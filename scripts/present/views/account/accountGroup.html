@@ -1,0 +1,91 @@
+﻿<ion-view view-title="管理员设置" class="ion-view-bg">
+
+    <div class="bar bar-header" style="margin-top:10px;top:44px;">
+
+        <button class="btn btn-primary SourceHanSansCN" style="width:120px;color:white; left:30px;" ng-click="setAdminGroup()">
+            添加管理员
+        </button>
+
+    </div>
+
+    <ion-content style="bottom:0;background-color:#f7f7f7;margin-top:10px;top:100px; margin-bottom:250px;">
+        <ion-refresher pulling-text="下拉更新..." on-refresh="managerListRefresh()" spinner="ios"></ion-refresher>
+        <div class="row" style="flex-wrap:wrap;-webkit-flex-wrap:wrap;margin:0;">
+            <a class="col col-10" ng-repeat="manager in managerList">
+                <div class="card" style="margin:0px;box-shadow:none;border-radius:4px;position:relative;">
+                    <div class="item item-image">
+                        <img ng-src="{{manager.faceImgUrl|imgCdnFilter}}">
+                    </div>
+                    <div class="item" style="border:none;">
+                        <h2 class="SourceHanSansCN" style="font-size:11px;color:rgba(0,0,0,0.9);margin-bottom:5px;">{{manager.phoneNumber}}</h2>
+                        <p class="SourceHanSansCN" style="font-size:11px;color:rgba(0,0,0,0.4);margin-bottom:15px;">{{manager.level}}</p>
+                    </div>
+                    <div class="mum-masker">
+                        <div class="mum-middle-container" style="margin-top: 40%;text-align: center;">
+                            <i class="icon ion-ios-settings" ng-click="chooseManager(manager)"></i>
+                            <!--<i class="icon ion-ios-trash mum-delete-icon" ng-click="deleteCargo(goods)"></i>-->
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <ion-infinite-scroll on-infinite="managerListLoadMore()" ng-if="managerListShowInfinite" distance="1%" spinner="ios"></ion-infinite-scroll>
+        <div class="item-content center-block SourceHanSansCN backColor" style="text-align:center;" ng-hide="managerListShowInfinite">
+            <p style="font-family:'Microsoft YaHei';font-size:16px;">没有更多啦</p>
+        </div>
+    </ion-content>
+
+    <div class="mum-footer" style="height:230px;">
+        <div class="row">
+            <div class="col col-md-6">
+                <table class="table table-striped">
+                    <tr>
+                        <td style="line-height:40px;">头像</td>
+                        <td><img ng-src="{{selectManager.faceImgUrl|imgCdnFilter}}" style="width:40px;height:40px;"></td>
+                    </tr>
+                    <tr>
+                        <td>账户名</td>
+                        <td>{{selectManager.phoneNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td>账户等级</td>
+                        <td>{{selectManager.level}}</td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:40px;">设置</td>
+                        <td>
+                            <button class="btn btn-primary SourceHanSansCN" style="width:120px;height:40px;color:white;bottom:8px;" ng-click="createConfig(adminConfig)">
+                                设置配额
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col col-md-6">
+                <table class="table table-striped">
+                    <tr>
+                        <td>配置项</td>
+                        <td>配置内容</td>
+                    </tr>
+                    <tr>
+                        <td>设置生成购物卡金额上限</td>
+                        <td><input ng-model="adminConfig.cardLimit" /></td>
+                    </tr>
+                    <tr>
+                        <td>设置生成优惠券金额上限</td>
+                        <td><input ng-model="adminConfig.ticketLimit" /></td>
+                    </tr>
+                    <tr>
+                        <td>已生成购物卡总值</td>
+                        <td>{{adminConfig.cardCurrent}}</td>
+                    </tr>
+                    <tr>
+                        <td>已生成优惠券总值</td>
+                        <td>{{adminConfig.ticketCurrent}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</ion-view>

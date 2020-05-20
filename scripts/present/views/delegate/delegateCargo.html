@@ -1,0 +1,20 @@
+﻿<ion-view view-title="代理商品" class="ion-view-bg">
+    <ion-content class="has-header">
+        <form class="form-inline clearfix" style="background-color:#fff;margin-top:10px;padding:10px 0;">
+            <div class="btn  bg-primary" style="float:right;margin-right:10px;" ng-click="addDelegateCargo()">增加</div>
+        </form>
+        <div class="row" style="flex-wrap:wrap;-webkit-flex-wrap:wrap;margin:0;">
+            <a class="col col-20" ng-repeat="delegate in delegateList">
+                <div class="card" style="margin:0px;box-shadow:none;border-radius:4px;">
+                    <div class="item item-image">
+                        <img ng-src="{{delegate.faceImgUrl|imgCdnFilter}}">
+                    </div>
+                    <div class="item" style="border:none;">
+                        <h2 class="SourceHanSansCN" style="font-size:16px;color:rgba(0,0,0,0.9);margin-bottom:5px;">{{delegate.name}}</h2>
+                        <p class="SourceHanSansCN" style="font-size:13px;color:rgba(0,0,0,0.4);margin-bottom:15px;">{{delegate.content}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

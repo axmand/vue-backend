@@ -1,0 +1,64 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="新建团购" class="ion-view-bg">
+    <ion-content>
+        <div style="width:650px;margin:20px auto;text-align:center;background-color:#fff;">
+            <img class="img-responsive center-block" style="padding-top: 20px;width: 320px; height:180px;" ng-src="{{newGroupCargo.headImgUrl|imgCdnFilter}}" />
+            <a ng-click="cutHeadImgUrlPicture()" class="btn btn-default" style="margin:10px;">点击上传特惠封面</a>
+            <div class="form-horizontal" style="border-top: 1px solid #ddd;padding: 20px;">
+                <table class="table table-striped">
+                    <tr>
+                        <td class="SourceHanSansCN" style="line-height:2.3;">选择城市</td>
+                        <td><select style="width:150px;margin-left:auto;margin-right:auto;" class="form-control" ng-model="newGroupCargo.regionId" ng-options="city.cityRegionId as city.cityName group by city.provinceName for city in cityList"><option value="">-- 选择城市 --</option></select></td>
+                    </tr>
+                    <tr>
+                        <td>商品名称</td>
+                        <td>{{newGroupCargo.cargo.title}}</td>
+                    </tr>
+                    <tr>
+                        <td>参团规格</td>
+                        <td>{{newGroupCargo.cargoStandard.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>参团规格团购价</td>
+                        <td>{{newGroupCargo.cargoStandard.groupPrice+"元"}}</td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:2.3;">提供总数</td>
+                        <td ><input type="number" ng-model="newGroupCargo.maxNum" class="form-control" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px; width:150px;margin-left:auto;margin-right:auto;" /></td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:2.3;">开团时间 : </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                <input class="form-control" style="text-align:center; display:inline;" placeholder="点击选择开团时间" id="buyGroupStartTime">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:2.3;">结束时间 : </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                <input class="form-control" style="text-align:center; display:inline;"  placeholder="选择结束时间" id="buyGroupEndTime">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:2.3;"> 选择商品/规格：</td>
+                        <td>
+                            <button class="btn  btn-primary" style="margin: auto;" ng-click="chooseCargo()">选择参团商品</button>
+                            <button class="btn  btn-primary" style="margin: auto;" ng-click="chooseStandard()">选择/修改规格</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+           
+        </div>
+    </ion-content>
+
+    <div class="mum-footer">
+        <button class="btn btn-primary" ng-click="groupPurchasePost(newGroupCargo)" style="display:block;width:10%;margin:15px auto;">创建</button>
+    </div>
+
+</ion-view>

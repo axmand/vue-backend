@@ -1,0 +1,23 @@
+﻿    <!-- 编辑弹出窗 -->
+<div class="modal fade" id="mumDeliverOrder" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-tap-disabled="true" style="width:100%;background-color:rgba(0,0,0,0);top:20px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">订单发货详情</h4>
+            </div>
+            <div class="modal-body">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label"><span style="color:red;">*&nbsp;</span>运单号：</span>
+                        <input type="text" ng-model="waybill.number" placeholder="请填写快递单号">
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="deliverOrder(goods)">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

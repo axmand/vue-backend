@@ -1,0 +1,135 @@
+﻿<ion-view view-title={{modelText}} class="ion-view-bg">
+    <ion-content>
+        <div style="width:100%;margin:20px auto;text-align:center;background-color:#fff;">
+            <div class="form-horizontal" style="border-top: 1px solid #ddd;padding: 20px;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-striped">
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>商品名称：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <input type="text" placeholder="填入商品名称" ng-model="cargo.title" style="margin-left:auto;margin-right:auto;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>副标题：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <input type="text" ng-model="cargo.subTitle" placeholder="副标题，如'限时热卖'等." style="margin-left:auto;margin-right:auto;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:red;">*&nbsp;</span><a class="btn btn-primary" ng-click="openShopModal()">选择店铺</a></td>
+                                <td style="vertical-align:middle; text-align:center;">{{cargo.shopName}}</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:red;">*&nbsp;</span>商品类别：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <select ng-model="cargo.cCargoType" style="margin-left:auto;margin-right:auto;" ng-options="m.uid as m.name for m in $$commericalCargoType"><option value="">--请选择商品类别--</option></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>计量单位：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <input type="text" style="margin-left:auto;margin-right:auto;" ng-model="cargo.measureUnit" placeholder="如：斤，米">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>商品运费：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <input type="text" style="margin-left:auto;margin-right:auto;" ng-model="cargo.postagePrice" placeholder="运费">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>发货仓库：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <select style="margin-left:auto;margin-right:auto;" ng-model="cargo.dispatchPlace" ng-options="m.uid as m.name for m in $$commercialWhareHouse"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>所在地区：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <select style="margin-left:auto;margin-right:auto;" ng-model="cargo.regionId" ng-options="city.cityRegionId as city.cityName group by city.provinceName for city in $$commercialMarketCity"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>仅售城市：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <input style="margin-left:auto;margin-right:auto;" type="text" ng-model="cargo.onlyCity" placeholder="售卖城市">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>禁售城市：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <input style="margin-left:auto;margin-right:auto;" type="text" ng-model="cargo.forbiddenCity" placeholder="禁售城市">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>商品描述：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <textarea class="form-control" rows="3" placeholder="请填写商品描述（简述）" ng-model="cargo.content"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>商品售后政策：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <textarea class="form-control" rows="3" placeholder="请填写商品售后正常" ng-model="cargo.afterSaleContent"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>规格参数：</td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <textarea class="form-control" rows="3" placeholder="请填写规格参数，每条规格后使用符号 '~' 隔开" ng-model="cargo.argumentsContent"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    <img ng-src="{{cargo.faceImgUrl|imgCdnFilter}}" style="width:145px;height:145px; margin-left:auto;margin-right:auto;">
+                                    <p style="margin:10px 0 0 0;text-align:center;">
+                                        <a class="btn btn-primary" role="button" ng-click="setFaceImage()">上传封面图片(头图)</a>
+                                    </p>
+                                </td>
+                                <td style="vertical-align:middle;">
+                                    <div class="item item-borderless" style="background-color:transparent;">
+                                        <input type="checkbox" class="mum-checkbox" ng-model="cargo.placeDeliveryFlag" />&nbsp;产地发货
+                                    </div>
+                                    <div class="item item-borderless" style="background-color:transparent;">
+                                        <input type="checkbox" class="mum-checkbox" ng-model="cargo.timeDeliveryFlag" />&nbsp;定时发货
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>商品相册（图片集合）</td>
+                                <td style="background-color:gray; height:280px;">
+                                    <img ng-src="{{img|imgCdnFilter}}" style="width:160px;height:90px;float:left;" ng-repeat="img in cargo.album" ng-click="changeCargoAlbum($index)" />
+                                    <a class="btn btn-primary" role="button" ng-click="addCargoAlbum()">新增</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;"><span style="color:red;">*&nbsp;</span>商品详情页（图片集合）</td>
+                                <td style="background-color:gray; height:280px;">
+                                    <img ng-src="{{img|imgCdnFilter}}" style="width:160px;height:90px;float:left;" ng-repeat="img in cargoDisplay" ng-click="changeCargoDisplayPicture($index)" />
+                                    <a class="btn btn-primary" role="button" ng-click="addCargoDisplayPicture(cargoDisplay)">新增</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <div class="mum-footer">
+        <button ng-if="model==2" ng-click="showCargoStandards()" class="btn btn-primary btn-block" style="display:inline;width:10%;margin:15px auto; padding:5px;">查看规格</button>
+        <!--提交-->
+        <button ng-if="model==1" ng-click="sumitCargo()" class="btn btn-primary btn-block" style="display:inline;width:10%;margin:15px auto; padding:5px;">提交</button>
+        <!--删除-->
+        <button ng-if="model==2" ng-click="deleteCargo(cargo)" class="btn btn-danger btn-block" style="display:inline;width:10%;margin:15px auto; padding:5px;">删除</button>
+        <!--修改-->
+        <button ng-if="model==2" ng-click="modifyCargo(cargo)" class="btn btn-primary btn-block" style="display:inline;width:10%;margin:15px auto; padding:5px;">修改</button>
+        <!--审核通过-->
+        <button ng-if="model==2" ng-click="setCargoPass()" class="btn btn-success btn-block" style="display:inline;width:10%;margin:15px auto; padding:5px;">审核通过</button>
+    </div>
+</ion-view>

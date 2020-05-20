@@ -1,0 +1,72 @@
+﻿<ion-view view-title={{shelfName}} class="ion-view-bg">
+    <ion-content style="margin-bottom:60px;">
+        <div style="width:720px;margin:20px auto;text-align:center;background-color:#fff;">
+            <!--表单-->
+            <div class="form-horizontal" style="border-top: 1px solid #ddd;padding: 20px;">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <div ng-click="chooseShop()" class="btn btn-primary">请选择社区店</div>
+                        </td>
+                        <td style="line-height:2.3;">
+                            <div>{{shelf.shopName}}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img ng-src="{{shelf.headImgUrl|imgCdnFilter}}" style="width:257px;height:145px; margin-left:auto;margin-right:auto;">
+                            <p style="margin:10px 0 0 0;text-align:center;">
+                                <a class="btn btn-primary" role="button" ng-click="cutHeadImgUrl()">栏目封面图片(16：9)</a>
+                            </p>
+                        </td>
+                        <td>
+                            <img ng-src="{{shelf.faceImgUrl|imgCdnFilter}}" style="width:145px;height:145px; margin-left:auto;margin-right:auto;">
+                            <p style="margin:10px 0 0 0;text-align:center;">
+                                <a class="btn btn-primary" role="button" ng-click="cutFaceImgUrl()">栏目缩略图(1：1)</a>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:2.3;">栏目名称：</td>
+                        <td>{{shelf.title}}</td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:2.3;">栏目简述：</td>
+                        <td>
+                            <input type="text" ng-model="shelf.content" class="form-control" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:2.3;">添加货架商品</td>
+                        <td><button class="btn btn-default btn-group" ng-click="addShelfCargo()">选择</button></td>
+                    </tr>
+                </table>
+            </div>
+            <!--商品平铺-->
+            <div class="flex flex-hw">
+                <div class="card" style="width:160px;height:230px;" ng-repeat="cargo in cargos">
+                    <div class="innerhover">
+                        <div class="mum-inner-masker" style="width:160px;height:230px; border-radius:3px;">
+                            <div style="line-height:230px;">
+                                <i class="icon ion-android-delete text-center" style="font-size:36px;color:#fff;" ng-click="deleteCargo(cargo)"></i>
+                            </div>
+                        </div>
+                        <img ng-src="{{cargo.faceImgUrl|imgCdnFilter}}" style="width:160px;">
+                        <label style="margin:8px;">{{cargo.title || cargo.name}}</label>
+                    </div>
+                    <div style="bottom:0px;">
+                        <select class="form-control" ng-model="cargo.selectStandardObjectId" ng-options="standard.objectId as standard.name for standard in cargo.standards" style="border:none;">
+                            <option value="">-- 选择商品规格 --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--商品平铺-完-->
+        </div>
+    </ion-content>
+    <div class="mum-footer">
+        <button ng-if="!shelf.objectId" class="btn btn-primary" ng-click="shelfPost()" style="width:10%;margin:15px auto;display:inline;">创建</button>
+        <!--修改-->
+        <button ng-if="!!shelf.objectId" class="btn btn-danger" ng-click="modify()" style="width:10%;margin:15px auto;display:inline;">修改</button>
+    </div>
+</ion-view>

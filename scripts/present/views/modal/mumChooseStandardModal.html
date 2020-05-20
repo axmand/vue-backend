@@ -1,0 +1,106 @@
+﻿<!--创建/删除规格信息-->
+<div class="modal fade" id="chooseStandardModal" data-backdrop="false" style="width:100%;background-color:rgba(0,0,0,0);top:20px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align:center;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">规格信息</h4>
+            </div>
+            <div class="modal-body" style="padding:3px;min-height:400px;">
+                <ion-content>
+                    <div class="row" style="margin-left:auto;margin-right:auto;">
+                        <div class="col-md-6">
+                            <div class="list">
+                                <label class="item item-input">
+                                    商品属性
+                                    <input type="text" placeholder=" " ng-model="standard.name" style="background-color:transparent;" disabled>
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>规格名称:</span>
+                                    <input type="text" placeholder="规格名称，例如:土鸡蛋60枚 " ng-model="standard.name">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>规格描述：</span>
+                                    <input type="text" placeholder="规格描述，例如500g一袋" ng-model="standard.content">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>规格内商品个数：</span>
+                                    <input type="text" placeholder="规格内商品个数，例如一盒鸡蛋内有6枚，填：6" ng-model="standard.amount">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>佣金：</span>
+                                    <input type="text" placeholder="代卖奖励佣金" ng-model="standard.commissionMoney">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>库存：</span>
+                                    <input type="text" placeholder="库存" ng-model="standard.repertory">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="list">
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>原价：</span>
+                                    <input type="text" placeholder="填入原价，例如 799" ng-model="standard.originalPrice">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>建议价：</span>
+                                    <input type="text" placeholder="填入建议价，例如 999" ng-model="standard.suggestPrice">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>团购价：</span>
+                                    <input type="text" placeholder="填入团购价，例如 76.55" ng-model="standard.groupPrice">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>拼团价：</span>
+                                    <input type="text" placeholder="填入拼团价，例如 90.5" ng-model="standard.buyTourPrice">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>特惠价：</span>
+                                    <input type="text" placeholder="填入特惠价，例如 100" ng-model="standard.buyOfferPrice">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label" style="font-size:13px;font-weight:500;"><span style="color:red;">*&nbsp;</span>预售价：</span>
+                                    <input type="text" placeholder="填入预售价，例如 100" ng-model="standard.presellPrice">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                        <ion-refresher pulling-text="下拉更新..." on-refresh="dataListRefresh()" spinner="ios"></ion-refresher>
+                        <div class="item" style="padding:0px;margin:20px;">
+                            <div class="button-bar SourceHanSansCN">
+                                <a class="button">规格名称</a>
+                                <a class="button">库存</a>
+                                <a class="button">原价</a>
+                                <a class="button">操作</a>
+                            </div>
+                        </div>
+                        <div class="list" style="margin:20px;">
+                            <div class="item item-borderless" style="padding: 5px 0px;" ng-repeat="data in dataList">
+                                <div class="button-bar fontVisiable">
+                                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.name}}">{{data.name}}</div>
+                                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.repertory}}">{{data.repertory}}</div>
+                                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.originalPrice}}">{{data.originalPrice}}</div>
+                                    <div class="button button-clear">
+                                        <a class="button button-clear SourceHanSansFontBlod" ng-click="chooseStandard(data)" style="color:darkslategray; width:100%; z-index:999;">选择</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ion-infinite-scroll on-infinite="dataListLoadMore()" ng-if="dataListShowInfinite" distance="1%" spinner="ios"></ion-infinite-scroll>
+                        <div class="item-content center-block SourceHanSansCN backColor" style="text-align:center;" ng-hide="dataListShowInfinite">
+                            <p style="font-family:'Microsoft YaHei';font-size:16px;">没有更多啦</p>
+                        </div>
+                </ion-content>
+
+            </div>
+            <div class="modal-footer" style="padding:10px;">
+                <button ng-if="!standard.objectId" type="button" class="btn btn-primary"  ng-click="createCommit(standard)">创建</button>
+                <button ng-if="!!standard.objectId" type="button" class="btn btn-danger"  ng-click="confirmCargoStandard(editData.cargoStandard)">删除</button>
+                <button ng-if="!!standard.objectId" type="button" class="btn btn-success" ng-click="confirmCargoStandard(editData.cargoStandard)">修改</button>
+                <button ng-if="showSelectButton" type="button" class="btn btn-success" ng-click="selectStandard(standard)">选择</button>
+            </div>
+        </div>
+    </div>
+</div>

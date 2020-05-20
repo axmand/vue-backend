@@ -1,0 +1,43 @@
+﻿<ion-view view-title="视频编辑" class="ion-view-bg">
+    <ion-content>
+        <div style="width:600px;position:relative;margin:20px auto;text-align:center;background-color:#fff;">
+            <div class="item-image">
+                <img ng-src="{{newVideo.headImgUrl|imgCdnFilter}}" style="width:600px;height:338px;" />
+            </div>
+            <button ng-click="startCutPicture()" class="btn btn-default" style="margin:10px;">点击上传视频封面</button>
+            <div class="form-horizontal" style="padding: 20px;">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">视频标题</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="newVideo.title" class="form-control" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">视频地址</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="newVideo.videoUrl" class="form-control" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">视频描述</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="newVideo.content" class="form-control" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">视频分类</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="newVideo.cVideoType" ng-options="type.uid as type.name for type in CommercialVideo">
+                            <option value="">-- 选择视频分类 --</option>
+                        </select>
+                    </div>
+                </div>          
+            </div>       
+        </div>
+    </ion-content>
+    <div class="mum-footer">
+        <button class="btn btn-primary" ng-if="!newVideo.objectId" ng-click="videoPost()" style="display:block;width:10%;margin:10px auto;">提交</button>
+        <button class="btn btn-primary" ng-if="!!newVideo.objectId" ng-click="modify()" style="display:inline-block;width:10%;margin:10px auto;float:right;">修改</button>
+        <button class="btn btn-primary" ng-if="!!newVideo.objectId" ng-click="delete(newVideo.objectId)" style="display:inline-block;width:10%;margin:10px auto;float:left;">删除</button>
+    </div>
+</ion-view>

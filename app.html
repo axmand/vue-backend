@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" href="http://image.qiongrenkeji.com/favicon.ico" mce_href="http://image.qiongrenkeji.com/favicon.ico" type="image/x-icon">
+    <link href="vendor/ionic/release/css/ionic.min.css" rel="stylesheet" />
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="vendor/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+    <!--图片编辑器样式-->
+    <link href="vendor/Croppie/croppie.css" rel="stylesheet" />
+    <!--toast样式-->
+    <link href="vendor/toast/toastr.min.css" rel="stylesheet" />
+    <!--自定义修正样式-->
+    <link href="resource/css/app.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+            </div>
+            <div id="loadingProgress" style="position:absolute;top:50%;left:50%;margin-top:100px;margin-left:-150px;width:300px;height:200px;border:none;text-align:center;color:white;">
+            </div>
+        </div>
+    </div>
+    <ion-nav-view></ion-nav-view>
+    <!--模块加载器-->
+    <script src="vendor/requirejs/require.js" data-main="app"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="今日特惠" class="ion-view-bg">
+    <!--检索栏-->
+    <div class="form-inline item" style="margin:20px;top:44px;">
+        <div class="form-group" style="margin-left:20px;">
+            <label>展示地区</label>
+            <select class="form-control" ng-model="regionId" ng-change="cityChanged(regionId)" ng-options="city.cityRegionId as city.cityName group by city.provinceName for city in cityList">
+                <option value="">-- 请选择展示地区 --</option>
+            </select>
+        </div>
+        <a class="btn btn-success" style="float:right;" href="#/main/daily/exPurchaseCreate">新建特惠</a>
+    </div>
+    <!--banner列表-->
+    <div class="item" style="padding:0px;margin:20px;top:35px;">
+        <div class="button-bar SourceHanSansCN">
+            <a class="button">特惠商品</a>
+            <a class="button">商品名称</a>
+            <a class="button">特惠价/原价</a>
+            <a class="button">已售出</a>
+            <a class="button">操作</a>
+        </div>
+    </div>
+    <ion-content style="top:200px;bottom:0px;">
+        <ion-refresher pulling-text="下拉更新..." on-refresh="exPurchaseListRefresh()" spinner="ios"></ion-refresher>
+        <div class="item" style="padding: 16px 0px;margin:0px 20px;" ng-repeat="data in exPurchaseList">
+            <div class="button-bar fontVisiable">
+                <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{data.faceImgUrl|imgCdnFilter}})"></div>
+                <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.cargo.title}}">{{data.cargo.title}}</div>
+                <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.buyOfferPrice}}&nbsp;{{data.originalPrice}}"><span>{{data.cargo.standards[data.cargoStandardObjectId].buyOfferPrice+" / "+data.cargo.standards[data.cargoStandardObjectId].originalPrice}}</span></div>
+                <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.statistic.sellNum}}">{{data.maxNum +" / "+data.statistic.sellNum}}</div>
+                <button class="button button-clear SourceHanSansFontBlod" ng-click="delete(data.objectId)" style="color:red; width:100%; z-index:999;">删除</button>
+            </div>
+        </div>
+        <ion-infinite-scroll on-infinite="exPurchaseListLoadMore()" ng-if="exPurchaseListShowInfinite"  distance="1%" spinner="ios"></ion-infinite-scroll>
+        <div class="item-content center-block" style="text-align:center;" ng-hide="exPurchaseListShowInfinite">
+            <p style="font-family:'Microsoft YaHei';font-size:16px;">没有更多啦</p>
+        </div>
+    </ion-content>
+</ion-view>

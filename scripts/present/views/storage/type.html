@@ -1,0 +1,19 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="分类管理" class="ion-view-bg">
+    <div class="bar bar-header" style="margin-top:10px;top:33px; ">
+        <div class="dropdown" style="margin-left:25px;">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                类目选择
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li ng-repeat="(key,value) in ECategory"><a href="#" ng-click="selectCategory($event,key)">{{key|$$typeFilter}}</a></li>
+            </ul>
+        </div>
+        <div style="padding-left:10px;">
+            <button type="button" class="btn btn-primary" ng-click="openModal()">添加子类</button>
+        </div>
+    </div>
+    <!--类树视图-->
+    <div id="tree-container-type" style="width:100%;"></div>
+</ion-view>

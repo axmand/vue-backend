@@ -1,0 +1,24 @@
+﻿<ion-view view-title="登录页" class="ion-view-bg">
+    <!--poster="https://nie.res.netease.com/nie/zt/2015/love/images/data/vision-1_b41c4e1.jpg"-->
+    <video style="position:absolute;top:0px;" id="minVideo" autoplay preload="auto" loop >
+        <source src="resource/images/background.mp4" type="video/mp4">
+    </video>
+    <ion-content  ng-keydown="keyDown($event)" >
+        <div class="list padding list-borderless" id="container" style="border-radius:5px;width: 450px; margin:auto; margin-top:15%;">
+            <div class="item" style="color:white; background-color:transparent;">
+                <div class="item-text-wrap swiper-pagination-white" style="text-indent:2em;">
+                    <p style="color:white; font-size:medium;">不管是否情愿，生活总在催促我们迈步向前，人们整装，启程，跋涉，落脚，停在哪里，哪里就会燃起灶火。从个体生命的迁徙，到食材的交流运输，从烹调方法的改变，到人生命运的流转，人和食物的匆匆脚步，从来不曾停歇。</p>
+                </div>
+            </div>
+            <div class="item" style="background-color:transparent;">
+                <input class="SourceHanSansCN" id="loginname" ng-model="userInfo.loginname" type="text" placeholder="注册邮箱/用户名" style="line-height: 34px; border:1px white solid; border-radius:3px; background-color:transparent;text-align:center;margin-left:auto;margin-right:auto;" ng-focus="slideUp()" ng-blur="slideDown()">
+            </div>
+            <div class="item" style="background-color:transparent;">
+                <input class="SourceHanSansCN" id="loginpsd" ng-model="userInfo.loginpsd" type="password" placeholder="登录密码" style="line-height: 34px;border:1px white solid; border-radius:3px; background-color:transparent; text-align:center;margin-left:auto;margin-right:auto;" ng-focus="slideUp()" ng-blur="slideDown()">
+            </div>
+            <div class="item" style="background-color:transparent; padding:0px;">
+                <a class="button button-block button-clear SourceHanSansCN" style="line-height: 1.5em; color:#FFFFFF;font-size:1.4em;" ng-click="login(userInfo.loginname,userInfo.loginpsd)">登录</a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

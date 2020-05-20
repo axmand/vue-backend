@@ -1,0 +1,29 @@
+﻿    <!-- 编辑弹出窗 -->
+<div class="modal fade" id="mumRefuseOrder" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-tap-disabled="true" style="width:100%;background-color:rgba(0,0,0,0);top:20px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">拒绝订单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label"><span style="color:red;">*&nbsp;</span>拒绝原因：</span>
+                        <input type="text" ng-model="disAgree.reason" placeholder="请填写拒绝订单原因">
+                    </label>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading SourceHanSansCN" style="color:red;font-weight:600;">注意事项</div>
+                    <div class="panel-body">
+                        订单被拒绝后，需要再次进入订单详情，仅需“退款”操作
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="disDeliverOrder(orderData)">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

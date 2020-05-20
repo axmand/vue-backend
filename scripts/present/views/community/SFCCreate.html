@@ -1,0 +1,105 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="私房菜编辑" class="ion-view-bg">
+    <ion-content style="text-align:center;">
+        <div class="card row">
+            <div class="col-md-6" style="margin-top:20px;">
+                <div class="item form-horizontal">
+                    <table class="table table-striped">
+                        <tr>
+                            <td style="vertical-align:middle;">私房菜标题(封面)</td>
+                            <td><input class="form-control" ng-model="nowTopic.title" type="text" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;" /></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">私房菜副标题</td>
+                            <td><input class="form-control" ng-model="nowTopic.subTitle" type="text" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;" /></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">私房菜版式</td>
+                            <td><select class="form-control" ng-model="nowTopic.eTopicTemplate" ng-options="template.value as template.name for template in topicTemplete"><option value="">-- 请选择私房菜版式 --</option></select></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">选择城市</td>
+                            <td><select class="form-control" ng-model="nowTopic.regionId" ng-options="city.cityRegionId as city.cityName group by city.provinceName for city in cityList"><option value="">-- 选择城市 --</option></select></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;"><a ngf-select="upLoadMusic($file)" class="btn btn-default" style="margin-left:auto;margin-right:auto;">上传背景音乐</a></td>
+                            <td style="vertical-align:middle;">
+                                <audio controls="controls" ng-src="{{nowTopic.musicUrl|imgCdnFilter}}" style="float:right;margin-bottom: 5px;"></audio>
+                                <div class="progress" style="width: 100%;height: 2px;margin: 0px;">
+                                    <div id="musicProgress" class="progress-bar" role="progressbar" style="width:0%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6" style="margin-top:20px;">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <img ng-src="{{nowTopic.headImgUrl|imgCdnFilter}}" style="margin-left:auto;margin-right:auto;width:160px;height:90px;" />
+                            <p>
+                                <a class="btn btn-default" ng-click="cutPicture(0.5625)" style="margin:10px;">上传私房菜封面</a>
+                            </p>
+                        </td>
+                        <td>
+                            <img ng-src="{{nowTopic.faceImgUrl|imgCdnFilter}}" style="margin-left:auto;margin-right:auto;width:90px;height:90px;" />
+                            <p>
+                                <a class="btn btn-default" ng-click="cutPicture(1)" style="margin:10px;">上传私房菜封面</a>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a class="btn btn-default" ng-click="chooseShelf()" style="margin-left:auto;margin-right:auto;">选择私房菜货架</a></td>
+                        <td>{{nowTopic.shelfName}}</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:middle;"><span style="color:red;">*</span><a class="btn btn-default" ng-click="chooseShop()" style="margin-left:auto;margin-right:auto;">选择所属店铺</a></td>
+                        <td>{{nowTopic.shopName}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card row">
+            <div class="col-md-6">
+                <div class="item form-horizontal" tyle="margin-top:20px;">
+                    <table class="table table-striped">
+                        <tr>
+                            <td style="vertical-align:middle;">字体颜色</td>
+                            <td><input id="colorSelector" class="simple_color_live_preview form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">页面标题</td>
+                            <td><input class="form-control" ng-model="currentTopicContent.title" type="text" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;" /></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">内容描述</td>
+                            <td><textarea rows="3" ng-model="currentTopicContent.content" class="form-control" type="text" style="padding: 0px 5px;border: 1px solid #ccc;border-radius: 4px;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">文字布局</td>
+                            <td><select class="form-control" ng-model="currentTopicContent.eTextPosition" ng-options="type.value as type.name for type in textposition"><option value="">-- 选择文字排版位置 --</option></select></td>
+                        </tr>
+                    </table>
+                    <div class="form-inline" style="text-align:center;">
+                        <button class="btn btn-success" ng-click="goToSide(-1)">上一页</button>
+                        <span class="SourceHanSansCN" style="padding:0px 20px;font-size:18px;">当前：第<span style="color:red;font-size:22px;padding: 0px 10px;">{{pageId}}</span>页</span>
+                        <button class="btn btn-success" ng-click="goToSide(1)">下一页</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" tyle="margin-top:20px;">
+                <img ng-src="{{currentTopicContent.verticalImgUrl|imgCdnFilter}}" style="width:200px;height:354px;margin-top:20px;" />
+                <p><a class="btn btn-default" ng-click="cutPicture(1.77)" style="margin:10px;">上传详情页图片</a></p>
+            </div>
+        </div>
+    </ion-content>
+    <div class="mum-footer">
+        <!--提交-->
+        <button class="btn btn-primary" ng-if="!nowTopic.objectId" ng-click="topicPost()" style="width:10%;margin:15px auto;">提交</button>
+        <!--删除-->
+        <button class="btn btn-primary" ng-if="!!nowTopic.objectId" ng-click="deleteTopic(nowTopic.objectId)" style="width:10%;margin:15px auto;">删除</button>
+        <!--修改-->
+        <button class="btn btn-primary" ng-if="!!nowTopic.objectId" ng-click="modifyTopic()" style="width:10%;margin:15px auto;">修改</button>
+    </div>
+</ion-view>

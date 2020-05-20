@@ -1,0 +1,35 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="创建banner" class="ion-view-bg">
+    <ion-content>
+        <div style="width:600px;position:relative;margin:20px auto;text-align:center;background-color:#fff;">
+            <img ng-src="{{newBanner.headImgUrl|imgCdnFilter}}" style="width:600px;height:338px;" />
+            <p style="text-align:center;">
+                <a ng-click="startCutPicture()" class="btn btn-default" style="margin:10px;">点击上传封面</a>
+            </p>
+            <div class="form-horizontal" style="padding:20px;">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">选择城市</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="newBanner.regionId" ng-options="city.cityRegionId as city.cityName group by city.provinceName for city in cityList">
+                            <option value="">-- 选择城市 --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="item" style="padding: 4px 16px;border-left: 0px;border-right: 0px;">
+                <span class="SourceHanSansCN h4" style="float:left;">广告图展示商品</span>
+                <button ng-click="getCargo()" class="btn btn-default" style="float:right;">选择商品</button>
+            </div>
+            <div class="item">
+                <span ng-show="!newBannerCargo.objectId" class="SourceHanSansCN" style="float:left;">目前尚未选中商品</span>
+                <div class="button-bar fontVisiable" ng-show="!!newBannerCargo.objectId">
+                    <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{newBannerCargo.headImgUrl|imgCdnFilter}})"></div>
+                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{newBannerCargo.title}}">{{newBannerCargo.title}}</div>
+                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{newBannerCargo.subTitle}}">{{newBannerCargo.subTitle}}</div>
+                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{newBannerCargo.content}}">{{newBannerCargo.content}}</div>
+                </div>
+            </div>
+        </div>
+        <button ng-click="bannerPost()" class="btn btn-primary btn-block" style="display:block;width:20%;margin:auto;">提交</button>
+    </ion-content>
+</ion-view>

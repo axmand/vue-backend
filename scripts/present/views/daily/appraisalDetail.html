@@ -1,0 +1,64 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="评审详情" class="ion-view-bg">
+    <ion-content>
+        <div style="width:100%;margin:20px auto;text-align:center;background-color:#fff;">
+            <div class="card row">
+                <!--图片区域-->
+                <div class="col-md-4">
+                    <img class="img-responsive center-block" style="padding-bottom: 20px;width:100%;height:100%;" ng-src="{{appraisalDetail.faceImgUrl|imgCdnFilter}}" />
+                </div>
+                <!--文字描述区域-->
+                <div class="col-md-8">
+                    <div class="form-horizontal" style="padding: 20px;">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评审名称</label>
+                            <div class="col-sm-10 text-center">
+                                <input type="text" disabled class="form-control" ng-model="appraisalDetail.title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评审内容</label>
+                            <div class="col-sm-10 text-center">
+                                <input type="text" disabled class="form-control" ng-model="appraisalDetail.content">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评审状态</label>
+                            <div class="col-sm-10 text-center">
+                                <input type="text" disabled class="form-control" ng-model="appraisalDetail.eAppraisalState|$$typeFilter">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--选择评评审团操作区-->
+            <div class="item" style="border-right:none;border-left:none;">
+                <span class="SourceHanSansCN" style="float:left;">
+                    最大评审人数/申请人数:&nbsp;&nbsp;
+                    <span>{{appraisalDetail.maxNum}}/{{appraisalDetail.applyNum}}</span>
+                </span>
+                <button class="btn btn-default SourceHanSansCN" ng-click="appraisalPersonRefresh()" style="float:right;">刷新</button>
+                <button class="btn btn-default SourceHanSansCN" style="float:right;border:none;">已选中人数: <span style="color:red;">{{appraisalDetail.people.length}}</span></button>
+            </div>
+            <div class="item-content flex flex-hw">
+                <a class="card flex1 flex-10 appraisalCheck" ng-class="{'appraisalCheckedOld':checkPeople[person.objectId]}" ng-click="choosePerson(person,$event)" style="max-width:100px;position:relative;" ng-repeat="person in appraisalPerson">
+                    <div class="item item-image">
+                        <img ng-src="{{person.faceImgUrl|imgCdnFilter}}" />
+                        <i class="icon ion-checkmark-circled" style="position:absolute;top:5px;right:10px;font-size: 15px;"></i>
+                    </div>
+                    <div class="item-content SourceHanSansCN text-center" style="padding: 10px 0px;">
+                        <span>{{person.authorName}}</span>
+                    </div>
+                </a>
+            </div>
+            <ion-infinite-scroll on-infinite="appraisalPersonLoadMore()" ng-if="appraisalPersonShowInfinite" distance="1%" spinner="ios"></ion-infinite-scroll>
+            <div class="item-content center-block" style="text-align:center;padding: 5px;font-size: 18px;" ng-hide="appraisalPersonShowInfinite || appraisalPerson.length == 0">
+                没有更多啦
+            </div>
+            <div class="item-content center-block" ng-show="!appraisalPerson||appraisalPerson.length == 0" style="text-align: center;font-size: 24px;padding: 20px;">
+                目前还没人申请
+            </div>
+        </div>
+        <button class="btn btn-primary center-block" ng-click="selectAppraisalPost()" style="width:30%;margin:auto;">选定评审团成员</button>
+    </ion-content>
+</ion-view>
