@@ -13,7 +13,7 @@
                     <div id="upload-demo" class="croppie-container" style="padding:0px;"></div>
                     <div class="item" style="border:none;text-align: center;padding-top: 0px;">
                         <div class="btn btn-default" ngf-select="preUpload($file)" style="margin-right:10px;">选择上传图片</div>
-                        <div class="btn btn-default" ng-disabled="cutPicFlag" ng-click="clickEl()" style="padding: 6px 23px;">裁剪</div>
+                        <div class="btn btn-default" ng-click="clickEl()" style="padding: 6px 23px;">裁剪</div>
                     </div>
                 </div>
                 <!--<div class="item row" style="border:0px;margin:0px;">
@@ -40,7 +40,7 @@
                 </div>-->
             </div>
             <div class="modal-footer" style="padding:5px;">
-                <div class="btn btn-primary" ng-click="upload()">上传</div>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="upload()">上传</button>
             </div>
         </div>
     </div>

@@ -11,14 +11,9 @@ requirejs.config({
         appComposite: 'scripts/modules/composite/appComposite',
         //module
         commercialModule: 'scripts/modules/module/commercialModule',
-        dailyModule: 'scripts/modules/module/dailyModule',
-        statisticModule: 'scripts/modules/module/statisticModule',
-        storageModule: 'scripts/modules/module/storageModule',
-        delegateModule: 'scripts/modules/module/delegateModule',
-        supplyModule: 'scripts/modules/module/supplyModule',
-        communityModule: 'scripts/modules/module/communityModule',
-        accountModule: 'scripts/modules/module/accountModule',
-        cardModule: 'scripts/modules/module/cardModule',
+        cooperationModule: 'scripts/modules/module/cooperationModule',
+        frontdeskModule: 'scripts/modules/module/frontdeskModule',
+        selfsupportModule: 'scripts/modules/module/selfsupportModule',
         //components-commands
         baseCommand: 'scripts/components/commands/baseCommand',
         commandManager: 'scripts/components/commands/commandManager',
@@ -32,65 +27,55 @@ requirejs.config({
         //present-controller
         mainController: 'scripts/present/controllers/mainController',
         loginController: 'scripts/present/controllers/login/loginController',
-        //presetn-verification
-        cardController: 'scripts/present/controllers/verification/cardController',
-        ticketController: 'scripts/present/controllers/verification/ticketController',
-        //prestent-controller-account
-        accountGroupController: 'scripts/present/controllers/account/accountGroupController',
         //present-controller-commercial
-        shopController: 'scripts/present/controllers/commercial/shopController',
+        shopDetailController: 'scripts/present/controllers/commercial/shopDetailController',
+        activityController: 'scripts/present/controllers/commercial/activityController',
         cargoController: 'scripts/present/controllers/commercial/cargoController',
+        cargoDetailController: 'scripts/present/controllers/commercial/cargoDetailController',
         orderController: 'scripts/present/controllers/commercial/orderController',
-        //present-controller-community
-        communityDSSXController: 'scripts/present/controllers/community/communityDSSXController',
-        communitySQRCController: 'scripts/present/controllers/community/communitySQRCController',
-        communitySQZXController: 'scripts/present/controllers/community/communitySQZXController',
-        communitySFCCreateController: 'scripts/present/controllers/community/communitySFCCreateController',
-        communitySFCController: 'scripts/present/controllers/community/communitySFCController',
-        communityBuyGroupListController: 'scripts/present/controllers/community/communityBuyGroupListController',
-        communityBuyGroupCreateController: 'scripts/present/controllers/community/communityBuyGroupCreateController',
-        communityExBuyListController: 'scripts/present/controllers/community/communityExBuyListController',
-        communityExBuyCreateController: 'scripts/present/controllers/community/communityExBuyCreateController',
-        //present-controller-daily
-        shelfController: 'scripts/present/controllers/daily/shelfController',
-        shelfCreateController: 'scripts/present/controllers/daily/shelfCreateController',
-        bannerController: 'scripts/present/controllers/daily/bannerController',
-        bannerCreateController: 'scripts/present/controllers/daily/bannerCreateController',
-        exPurchaseController: 'scripts/present/controllers/daily/exPurchaseController',
-        groupPurchaseController: 'scripts/present/controllers/daily/groupPurchaseController',
-        passwordActivityController: 'scripts/present/controllers/daily/passwordActivityController',
-        videoCreateController: 'scripts/present/controllers/daily/videoCreateController',
-        passwordActivityDetailController: 'scripts/present/controllers/daily/passwordActivityDetailController',
-        videoController: 'scripts/present/controllers/daily/videoController',
-        topicController: 'scripts/present/controllers/daily/topicController',
-        topicCreateController: 'scripts/present/controllers/daily/topicCreateController',
-        appraisalController: 'scripts/present/controllers/daily/appraisalController',
-        //present-controller-storage
-        typeController: 'scripts/present/controllers/storage/typeController',
-        storehouseController: 'scripts/present/controllers/storage/storehouseController',
-        cityController: 'scripts/present/controllers/storage/cityController',
-        //present-controller-statistic
-        sellStatisticController: 'scripts/present/controllers/statistic/sellStatisticController',
-        //present-controller-delegate
-        delegateShopController: 'scripts/present/controllers/delegate/delegateShopController',
-        delegateCargoController: 'scripts/present/controllers/delegate/delegateCargoController',
-        //present-controller-supply
-        supplyShopController: 'scripts/present/controllers/supply/supplyShopController',
-        supplyCargoController: 'scripts/present/controllers/supply/supplyCargoController',
-        //present-services
-        groupService: 'scripts/present/services/groupService',
-        commonDatabase: 'scripts/present/services/database/commonDatabase',
-        dataBase: 'scripts/present/services/database/dataBase',
-        storageDatabase: 'scripts/present/services/database/storageDatabase',
-        pluginService: 'scripts/present/services/pluginService',
-        d3Service: 'scripts/present/services/d3Service',
-        bootstrapModal: 'scripts/present/services/modal/bootstrapModal',
-        chooseShopService: 'scripts/present/services/modal/chooseShopService',
+        reviewController: 'scripts/present/controllers/commercial/reviewController',
+        //present-controller-cooperation
+        superMarketController: 'scripts/present/controllers/cooperation/superMarketController',
+        shopController: 'scripts/present/controllers/cooperation/shopController',
+        shopAuditController: 'scripts/present/controllers/cooperation/shopAuditController',
+        auditController: 'scripts/present/controllers/cooperation/auditController',
+        workerController: 'scripts/present/controllers/cooperation/workerController',
+        workerAuditController: 'scripts/present/controllers/cooperation/workerAuditController',
+        publishAnnoController: 'scripts/present/controllers/cooperation/publishAnnoController',
+        annoCreateController: 'scripts/present/controllers/cooperation/annoCreateController',
+        publishTopicController: 'scripts/present/controllers/cooperation/publishTopicController',
+        topicCreateController: 'scripts/present/controllers/cooperation/topicCreateController',
+        publishVideoController: 'scripts/present/controllers/cooperation/publishVideoController',
+        videoCreateController: 'scripts/present/controllers/cooperation/videoCreateController',
+        //present-controller-frontdesk
+        branchManagementController: 'scripts/present/controllers/frontdesk/branchManagementController',
+        orderManagementController: 'scripts/present/controllers/frontdesk/orderManagementController',
+        categoryManagementController: 'scripts/present/controllers/frontdesk/categoryManagementController',
+        //present-controller-selfsupport
+        selfsupportShelfCreateController: 'scripts/present/controllers/selfsupport/selfsupportShelfCreateController',
+        selfsupportShelfController: 'scripts/present/controllers/selfsupport/selfsupportShelfController',
+        selfsupportCargoController: 'scripts/present/controllers/selfsupport/selfsupportCargoController',
+        selfsupportOrderController: 'scripts/present/controllers/selfsupport/selfsupportOrderController',
+        selfsupportCargoDetailController: 'scripts/present/controllers/selfsupport/selfsupportCargoDetailController',
+        selfsupportOrderDetailController: 'scripts/present/controllers/selfsupport/selfsupportOrderDetailController',
+        ////present-database
+        commonDatabase: 'scripts/present/services/commonDatabase',
+        commercialDatabase: 'scripts/present/services/commercialDatabase',
+        cooperationDatabase: 'scripts/present/services/cooperationDatabase',
+        frontdeskDatabase: 'scripts/present/services/frontdeskDatabase',
+        dataBase: 'scripts/present/services/dataBase',
+        //function-service
+        bootstrapModal:'scripts/present/services/modal/bootstrapModal',
         chooseCargoService: 'scripts/present/services/modal/chooseCargoService',
-        chooseShelfService: 'scripts/present/services/modal/chooseShelfService',
-        chooseStandardService: 'scripts/present/services/modal/chooseStandardService',
-        confirmService: 'scripts/present/services/modal/confirmService',
-        setAdminGroupService: 'scripts/present/services/modal/setAdminGroupService',
+        chooseShopService: 'scripts/present/services/modal/chooseShopService',
+        //present-services
+        loginService: 'scripts/present/services/loginService',
+        configService: 'scripts/present/services/configService',
+        groupService: 'scripts/present/services/groupService',
+        commercialService: 'scripts/present/services/commercialService',
+        cooperationService: 'scripts/present/services/cooperationService',
+        frontdeskService: 'scripts/present/services/frontdeskService',
+        pluginService: 'scripts/present/services/pluginService',
         //present-directives
         cutPictureDirective: 'scripts/present/directives/cutPictureDirective',
         starDirectives: 'scripts/present/directives/starDirective',
@@ -112,14 +97,9 @@ define(
     ['appComposite',
     'commandManager',
     'commercialModule',
-    'dailyModule',
-    'statisticModule',
-    'storageModule',
-    'delegateModule',
-    'supplyModule',
-    'communityModule',
-    'accountModule',
-    'cardModule',
+    'cooperationModule',
+    'frontdeskModule',
+    'selfsupportModule',
     //base
     'baseControllers',
     'baseDirectives',
@@ -136,65 +116,50 @@ define(
     //controller
     'loginController',
     'mainController',
-    //account-controller
-    'accountGroupController',
-    //controller-commercial
-    'shopController',
+    'shopDetailController',
+    'activityController',
     'cargoController',
+    'cargoDetailController',
     'orderController',
-    //present-controller-community
-    'communityDSSXController',
-    'communitySQRCController',
-    'communitySQZXController',
-    'communitySFCCreateController',
-    'communitySFCController',
-    'communityBuyGroupListController',
-    'communityBuyGroupCreateController',
-    'communityExBuyListController',
-    'communityExBuyCreateController',
-    //present-controller-daily
-    'shelfController',
-    'shelfCreateController',
-    'bannerController',
-    'bannerCreateController',
-    'exPurchaseController',
-    'groupPurchaseController',
-    'passwordActivityController',
-    'videoCreateController',
-    'passwordActivityDetailController',
-    'videoController',
-    'topicController',
+    'reviewController',
+    'shopController',
+    'shopAuditController',
+    'auditController',
+    'workerController',
+    'workerAuditController',
+    'publishAnnoController',
+    'annoCreateController',
+    'publishTopicController',
     'topicCreateController',
-    'appraisalController',
-    //present-controller-storage
-    'typeController',
-    'storehouseController',
-    'cityController',
-    //present-controller-statistic
-    'sellStatisticController',
-    //present-controller-delegate
-    'delegateShopController',
-    'delegateCargoController',
-    //present-controller-supply
-    'supplyShopController',
-    'supplyCargoController',
-    //present-controller-verifcation
-    'cardController',
-    'ticketController',
+    'publishVideoController',
+    'videoCreateController',
+    'branchManagementController',
+    'orderManagementController',
+    'categoryManagementController',
+    'superMarketController',
+    'selfsupportCargoController',
+    'selfsupportOrderController',
+    'selfsupportCargoDetailController',
+    'selfsupportOrderDetailController',
+    'selfsupportShelfController',
+    'selfsupportShelfCreateController',
     //service
-    'groupService',
     'commonDatabase',
+    'commercialDatabase',
+    'cooperationDatabase',
+    'frontdeskDatabase',
     'dataBase',
-    'storageDatabase',
-    'pluginService',
-    'd3Service',
+    //function-service
     'bootstrapModal',
-    'chooseShopService',
     'chooseCargoService',
-    'chooseShelfService',
-    'chooseStandardService',
-    'confirmService',
-    'setAdminGroupService',
+    'chooseShopService',
+    'loginService',
+    'groupService',
+    'configService',
+    'commercialService',
+    'cooperationService',
+    'frontdeskService',
+    'pluginService',
     //directive
     'cutPictureDirective',
     'starDirectives',
@@ -203,14 +168,9 @@ define(
     function (appComposite,
         commandManager,
         commercialModule,
-        dailyModule,
-        statisticModule,
-        storageModule,
-        delegateModule,
-        supplyModule,
-        communityModule,
-        accountModule,
-        cardModule,
+        cooperationModule,
+        frontdeskModule,
+        selfsupportModule,
         //base
         baseControllers,
         baseDirectives,
@@ -227,72 +187,55 @@ define(
         //controller
         loginController,
         mainController,
-        //controller-account
-        accountGroupController,
-       //controller-commercial
-        shopController,
+        shopDetailController,
+        activityController,
         cargoController,
+        cargoDetailController,
         orderController,
-        //present-controllers-community
-        communityDSSXController,
-        communitySQRCController,
-        communitySQZXController,
-        communitySFCCreateController,
-        communitySFCController,
-        communityBuyGroupListController,
-        communityBuyGroupCreateController,
-        communityExBuyListController,
-        communityExBuyCreateController,
-        //present-controller-daily
-        shelfController,
-        shelfCreateController,
-        bannerController,
-        bannerCreateController,
-        exPurchaseController,
-        groupPurchaseController,
-        passwordActivityController,
-        videoCreateController,
-        passwordActivityDetailController,
-        videoController,
-        topicController,
+        reviewController,
+        shopController,
+        shopAuditController,
+        auditController,
+        workerController,
+        workerAuditController,
+        publishAnnoController,
+        annoCreateController,
+        publishTopicController,
         topicCreateController,
-        appraisalController,
-         //present-controller-storage
-        typeController,
-        storehouseController,
-        cityController,
-        //present-controller-statistic
-        sellStatisticController,
-        //present-controller-delegate
-        delegateShopController,
-        delegateCargoController,
-        //present-controller-supply
-        supplyShopController,
-        supplyCargoController,
-        //present-controller-verifcation
-        cardController,
-        ticketController,
+        publishVideoController,
+        videoCreateController,
+        branchManagementController,
+        orderManagementController,
+        categoryManagementController,
+        superMarketController,
+        selfsupportCargoController,
+        selfsupportOrderController,
+        selfsupportCargoDetailController,
+        selfsupportOrderDetailController,
+        selfsupportShelfController,
+        selfsupportShelfCreateController,
         //service
-        groupService,
         commonDatabase,
+        commercialDatabase,
+        cooperationDatabase,
+        frontdeskDatabase,
         dataBase,
-        storageDatabase,
-        pluginService,
-        d3Service,
+        //function-service
         bootstrapModal,
-        chooseShopService,
         chooseCargoService,
-        chooseShelfService,
-        chooseStandardService,
-        confirmService,
-        setAdminGroupService,
+        chooseShopService,
+        loginService,
+        groupService,
+        configService,
+        commercialService,
+        cooperationService,
+        frontdeskService,
+        pluginService,
         //directive
         cutPictureDirective,
         starDirectives,
-        finishRenderDirective) {
-
+        finishRenderDirective){
         var app = angular.module('wgApp', ['ionic', 'controllers', 'services', 'filters', 'directives', 'ngFileUpload']);
-
         //添加模版到angular里
         app.addView = function (name, config) {
             this.config(function ($stateProvider) {
@@ -307,22 +250,13 @@ define(
         };
         //构建应用组建库
         var component = new appComposite(opts);
-
         component.add(new commercialModule(opts));
-        component.add(new dailyModule(opts));
-        component.add(new storageModule(opts));
-        component.add(new statisticModule(opts));
-        component.add(new delegateModule(opts));
-        component.add(new supplyModule(opts));
-        component.add(new communityModule(opts));
-        component.add(new accountModule(opts));
-        component.add(new cardModule(opts));
-
+        component.add(new cooperationModule(opts));
+        component.add(new frontdeskModule(opts));
+        component.add(new selfsupportModule(opts));
         component.inilizationComposite();
-
         return {
             app: app,
             component: component
         }
-
     });

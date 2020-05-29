@@ -1,10 +1,11 @@
 ﻿define(['baseServices'], function (baseServices) {
     baseServices
    .factory('$$bootstrapModal', [
+       '$rootScope',
        '$ionicBody',
        '$compile',
        '$ionicTemplateLoader',
-   function ($ionicBody, $compile, $ionicTemplateLoader) {
+   function ($rootScope, $ionicBody, $compile, $ionicTemplateLoader) {
        var BootstrapModal = function (el) {
            this.$el = $(el)
        }
@@ -21,7 +22,7 @@
            this.$el.remove();
        }
        var createModal = function (templateString, options) {
-           var scope = options.scope || $new(true);
+           var scope = options.scope || $rootScope.$new(true);
            var el = $compile(templateString)(scope);
            return new BootstrapModal(el);
        }

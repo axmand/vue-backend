@@ -1,0 +1,53 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="订单管理" class="ion-view-bg">
+    <!--<div class="bar bar-header" style="margin-top:10px;top:44px;">
+       
+        <!--<button class="button calm-bg SourceHanSansCN" style="color:white;" ng-disabled="orderState==EOrderState.REFUND" ng-click="setOrderState(EOrderState.REFUND)">
+           
+        </button>
+        <button class="button calm-bg SourceHanSansCN"  style="color:white;" ng-disabled="orderState==EOrderState.REFUNDING" ng-click="setOrderState(EOrderState.REFUNDING)">-->
+            
+       <!-- </button>-->
+    <!--</div>-->
+    <ion-content data-tap-disable="false">
+        <div class="list">
+            <a class="item item-thumbnail-left" ng-repeat="order in orders" ng-click="openDeletOrderModal(order)">
+                <img ng-src="{{order.goods[0].cargoFaceImgUrl?imgUrl+order.goods[0].cargoFaceImgUrl:'resource/img/nopic.jpg'}}">
+                <h2>{{order.merchantCargoName}}&nbsp;&nbsp;&nbsp;&nbsp;{{order.measureCount||'1'}}&nbsp;x&nbsp;{{order.totalPayPrice}}元</h2>
+                <span class="item-note SourceHanSansCN lightGray">{{order.orderState|orderStatusFilter:order.flag}}</span>
+                <p>购货人:&nbsp;{{order.address[4]}} &nbsp;&nbsp;&nbsp;  联系电话:&nbsp;{{order.address[5]||'空号'}}</p>
+                <p>送货地址:&nbsp;{{order.address[0]+order.address[1]+order.address[2]+order.address[3]||'缺失'}}</p>
+                <p>{{order.date}} {{order.time}}</p>              
+            </a>
+        </div>
+        <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" immediate-check=false distance="1%" spinner="ios"></ion-infinite-scroll>
+        <div class="item borderLess SourceHanSansCN backColor" style="text-align:center;" ng-show="noMoreItemsAvailable">
+            没有订单了
+        </div>
+    </ion-content>
+    <ion-footer-bar style="padding:0;">
+        <div class="button-bar">
+            <a class="button SourceHanSansCN" style="line-height:41px;" ng-disabled="orderState==EOrderState.REFUND"  ng-click="setOrderState(EOrderState.REFUND)">待退款</a>
+            <a class="button SourceHanSansCN" style="line-height:41px;" ng-disabled="orderState==EOrderState.REFUNDING" ng-click="setOrderState(EOrderState.REFUNDING)">正在退款</a>
+            <a class="button SourceHanSansCN" style="line-height:41px;" ng-disabled="orderState==EOrderState.REFUNDSUCCESS" ng-click="setOrderState(EOrderState.REFUNDSUCCESS)">已退款</a>
+        </div>
+    </ion-footer-bar>
+    <!--退款警告框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="deletOrderModal" style="width:100%;top:40px;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">警告</h4>
+                </div>
+                <div class="modal-body">
+                    确认次退款操作？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="sumitDeleteOrder()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+--></ion-view>

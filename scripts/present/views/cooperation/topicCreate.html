@@ -1,0 +1,163 @@
+﻿<!--专题发布，基于summerNote组件-->
+<ion-view view-title="专题发布" class="ion-view-bg" data-tap-disabled="true">
+    <ion-content>
+        <!--专题创建-->
+        <div class="list card SourceHanSansCN">
+            <div class="row">
+                <div class="col col-60">
+                    <!--专题标题-->
+                    <div class="row" style="margin-bottom: 10px;border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-20" style="text-align: center;">
+                            <span><span style="color:red;">*&nbsp;</span>专题标题</span>
+                        </div>
+                        <div class="col col-80 item item-input" style="padding: 0px;border: 1px solid #949494;">
+                            <input type="text" ng-model="nowTopic.title" placeholder="请输入专题标题" />
+                        </div>
+                    </div>
+                    <!--专题关键词-->
+                    <div class="row" style="margin-bottom: 10px;border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-20" style="text-align: center;">
+                            <span><span style="color:red;">*&nbsp;</span>关键词</span>
+                        </div>
+                        <div class="col col-80 item item-input" style="padding: 0px;border: 1px solid #949494;">
+                            <textarea style="font-size:14px;" ng-model="nowTopic.label" type="text" placeholder="请输入专题相关关键词，便于搜索"></textarea>
+                        </div>
+                    </div>
+                    <!--专题副标题-->
+                    <div class="row" style="margin-bottom: 10px;border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-20" style="text-align: center;">
+                            <span>专题副标题</span>
+                        </div>
+                        <div class="col col-80 item item-input" style="padding: 0px;border: 1px solid #949494;">
+                            <input type="text" ng-model="nowTopic.subTitle" placeholder="请输入专题副标题" />
+                        </div>
+                    </div>
+                    <!--专题模板-->
+                    <div class="row" style="margin-bottom: 10px;border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-20" style="text-align: center;">
+                            <span><span style="color:red;">*&nbsp;</span>专题模板</span>
+                        </div>
+                        <div class="col col-80 item item-input" style="border:0px;padding-left: 0px;">
+                            <select ng-model="nowTopic.templateType " ng-options="x.uid as  x.name for x in topicTemplete">
+                                <option value="">-- 选择专题模板 --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--上传背景音乐-->
+                    <div class="row">
+                        <div class="col col-20" style="text-align: center;">
+                            <span>背景音乐</span>
+                        </div>
+                        <div class="col col-30 item item-input" style="border:0px;padding-left: 0px;">
+                            <div class="btn btn-default" ngf-select="upLoadMusic($file)">选择上传音乐</div>
+                        </div>
+                        <div class="col col-50">
+                            <audio ng-src="{{nowTopic.musicUrl | imgCdnFilter}}" style="width:100%;" controls="controls"></audio>
+                            <div class="progress" style="width: 100%;height: 2px;">
+                                <div id="musicProgress" class="progress-bar" role="progressbar" style="width:0%;"></div>
+                            </div>
+                            <div class="row" style="padding:0px;margin:0px;">
+                                <span style="color:red;font-weight:800;">上传的音乐文件大小不超过1m , 时长不超过30s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-40" style="border-left:1px dotted gray;">
+                    <div class="list">
+                        <div class="item-image" style="text-align:center;">
+                            <img ng-src="{{nowTopic.faceImgUrl|imgCdnFilter}}" style="width:304px;height:223px; margin-top:10px;" />
+                        </div>
+                        <div class="item item-borderless" style="text-align:center;">
+                            <div class="btn btn-default" style="width:200px; margin-left:auto;margin-right:auto;clear:both;margin-top: 10px;" ng-click="cutPicture(0.75)"><span style="color:red;">*&nbsp;</span>专题封面上传</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--content分页编辑-->
+        <div class="list card SourceHanSansCN">
+            <!--左侧属性-->
+            <div class="row">
+                <div class="col col-60" style="border-right:1px dashed #BBBBBB;">
+                    <!--专题内容-->
+                    <div class="row" style="border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-50" style="z-index:99;margin-left: 10px;">
+                            <div class="input-group">
+                                <span class="input-group-addon" style="padding:2px 12px;border:none;background-color:#fff;" id="sizing-addon1"><span style="color:red;">*&nbsp;</span>字体颜色:</span>
+                                <input id="colorSelector" class='simple_color_live_preview form-control' />
+                            </div>
+                        </div>
+                        <div class="col col-50" style="padding:2px;">
+                            <span><span style="color:red;">*&nbsp;</span>文字位置 : </span>
+                            <select ng-model="currentTopicContent.position" ng-options="x.uid as x.name for x in textposition">
+                                <option value="">-- 选择文字排版位置 --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="padding:14px;border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-20" style="text-align: center;">
+                            <span><span style="color:red;">*&nbsp;</span>当前滑页标题</span>
+                        </div>
+                        <div class="col col-80 item item-input" style="padding: 0px;border: 1px solid #949494;">
+                            <input type="text" ng-model="currentTopicContent.title" placeholder="请输入当前滑页标题" />
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;padding-bottom: 10px;border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-20" style="text-align: center;">
+                            <span><span style="color:red;">*&nbsp;</span>当前滑页描述</span>
+                        </div>
+                        <div class="col col-80 item item-input" style="padding: 0px;border: 1px solid #949494;">
+                            <textarea style="font-size:14px;height:70px;" ng-model="currentTopicContent.details" type="text" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <!--参与商家-->
+                    <div class="row" style="padding:14px;border-bottom: 1px dashed #BBBBBB;">
+                        <div class="col col-20" style="text-align: center;">
+                            <span>跳转设定</span>
+                        </div>
+                        <div class="col col-40">
+                            <span>跳转类型:</span>
+                            <select ng-model="currentTopicContent.hrefType" ng-options="x.uid as x.name for x in hrefTypes">
+                                <option value="">-选择跳转类型-</option>
+                            </select>
+                        </div>
+                        <div class="col col-40" style="position:relative;">
+                            <div class="btn btn-default" ng-click="openListModal(currentTopicContent.hrefType)" style="width:200px;position:absolute;top:0px;left:0px; clear:both;">跳转指向</div>
+                        </div>
+                    </div>
+                    <!--显示当前页关联的店铺-->
+                    <div class="row" style="padding-top:20px;text-align:center;">
+                        <div style="margin-left:auto;margin-right:auto;" class="item-text-wrap well" ng-if="!!currentTopicContent.targetObjectId">已添加ID: <span style="color:red">{{currentTopicContent.targetObjectId}}</span> 的跳转</div>
+                    </div>
+                </div>
+                <div class="col col-40" style="text-align:center;">
+                    <div class="list">
+                        <div class="item-image" style="text-align:center;">
+                            <img ng-src="{{currentTopicContent.faceImgUrl|imgCdnFilter}}" style="width:145px;height:260px; margin-top:10px;" />
+                        </div>
+                        <div class="item item-borderless" style="text-align:center;">
+                            <div class="btn btn-default" style="width:200px; margin-left:auto;margin-right:auto;clear:both;margin-top: 10px;" ng-click="cutPicture()"><span style="color:red;">*&nbsp;</span>子页图片上传</div>
+                        </div>
+                    </div>
+                </div>
+            </div>、
+            <!--右侧滑页图片-->
+            <div class="row">
+                <div class="col col-30"></div>
+                <div class="col col-40" style="text-align:center;">
+                    <div class="row" style="margin-left: 25%;padding-top: 0px;">
+                        <button type="button" class="btn btn-success" ng-click="goToSide(-1)">上一页</button>
+                        <button type="button" class="btn btn-default" style="border:none;font-size:16px;">当前编辑第:<span style="font-size:18px;color:red;">{{pageId}}</span>页</button>
+                        <button type="button" class="btn btn-success" ng-click="goToSide(1)" style="margin-left:10px;">下一页</button>
+                    </div>
+                </div>
+                <div class="col col-30"></div>
+            </div>
+        </div>
+        <!--确认提交区-->
+        <!--提交-->
+        <button class="btn btn-primary" ng-if="!nowTopic.objectId" ng-click="topicPost()" style="width:30%;margin:0px auto;display: block;">提交</button>
+        <!--修改-->
+        <button class="btn btn-primary" ng-if="!!nowTopic.objectId" ng-click="modifyTopic()" style="width:30%;margin:0px auto;display: block;">修改</button>
+    </ion-content>
+</ion-view>

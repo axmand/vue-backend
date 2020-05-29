@@ -31,7 +31,6 @@
  * @param {boolean=} paging Whether to scroll with paging.
  * @param {expression=} on-refresh Called on pull-to-refresh, triggered by an {@link ionic.directive:ionRefresher}.
  * @param {expression=} on-scroll Called whenever the user scrolls.
- * @param {expression=} on-scroll-complete Called whenever the scrolling paging is completed.
  * @param {boolean=} scrollbar-x Whether to show the horizontal scrollbar. Default true.
  * @param {boolean=} scrollbar-y Whether to show the vertical scrollbar. Default true.
  * @param {boolean=} zooming Whether to support pinch-to-zoom
@@ -67,7 +66,6 @@ function($timeout, $controller, $ionicBind, $ionicConfig) {
           direction: '@',
           paging: '@',
           $onScroll: '&onScroll',
-          $onScrollComplete: '&onScrollComplete',
           scroll: '@',
           scrollbarX: '@',
           scrollbarY: '@',
@@ -109,8 +107,7 @@ function($timeout, $controller, $ionicBind, $ionicConfig) {
           maxZoom: $scope.$eval($scope.maxZoom) || 3,
           minZoom: $scope.$eval($scope.minZoom) || 0.5,
           preventDefault: true,
-          nativeScrolling: nativeScrolling,
-          scrollingComplete: onScrollComplete
+          nativeScrolling: nativeScrolling
         };
 
         if (isPaging) {
@@ -118,17 +115,10 @@ function($timeout, $controller, $ionicBind, $ionicConfig) {
           scrollViewOptions.bouncing = false;
         }
 
-        var scrollCtrl = $controller('$ionicScroll', {
+        $controller('$ionicScroll', {
           $scope: $scope,
           scrollViewOptions: scrollViewOptions
         });
-
-        function onScrollComplete() {
-          $scope.$onScrollComplete && $scope.$onScrollComplete({
-            scrollTop: scrollCtrl.scrollView.__scrollTop,
-            scrollLeft: scrollCtrl.scrollView.__scrollLeft
-          });
-        }
       }
     }
   };

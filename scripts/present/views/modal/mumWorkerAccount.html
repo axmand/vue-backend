@@ -1,0 +1,62 @@
+﻿ <!--绑定工匠合同modal框-->
+<div id="workerModal" data-backdrop="false" class="modal fade" style="background-color:rgba(0,0,0,0);width:100%;margin-top:20px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="text-align:center;">{{workerAccount.oppositeName}} 管理合同</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label"><span style="color:red;">*&nbsp;</span>账号名称:</label>
+                        <input type="text" ng-model="workerAccount.customerName" class="form-control" placeholder="请输入要绑定的账号名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label"><span style="color:red;">*&nbsp;</span>邮箱地址:</label>
+                        <input type="text" ng-model="workerAccount.customerMailAddress" class="form-control" placeholder="请输入账号邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label"><span style="color:red;">*&nbsp;</span>合同编号:</label>
+                        <input type="text" ng-model="workerAccount.bargainNumber" class="form-control" placeholder="请输入工匠合同编号">
+                    </div>
+                    <div class="item-divider"></div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label"><span style="color:red;">*&nbsp;</span>支付宝收款账户:</label>
+                        <input type="text" ng-model="workerAccount.alipayAccount" class="form-control" placeholder="请输入支付宝收款账户">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label"><span style="color:red;">*&nbsp;</span>微信收款账户:</label>
+                        <input type="text" ng-model="workerAccount.weiXinpayAccount" class="form-control" placeholder="请输入微信收款账户">
+                    </div>
+                    <div class="item-divider"></div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">合同补充:</label>
+                        <input type="text" ng-model="workerAccount.bargainContent" class="form-control" placeholder="请输入对当前合同的备注">
+                    </div>
+                </form>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color:red;"><span style="color:red;">*&nbsp;</span>合同须知</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>
+                                用户应当为具有完全民事行为能力的自然人，或者是具有独立承担法律责任能力的其他合法主体。若用户属于无民事行为能力、限制民事行为能力人的，或是不具有独立承担法律责任能力的其他主体的，您应在监护人监护下进行交易或是得到有权主体授权后进行交易。
+                            </li>
+                            <li>
+                                用户使用穷人科技提供的网络平台服务，必须：<br />
+                                A）自行配备上网的所需设备，包括个人电脑、调制解调器或其他必须上网装置；<br />
+                                B）自行负担个人上网所支付的与此服务有关的电话费用、网络费用<br />
+                                <span style="color:red;">C）微信和支付宝收款账户需具备收款能力，且至少填写一种 </span><br />
+                                用户在使用本地链服务前，应检查其软硬件设备，保证其处于安全使用状态。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="postWorkerAccount()">绑定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

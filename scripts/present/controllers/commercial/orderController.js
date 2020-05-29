@@ -1,228 +1,120 @@
 ﻿/**
-*   平台订单管理
-*   @author yellow date 2016/8/27
+*   订单controller
+*   @author yellow date 2015/11/30
 */
-define(['baseControllers', 'cdn'], function (baseControllers, cdn) {
+define(['baseControllers'], function (baseControllers) {
 
-    baseControllers
-        .controller('orderController', function ($scope, groupService, $ionicSideMenuDelegate, $$dataBase, $state, $$toast, $$dataCache) {
-            //用户信息
-            var _userInfo = $$dataBase.getUserInfo();
-            //订单列表
-            var orderListFeed = new $$dataBase.Feed({
-                name: 'orderList',
-                url: 'BackendCommericalOrderListGet',
-                scope: $scope,
-                autoShowInfinit: true,
-                autoRefreshAndLoadMore: true,
-                params: {
-                    customerName: _userInfo.phoneNumber,
-                    token: _userInfo.token,
-                    searchWord: "all",
-                    eOrderState: -1,
-                    eBuyPattern: -1,
-                    pageNumber: 0,
-                },
-                refreshCallback: {
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (err) {
-                        if (!!err && err.code == '401') {
-                            $scope.orderList = [];
-                        }
-                    }
-                },
-                loadMoreCallback: {
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (err) {
-                        if (!!err && err.code == '401') {
-                            $$toast('未查询到更多数据', 'error');
-                        }
-                        console.log(err);
-                    }
-                }
-            });
-            //
-            $scope.searchOrder = function (searchWord, $event) {
-                if ($event.keyCode === 13) {
-                    orderListFeed.setParam('searchWord', searchWord || 'all');
-                    $scope.orderListRefresh();
-                }
-            }
-            //订单详情
-            $scope.goToOrderDetail = function (order) {
-                $$dataCache.setData("orderDetail", order, true);
-                $state.go('main.commercialOrderDetail', { model: !!order ? 2 : 1 });
-            }
-            //刷新商家列表
-            $scope.$on('$ionicView.enter', function () {
-                //刷新 orderlist
-                $scope.orderListRefresh();
-                //if (arguments[0].targetScope == arguments[0].currentScope) { }
-            });
-        })
-        .controller('orderDetailController', function ($window, $$confirmService, $$toast, $$bootstrapModal, $stateParams, $scope, $$dataCache, $$dataBase, groupService, $ionicSideMenuDelegate) {
-            var  _userInfo = $$dataBase.getUserInfo();
-            $scope.orderData = {};
-            $scope.model = $stateParams.model;
-            if ($scope.model == 2)
-                $scope.orderData = $$dataCache.getData("orderDetail");
-
-            $scope.disAgree = {
-                reason: null,
-            }
-
-            var deliverOrderModal = {}, //发货信息对话框
-                disDeliverOrderModal = {}; //拒绝订单对话框
-
-            //选中购物车
-            $scope.selectTrolleyElement = function (goods) {
-                if (!!$scope.goods)
-                    $scope.goods.isSelect = "";
-                $scope.goods = goods;
-                goods.isSelect = "mum-card-select";
-            }
-            //刷新商家列表
-            $scope.$on('$ionicView.enter', function () {
-                //if (arguments[0].targetScope == arguments[0].currentScope) {
-                //    $scope.model = $stateParams.model;
-                //    if ($scope.model == 2)
-                //        $scope.orderData = $$dataCache.getData("orderDetail");
-                //}
-            });
-            //销毁
-            $scope.$on('$destroy', function () {
-                disDeliverOrderModal.remove();
-                deliverOrderModal.remove();
-            });
-            //订单发货modal
-            $$bootstrapModal.fromTemplateUrl('scripts/present/views/modal/mumDeliverOrder.html', {
-                scope: $scope
-            }).then(function (modal) {
-                deliverOrderModal = modal;
-            });
-            //拒绝发货modal
-            $$bootstrapModal.fromTemplateUrl('scripts/present/views/modal/mumRefuseOrder.html', {
-                scope: $scope
-            }).then(function (modal) {
-                disDeliverOrderModal = modal;
-            });
-            //打开订单发货对话框
-            $scope.openDeliverModal = function (goods) {
-                deliverOrderModal.show();
-            };
-            //打开拒绝发货订单对话框
-            $scope.openDisDeliverModal = function () {
-                disDeliverOrderModal.show();
-            }
-            //
-            $window.getRefundSubmit = function () {
-                return $scope.refundSubmit;
-            }
-            //退款
-            $scope.refundOrder = function () {
-                //同意退货
-                $$dataBase.getData('BackendCommercialRefundMoneyGet', {
-                    customerName: _userInfo.phoneNumber,
-                    token: _userInfo.token,
-                    orderObjectId: $scope.orderData.objectId,
-                    batchNo: $scope.goods.batchNo
-                }).then(function (data) {
-                    if (data.status === "ok") {
-                        $scope.refundSubmit = JSON.parse(data.content);
-                        $window.open("scripts\\present\\views\\modal\\mumAlipayRefund.html");
-                    }
-                    else
-                        $$toast(JSON.parse(data.content), "error");
-                }, function (err) {
-                    $$toast(err, "error");
-                });
-            };
-            //同意退货
-            $scope.agreeReturn = function (cargo) {
-                $$confirmService.show("确认同意此件商品的退货申请吗？").then(function () {
-                    //同意退货
-                    $$dataBase.getData('BackendCommercialAgreeReturnCargoGet', {
-                        customerName: _userInfo.phoneNumber,
-                        token: _userInfo.token,
-                        orderObjectId: $scope.orderData.objectId,
-                        batchNo: $scope.goods.batchNo,
-                    }).then(function (data) {
-                        if (data.status === "ok")
-                            $$toast(JSON.parse(data.content), "success");
-                        else
-                            $$toast(JSON.parse(data.content), "error");
-                    }, function (err) {
-                        $$toast(err, "error");
-                    });
-                }, function () {
-                    //取消即可
-                });
-            }
-            //不同意退货
-            $scope.disagreeReturn = function (cargo) {
-                $$confirmService.show("确认拒绝此件商品的退货申请吗？").then(function () {
-                    //同意退货
-                    $$dataBase.getData('BackendCommercialDisagreeReturnCargoGet', {
-                        customerName: _userInfo.phoneNumber,
-                        token: _userInfo.token,
-                        orderObjectId: $scope.orderData.objectId,
-                        batchNo: $scope.goods.batchNo,
-                    }).then(function (data) {
-                        if (data.status === "ok")
-                            $$toast(JSON.parse(data.content), "success");
-                        else
-                            $$toast(JSON.parse(data.content), "error");
-                    }, function (err) {
-                        $$toast(err, "error");
-                    });
-                }, function () {
-                    //取消即可
-                });
-            }
-            //发货
-            $scope.deliverOrder = function (goods) {
-                if (!$scope.waybill.number)
-                    return $$toast("请填写快递号", "error");
-                $$dataBase.getData('BackendCommercialDeliverOrderGet', {
-                    customerName: _userInfo.phoneNumber,
-                    token: _userInfo.token,
-                    orderObjectId: $scope.orderData.objectId,
-                    batchNo: goods.batchNo,
-                    waybillNumber: $scope.waybill.number,
-                }).then(function (data) {
-                    if (data.status === "ok")
-                        $$toast(JSON.parse(data.content), "success");
-                    else
-                        $$toast(JSON.parse(data.content), "error");
-                }, function (err) {
-                    $$toast(err, "error");
-                });
-                deliverOrderModal.hide();
-            }
-            //不同意发货
-            $scope.disDeliverOrder = function (order) {
-                if (!$scope.disAgree.reason)
-                    return $$toast("请填写拒绝订单的理由", "error");
-                //
-                $$dataBase.getData('BackendCommercialRefuseOrderGet', {
-                    customerName: _userInfo.phoneNumber,
-                    token: _userInfo.token,
-                    orderObjectId: order.objectId,
-                    refuseReason: $scope.disAgree.reason
-                }).then(function (data) {
-                    if (data.status === "ok")
-                        $$toast(JSON.parse(data.content), "success");
-                    else
-                        $$toast(JSON.parse(data.content), "error");
-                }, function (err) {
-                    $$toast(err, "error");
-                });
-                disDeliverOrderModal.hide();
+    baseControllers.controller('orderController', ['$scope', '$location', '$$commercialService', '$$loginService', 'configService','$$toast', function ($scope, $location, $$commercialService, $$loginService,configService,$$toast) {
+        $scope.imgUrl = configService.urlRequest.imgUrl;
+        console.log(configService.appConfig);
+        $scope.EWaybill = configService.appConfig.EWaybill;
+        $scope.ChoseEWaybil = {
+            SELF:'自取',
+            SFEXPRESS:'顺丰快递',
+        }
+        //进入时刷新
+        $scope.$on("$ionicView.enter", function () {
+            if (arguments[0].targetScope == arguments[0].currentScope) {
+                $scope.orders = [];
+                $scope.noMoreItemsAvailable = false;
+                $scope.getOrderList(0);
+                _num = 1;
             }
         });
+        //换商店时刷新
+        $scope.$on('shopChanged', function () {
+            console.log('shopChanged');
+            $scope.orders = [];
+            $scope.noMoreItemsAvailable = false;
+            $scope.getOrderList(0);
+            _num = 1;
+        });
+        $scope.getOrderList = function (number) {
+            var userInfo = $$loginService.userInfo;
+            console.log(userInfo);
+            $$commercialService.getOrderList(userInfo.userName, userInfo.token,number).then(function (data) {
+                console.log('get shop order success');
+                if (data.status == 'ok') {
+                    var addOrders = JSON.parse(data.content);
+                    addOrders.forEach(function (currentValue, index, array) {
+                        currentValue.address = currentValue.address.split('|');
+                        
+                    })
+
+                    $scope.orders = $scope.orders.concat(addOrders);
+                    console.log($scope.orders);
+                }
+                else {
+                    $scope.noMoreItemsAvailable = true;
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            }, function (error) {
+                $$toast('无网络连接！', 'warning');
+                console.log('get Shop order fail');
+                console.log(error);
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
+        }
+        //发货操作
+        $scope.deliverOrderData = {
+            order: null,
+            waybill: -1,
+            waybillNumber:'',
+        };
+        $scope.deliverOrder = function (order) {
+            $scope.deliverOrderData.order = order;
+            $scope.deliverOrderData.waybillNumber = '';
+            $('#deliverOrderModal').modal('show');
+        }
+        $scope.sumitDeliverOrder = function () {          
+            var sumitOrder=$scope.deliverOrderData.order;
+            var userInfo = $$loginService.userInfo;
+            $$commercialService.deliverOrder(userInfo.userName, userInfo.token, $scope.deliverOrderData.order.objectId, $scope.deliverOrderData.waybill, $scope.deliverOrderData.waybillNumber||'000')
+            .then(function (data) {
+                if (data.status == 'ok') {
+                    sumitOrder.orderState = 32;
+                    $$toast('发货成功', 'success');
+                }
+                else $$toast('发货失败', 'error');
+                $('#deliverOrderModal').modal('hide');
+            }, function (error) {
+                $$toast('网络连接出错', 'error');
+                console.log(error);
+                $('#deliverOrderModal').modal('hide');
+            })
+            console.log('summite deliver');
+        }
+
+        //拒绝订单操作
+        $scope.refuseOrderData = {
+            reason: '',
+            order:null,
+        }
+        $scope.refuseOrder = function (order) {
+            $scope.refuseOrderData.order = order;
+            $('#refuseOrderModal').modal('show');
+        }
+        $scope.sumitRefuseOrder = function () {
+            var userInfo = $$loginService.userInfo;
+            var sumitOrder = $scope.refuseOrderData.order;
+            $$commercialService.refuseOrder(userInfo.userName, userInfo.token, $scope.refuseOrderData.order.objectId, $scope.refuseOrderData.order.reason)
+            .then(function (data) {
+                if (data.status == 'ok') {
+                    sumitOrder.orderState = 61;
+                    $$toast('拒绝订单成功', 'success');
+                }
+                else $$toast('拒绝订单失败', 'error');
+                $('#refuseOrderModal').modal('hide');
+            }, function (error) {
+                $$toast('网络连接出错', 'error');
+                console.log(error);
+                $('#refuseOrderModal').modal('hide');
+            });
+        }
+        $scope.loadMore = function () {
+            console.log('more')
+            $scope.getOrderList(_num++);
+        }
+    }]);
 
 });

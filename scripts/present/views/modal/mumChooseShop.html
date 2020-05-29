@@ -17,29 +17,22 @@
                 </div>
                <ion-content class="has-header" style="bottom:0;">
                    <ion-refresher pulling-text="下拉更新..." on-refresh="shopListRefresh()" spinner="ios"></ion-refresher>
-                   <div class="item" style="padding:0px;margin: 5px 10px 5px 10px;">
-                       <div class="button-bar SourceHanSansCN">
-                           <a class="button">店铺缩略图</a>
-                           <a class="button">店铺名称</a>
-                           <a class="button">店铺地址</a>
-                           <a class="button">店铺描述</a>
-                       </div>
-                   </div>
-                   <div class="item" style="padding:0px;margin: 2px 10px 2px 10px;" ng-repeat="shop in shopList" ng-click="setShop(shop)">
-                       <div class="button-bar fontVisiable">
-                           <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{shop.faceImgUrl|imgCdnFilter}})"></div>
-                           <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{shop.name}}">{{shop.name}}</div>
-                           <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{shop.address}}">{{shop.address}}</div>
-                           <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{shop.description}}">{{shop.description}}</div>
-                       </div>
-                    </div>
+                   <a class="item item-thumbnail-left" ng-repeat="shop in shopList" ng-click="setShop(shop)">
+                       <img ng-src="{{shop.faceImgUrl|imgCdnFilter}}">
+                       <h2>{{shop.name}}</h2>
+                       <p>地址：{{shop.address}}</p>
+                       <p>简介：{{shop.description}}</p>
+                   </a>
                    <ion-infinite-scroll on-infinite="shopListLoadMore()" ng-if="shopListShowInfinite" distance="1%" spinner="ios">
                    </ion-infinite-scroll>
-                   <div class="item-content center-block SourceHanSansCN backColor" style="text-align:center;" ng-hide="shopListShowInfinite">
-                       <p style="font-family:'Microsoft YaHei';font-size:16px;">没有更多啦</p>
+                   <div class="item borderLess SourceHanSansCN backColor" style="text-align:center;" ng-hide="shopListShowInfinite">
+                       没有更多啦
                    </div>
                </ion-content>
             </div>
+            <!--<div class="modal-footer" style="padding:5px;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+            </div>-->
         </div>
     </div>
 </div>

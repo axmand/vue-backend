@@ -62,7 +62,7 @@
  *   $scope.$on('$destroy', function() {
  *     $scope.popover.remove();
  *   });
- *   // Execute action on hidden popover
+ *   // Execute action on hide popover
  *   $scope.$on('popover.hidden', function() {
  *     // Execute action
  *   });

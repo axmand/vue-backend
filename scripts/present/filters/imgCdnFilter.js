@@ -1,21 +1,18 @@
 ﻿//cdn显示image所在位置
-define(['baseFilters', 'cdn'], function (baseFilters, cdn) {
+define(['baseFilters', 'cdn', 'configService'], function (baseFilters, cdn, configService) {
 
-    baseFilters.filter('imgCdnFilter', function () {
-        var imgUrl = "http://resource.liangshisq.com/images/";
+    baseFilters.filter('imgCdnFilter', function (configService) {
+
         var imgCdn = function (fileUrl) {
-            var resultImgUrl = '';
             if (!!fileUrl) {
-                var imgType = fileUrl.substr(0, 4);
-                if (imgType == 'http') {
-                    resultImgUrl = fileUrl;
-                } else {
-                    resultImgUrl = imgUrl + fileUrl;
-                }
-            } else {
-                resultImgUrl = 'resource/images/noPic.jpg';
-            }
-            return resultImgUrl;
+                var index = fileUrl.lastIndexOf('.');
+                var fileType = fileUrl.substr(index, 4);
+                if (fileType === '.mp3')
+                    return configService.urlRequest.musicUrl + fileUrl;
+                else
+                    return cdn.resolve(fileUrl);
+            } else
+                return 'resource/images/noPic.jpg';
         };
 
         return imgCdn;

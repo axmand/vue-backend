@@ -1,6 +1,5 @@
 ﻿define(['baseFilters', 'objutil'], function (baseFilters, objutil) {
-
-    baseFilters.filter('$$typeFilter', function ($$dataBase) {
+    baseFilters.filter('typeFilter', function () {
         //店铺类型
         var typeShops = {
             '餐饮/美食': 'cyms',
@@ -98,7 +97,7 @@
             'xqgg': '稀奇古怪',
             'pchwl': '陪吃喝玩乐'
         };
-        //便民消息类型
+
         var typeMessage = {
             'ZXQZ': '咨询求助',
             'XZZL': '寻找招领',
@@ -113,7 +112,7 @@
             'TFSJ': '突发事件公告',
             'QT': '其他'
         };
-        //专题
+
         var typeTopic = {
             TEXTTOP: '文字置顶',
             TEXTMIDDLE: '文字置中',
@@ -124,57 +123,22 @@
             HREFCARGO: '商品',
             HREFSHOP:'店铺',
         };
-        //
-        var typeECategory = {
-            CategoryCommercialCargo: '商品分类',
-            CategoryCommercialCity: '城市分类',
-            CategoryCommercialMerchant: '店铺角色分类(代理/供应)',
-            CategoryCommercialShop: '店铺经营类型分类',
-            CategoryCommercialVideo: '商城视频分类',
-            CategoryCommercialWhareHouse: '仓库类',
-            CategoryConvenienceJourneyman: '便民工匠分类',
-            CategoryConvenienceMessage: '便民消息分类',
-            CategoryConvenienceViode: '便民视频分类',
-        }
-        //评审状态
-        var appraisalState = {
-            1: '预告状态',
-            11: '预热状态（可申请）',
-            21: '进行中',
-            31: '提交结论中',
-            41: '完成'
-        }
-        var cityCategory = {};
 
-        $$dataBase.getCityList().then(function (data) {
-            for (var i = 0,len=data.length; i < len;i++){
-                cityCategory[data[i].cityRegionId] = data[i].cityName;
-                cityCategory[data[i].cityName] = data[i].cityRegionId;
-                cityCategory[data[i].provinceName] = data[i].provinceRegionId;
-                cityCategory[data[i].provinceRegionId] = data[i].provinceName;
-            }
-            objutil.cover(dictionary, cityCategory);
-        });
-        //总字典
         var dictionary = {};
-
         objutil.cover(dictionary, typeShops);
         objutil.cover(dictionary, typeActivities);
         objutil.cover(dictionary, typeJourmany);
         objutil.cover(dictionary, typeMessage)
         objutil.cover(dictionary, typeTopic);
-        objutil.cover(dictionary, typeECategory);
-        objutil.cover(dictionary, appraisalState);
 
         var typeFilter = function (type) {
             if (type === 'null') {
                 return '未知';
             } else {
-                return dictionary[type] ? dictionary[type] : '正在加载...';
+                return dictionary[type] ? dictionary[type] : '未知类别';
             }
         }
 
         return typeFilter;
     });
-
 })

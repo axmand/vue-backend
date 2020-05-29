@@ -18,14 +18,11 @@
                 autoShowInfinit: true,
                 autoRefreshAndLoadMore: true,
                 params: {
-                    cCargoType: 'all',
-                    shopObjectId: 'all',           
-                    searchWord: 'all',
-                    eSearchPattern:1, 
-                    eSortMethod:-1,             
+                    cargoType: 'all',
+                    shopObjectId: '0',           
+                    searchword: 'all',
+                    eSearchPattern:1,              
                     pageNumber: 0,
-                    radius: 5000000000,
-                    location:[0,0],
                     regionId: 'all'
                 },         
                 refreshCallback: {
@@ -42,12 +39,16 @@
                     }
                 }
             });
+
+
             //获取店铺类别
             var config = $$dataBase.getAppConfig();
-            $$dataBase.getCategory(config.EClassifyPattern.CategoryCommercialCargo).then(function (data) {
+            $$dataBase.getCategory(config.ECategory.CommercialCargo).then(function (data) {
                 data[data.length] = { name: '全部分类', uid: 'all' };
                 $scope.$$commericalCargoType = data;
             });
+
+
             //搜索商品
             $scope.searchCargo = function (searchParams, $event) {
                 if ($event.keyCode === 13) {
@@ -57,12 +58,15 @@
                     $scope.cargoListRefresh();
                 }
             };
+
+
             //添加商品
             $scope.addCargo = function (cargo) {
                 if ($scope.chooseCargo[cargo.objectId]) {
                     delete $scope.chooseCargo[cargo.objectId];
                     return;
                 }
+
                 $scope.chooseCargo[cargo.objectId] = cargo;
                 if ($scope.model == 'single') {
                     $scope.chooseCargo = {};

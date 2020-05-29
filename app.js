@@ -15,7 +15,7 @@ requirejs.config({
     ],
     paths: {
         //ionic 库是webapp基础框架，内置angular.js，并提供多种基于ng的元素
-        ionic: 'vendor/ionic/release/js/ionic.bundle',
+        ionic: 'vendor/ionic/release/js/ionic.bundle.min',
         jquery: "vendor/jquery/dist/jquery.min",
         ngFileUpload: 'vendor/ng-file-upload/ng-file-upload.min',
         bootstrap: 'vendor/bootstrap/dist/js/bootstrap',
@@ -24,23 +24,15 @@ requirejs.config({
         croppie: 'vendor/Croppie/croppie',
         simplecolor: 'vendor/jquery-simple-color/jquery.simple-color.min',
         toastr: 'vendor/toast/toastr.min',
-        d3: 'vendor/d3/d3.min',
-        flatpickr: 'vendor/flatpickr/dist/flatpickr.min',
-        flatpickrZh: 'vendor/flatpickr/dist/l10n/zh',
+        d3: 'vendor/d3.js',
     },
     shim: {
         bootstrap:{
             deps:['jquery']
         },
-        flatpickr: {
-            deps:['jquery']
+        summernote: {
+            deps: ['bootstrap']
         },
-        flatpickrZh:{
-            deps: ['flatpickr']
-        },
-        //summernote: {
-        //    deps: ['bootstrap']
-        //},
         //summernoteZhCN: {
         //    deps:['summernote']
         //},
@@ -62,11 +54,12 @@ requirejs.config({
 });
 //加载进度
 window.loadCount = 0;
-//
+
 var requireTick = function (event) {
     window.loadCount++;
-    document.getElementById('loadingProgress').innerText = "正在加载，请稍后(" + (window.loadCount * 100 / 55).toFixed(1) + '%)';
+    document.getElementById('loadingProgress').innerText = "正在加载，请稍后(" + (window.loadCount * 100 / 54).toFixed(1) + '%)';
 }
+
 //重写 createNode ，提供计数器功能
 requirejs.createNode = function (config, moduleName, url) {
     var node = config.xhtml ?
@@ -83,15 +76,14 @@ requirejs.createNode = function (config, moduleName, url) {
     }
     return node;
 };
-//
-requirejs(['ionic', 'bootstrap', 'flatpickrZh', 'ngFileUpload', 'jquery', 'scripts'], function (ionic, bootstrap, flatpickrZh, ngFileUpload, jquery, scripts) {
-    //设置日期控件语言
-    Flatpickr.localize(Flatpickr.l10ns.zh);
+requirejs(['ionic', 'bootstrap', 'ngFileUpload', 'scripts'], function (ionic, bootstrap, ngFileUpload, scripts) {
     //启动,
-    scripts.app.run(function ($ionicPlatform, $location, $ionicPopup) {
+    scripts.app.run(function ($ionicPlatform, $location, $ionicPopup, $rootScope) {
         $ionicPlatform.ready(function () {
             //导航至首页
             $location.url("/login");
+            var url = $location.host();
+            $rootScope.regionId = url.split('.')[0];
         });
     }).config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         //设置视图缓存数目
@@ -134,8 +126,6 @@ requirejs(['ionic', 'bootstrap', 'flatpickrZh', 'ngFileUpload', 'jquery', 'scrip
         $httpProvider.defaults.transformRequest = [function (data) {
             return angular.isObject(data) && String(data) !== '[object File]' ? JSON.stringify(data) : data;
         }];
-    }]).config(['$rootScopeProvider', function ($rootScopeProvider) {
-        $rootScopeProvider.digestTtl(10000000);
     }]);
     //传统页面驱动
     angular.bootstrap(document, ['wgApp']);

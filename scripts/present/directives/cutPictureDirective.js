@@ -8,7 +8,7 @@
 *   @example<mum-cut mum-height="540" mum-width="304" boun-width="500" boun-height="600"></mum-cut>
 */
 
-define(['baseDirectives', 'croppie', 'jquery'], function (baseDirectives, croppie,$) {
+define(['baseDirectives', 'croppie', 'jquery'], function (baseDirectives, croppie, $) {
    
     baseDirectives.controller('mumCutController', function ($scope, $element, $attrs, $$toast) {
         var _size = $attrs.mumSize||0.75;

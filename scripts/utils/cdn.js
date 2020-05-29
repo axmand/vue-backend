@@ -5,7 +5,7 @@
 */
 define(function () {
 
-    var _imgRootUrl = "http://114.55.119.208/images/"
+    var _imgRootUrl = "http://120.55.166.61/images/"
 
     var _cdn = function () {
 

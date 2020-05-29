@@ -1,0 +1,44 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="视频发布" class="ion-view-bg">
+    <!--检索功能栏-->
+    <div class="form-inline item" style="margin:20px;top:44px;">
+        <div class="form-group" style="margin-right:10px;">
+            <label for="searchname">检索</label>
+            <input class="form-control" ng-model="searchword" ng-keydown="searchwordGet(searchword,$event)" style="width:220px;border: 1px solid #ccc;" type="text" id="searchname" placeholder="输入关键字查找符合条件的专题" />
+        </div>
+        <button class="btn btn-primary" ng-click="searchwordGet(searchword,{keyCode : 13})">搜索</button>
+
+        <a ng-click="createVidoe()" style="float:right;background-color:#fd9934;border-color:#fd9934;padding: 6px 18px;" class="btn btn-primary">创建店铺</a>
+    </div>
+    <ion-content style="bottom:0px;top:130px;">
+        <ion-refresher pulling-text="下拉更新..." on-refresh="videoListRefresh()" spinner="ios"></ion-refresher>
+        <div class="item" style="padding:0px;margin:20px;">
+            <div class="button-bar SourceHanSansCN">
+                <a class="button">视频封面</a>
+                <a class="button">视频标题</a>
+                <a class="button">视频描述</a>
+                <a class="button">操作</a>
+            </div>
+        </div>
+        <div class="item" style="padding: 16px 0px;margin:0px 20px;" ng-repeat="video in videoList">
+            <div class="button-bar fontVisiable">
+                <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{video.faceImgUrl|imgCdnFilter}})"></div>
+                <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{video.title}}">{{video.title}}</div>
+                <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{video.content}}">{{video.content}}</div>
+                <div class="button button-clear">
+                    <a class="button button-clear SourceHanSansFontBlod" ng-click="modifyVideo(video)" style="color:darkslategray; width:100%; z-index:999;">查看详情</a>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll on-infinite="videoListLoadMore()" ng-if="videoListShowInfinite" immediate-check=false spinner="ios"></ion-infinite-scroll>
+        <div class="item-content center-block" style="text-align:center;padding: 5px;font-size: 18px;" ng-hide="videoListShowInfinite || videoList.length == 0">
+            没有更多啦
+        </div>
+        <div class="item-content h4" style="text-align:center;margin-top: -350px;" ng-show="!videoList||videoList.length==0">
+            目前尚未有视频
+        </div>
+        
+    </ion-content>
+</ion-view>
+
+

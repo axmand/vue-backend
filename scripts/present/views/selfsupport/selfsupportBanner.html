@@ -1,0 +1,41 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="滑动广告" class="ion-view-bg">
+    <!--检索栏-->
+    <div class="form-inline item" style="margin:20px;top:44px;">
+        <div class="form-group" style="margin-left:20px;">
+            <label>展示地区</label>
+            <select class="form-control" ng-model="regionId" ng-change="cityChanged(regionId)" ng-options="city.cityRegionId as city.cityName group by city.provinceName for city in cityList">
+                <option value="">-- 请选择展示地区 --</option>
+            </select>
+        </div>
+        <a class="btn btn-success" style="float:right;" href="#/main/daily/bannerCreate">新建banner</a>
+    </div>
+    <!--banner列表-->
+    <div class="item" style="padding:0px;margin:20px;top:35px;">
+        <div class="button-bar SourceHanSansCN">
+            <a class="button">banner图</a>
+            <a class="button">展示地区</a>
+            <a class="button">创建时间</a>
+            <a class="button">操作</a>
+        </div>
+    </div>
+    <ion-content style="top:200px;">
+        <ion-refresher pulling-text="下拉更新..." on-refresh="bannerListRefresh()" spinner="ios"></ion-refresher>
+
+        <div class="item" style="padding: 16px 0px;margin:0px 20px;" ng-repeat="banner in bannerList">
+            <div class="button-bar fontVisiable">
+                <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{banner.faceImgUrl|imgCdnFilter}})"></div>
+                <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{banner.regionId}}">{{banner.regionId}}</div>
+                <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{banner.date}}&nbsp;{{banner.time}}">{{banner.date}}&nbsp;{{banner.time}}</div>
+                <button class="button button-clear SourceHanSansFontBlod" ng-click="deleteBanner(banner)" style="color:red; width:100%; z-index:999;">删除</button>
+            </div>
+        </div>
+        <ion-infinite-scroll on-infinite="bannerListLoadMore()" ng-if="bannerListShowInfinite" immediate-check=false spinner="ios"></ion-infinite-scroll>
+        <div class="item-content center-block" style="text-align:center;padding: 5px;font-size: 18px;" ng-hide="bannerListShowInfinite || bannerList.length == 0">
+            没有更多啦
+        </div>
+        <div class="item-content center-block" ng-show="!bannerList||bannerList.length == 0" style="text-align: center;font-size: 24px;">
+            目前尚未有banner
+        </div>
+    </ion-content>
+</ion-view>

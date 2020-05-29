@@ -1,0 +1,94 @@
+﻿<ion-view view-title="公告发布" class="ion-view-bg">
+    <ion-content style="padding:10px 10px 0px 20px">
+        <div class="list card">
+            <!--公告标题-->
+            <div class="row" style="margin-bottom: 10px;border-bottom: 1px dashed #BBBBBB;">
+                <div class="col col-20" style="text-align: center;">
+                    <span><span style="color:red;">*&nbsp;</span>公告标题</span>
+                </div>
+                <div class="col col-80 item item-input" style="padding: 0px;border: 1px solid #949494;">
+                    <input type="text" placeholder="输入公告标题，以便民栏滑动页文字形式展示" ng-model="messageInfo.title" />
+                </div>
+            </div>
+
+            <!--公告封面-->
+            <div class="row" style="margin-bottom: 10px;border-bottom: 1px dashed #BBBBBB;">
+                <div class="col col-20" style="text-align: center;">
+                    <span><span style="color:red;">*&nbsp;</span>封面图片</span>
+                </div>
+                <div class="col col-40" style="position:relative; text-align:center;">
+                    <img id="faceImage" style="width:331px;height:145px;border-radius:4px;" ng-src="{{messageInfo.faceImgUrl|imgCdnFilter}}">
+                    <div class="progress" style="width:331px;height:5px; z-index:999; margin-left:auto;margin-right:auto;">
+                        <div id="faceImgProgress" class="progress-bar" role="progressbar" style="width:0px;"></div>
+                    </div>
+                    <div class="btn btn-default" ng-click="startCutPicture('new')" style="width:150px;clear:both;">选择上传图片</div>
+                </div>
+                <div class="col col-40" style="position:relative;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="color:red;"><span style="color:red;">*&nbsp;</span>封面图片须知</div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>
+                                    封面图片比例为 <span style="font-weight:800;color:red;"> 16：9</span>，请在上传图片前确认图片分辨率符合此比例。
+                                </li>
+                                <li>
+                                    在您使用本地链发布带图片的公告时，请您务必遵循以下原则：<br />
+                                    A）不要发布可能带有令人不安、反感的图片<br />
+                                    B）不要发布带有反动，违法犯罪信息的图片<br />
+                                    站长在本地链平台发布的信息，均代表用户的观点，与本地链无关，站长须对其言论独立承担完全的法律责任。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--专题内容-->
+            <div class="row">
+                <div class="col col-20" style="text-align: center;">
+                    <span><span style="color:red;">*&nbsp;</span>公告正文</span>
+                </div>
+                <div class="col col-80 item item-input" style="padding: 0px;border: 1px solid #949494;">
+                    <textarea style="font-size:14px;height:70px;" ng-model="messageInfo.content" type="text" placeholder="请输入公告正文"></textarea>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" style="color:red;"><span style="color:red;">*&nbsp;</span>发布公告须知</div>
+                <div class="panel-body">
+                    <ul>
+                        <li>
+                            <p><span style="color:red;">站长</span>可以在本地链后台发布公告信息，但不得在本地链平台发布包含以下内容的言论：</p>
+                        </li>
+                        <li>
+                            A）反对宪法所确定的基本原则，煽动、抗拒、破坏宪法和法律、行政法规实施的；<br />
+                            B）煽动颠覆国家政权，推翻社会主义制度，煽动、分裂国家，破坏国家统一的；<br />
+                            C）损害国家荣誉和利益的；<br />
+                            D）煽动民族仇恨、民族歧视，破坏民族团结的；<br />
+                            E）任何包含对种族、性别、宗教、地域内容等歧视的；<br />
+                            F）捏造或者歪曲事实，散布谣言，扰乱社会秩序的；<br />
+                            G）宣扬封建迷信、邪教、淫秽、色情、赌博、暴力、凶杀、恐怖、教唆犯罪的；<br />
+                            H）公然侮辱他人或者捏造事实诽谤他人的，或者进行其他恶意攻击的；<br />
+                            I）损害国家机关信誉的；<br />
+                            J）其他违反宪法和法律行政法规的。<br />
+                            <span style="color:red;">站长</span>在本地链平台发布的信息，均代表用户的观点，与本地链无关，站长须对其言论独立承担完全的法律责任。<br />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!--确认提交区-->
+        <footer>
+            <div ng-if="!messageInfo.objectId" class="media-middle text-center padding">
+                <button type="button" class="btn btn-primary" ng-click="commit()">提交</button>
+            </div>
+            <div ng-if="!!messageInfo.objectId" class="media-middle text-center padding">
+                <button type="button" class="btn btn-danger" ng-click="deleteAnno(messageInfo)">删除</button>
+            </div>
+            <div ng-if="!!messageInfo.objectId" class="media-middle text-center padding">
+                <button type="button" class="btn btn-primary" ng-click="modifyAnnoPost()">修改</button>
+            </div>
+        </footer>
+    </ion-content>
+</ion-view>

@@ -9,15 +9,6 @@ define(function () {
 
     }
 
-    //将Date对象改为 2016/8/10 样式字符串
-    Date.prototype.stringToCommon = function () {
-        var year = this.getFullYear();
-        var month = this.getMonth()+1;
-        var day = this.getDate();
-        
-        return year + '/' + month + '/' + day;
-    }
-
     //格式化字符串显示
     String.prototype.format = function (args) {
         var result = this;
@@ -36,21 +27,6 @@ define(function () {
             }
         }
         return result;
-    }
-
-    //生成随机字符
-    _objUtil.guid = function () {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16).replace('-', '');
-        });
-    }
-    //获取设备唯一标识码
-    _objUtil.getFingerprint = function () {
-        if (!this.getData('guid')) {
-            this.storeData('guid', this.guid());
-        }
-        return this.getData('guid');
     }
 
     _objUtil.extend = function (child, parent) {
@@ -116,6 +92,22 @@ define(function () {
             return value;
         }
     }
+   
+    //生成随机字符
+    _objUtil.guid = function () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16).replace('-', '');
+        });
+    }
+
+    //获取设备唯一标识码
+    _objUtil.getFingerprint = function () {
+        if (!this.getData('guid')) {
+            this.storeData('guid', this.guid());
+        }
+        return this.getData('guid');
+    }
     /**
     *   @method 浅拷贝对象
     */
@@ -135,15 +127,5 @@ define(function () {
         return newobj;
     };
 
-    _objUtil.toArray = function (obj) {
-        var _array=[];
-        if (_objUtil.isObject(obj)) {
-            for (var element in obj)
-                _array.push(element);
-        }
-        else
-            _array = null;
-        return _array;
-    }
     return _objUtil;
 });

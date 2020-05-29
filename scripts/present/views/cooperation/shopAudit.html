@@ -1,0 +1,47 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="" class="ion-view-bg">
+    <ion-content>
+        <div style="padding:20px 20px 50px 20px;">
+            <div class="item item-image item-borderless" style="padding:16px;">
+                <img ng-src={{shopData.faceImgUrl|imgCdnFilter}} style="width:280px;height:158px; margin-left:auto;margin-right:auto;" />
+            </div>
+            <!--<div class="item" style="border:none;text-align: center;">
+                <button class="btn btn btn-default" ng-click="startCutPicture()">上传店铺封面图片</button>
+            </div>-->
+            <p class="SourceHanSansCN" style="font-size:16px; margin-top:15px;text-align:left;">店铺资料<span ng-show="!!shopData.bargainObjectId" style="color:red;">（合同已绑定）</span></p>
+            <div class="list SourceHanSansCN">
+                <label class="item item-input">
+                    <span class="input-label"><span style="color:red;">*&nbsp;</span>店名：</span>
+                    <input type="text" placeholder="未填写店名" ng-model="shopData.name" disabled>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label"><span style="color:red;">*&nbsp;</span>地址：</span>
+                    <input type="text" placeholder="未填写商铺地址" ng-model="shopData.address" disabled>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label"><span style="color:red;">*&nbsp;</span>手机号：</span>
+                    <input type="text" placeholder="未填写手机号码" ng-model="shopData.mobilephone" disabled>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">座机号：</span>
+                    <input type="text" placeholder="未填写座机" ng-model="shopData.telephone" disabled>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">经营范围：</span>
+                    <input type="text" placeholder="未填写经营范围" ng-model="shopData.serviceScope" disabled>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">微信公众号：</span>
+                    <input type="text" placeholder="未填写店铺微信公众号" ng-model="shopData.weiXin" disabled>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">店铺简介：</span>
+                    <input type="text" placeholder="未填写店铺简介" ng-model="shopData.description" disabled>
+                </label>
+            </div>
+            <button type="button" class="btn btn-danger" ng-click="deleteShopCommit(shopData.objectId)" style="float:left;width:20%;">删除</button>
+            <button type="button" class="btn btn-default" ng-click="bindShopAccount()" style="float:right;width:20%;">绑定</button>
+            <button type="button" class="btn btn-primary" ng-click="passShopCommit(shopData.objectId)" style="display:block;width:20%;margin:0px auto;">通过</button>
+        </div>
+    </ion-content>
+</ion-view>

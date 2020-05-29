@@ -16,21 +16,11 @@ define(['baseModule', 'objutil'], function (baseModule, objutil) {
 
     commercialModule.prototype.createView = function () {
         //商户页
-        this.addView('main.shop', {
+        this.addView('main.shopDetail', {
             url: '/commercial/shop',
             views: {
                 'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/shop.html',
-                    controller: 'shopController',
-                }
-            }
-        })
-        //店铺详情
-        this.addView('main.shopDetail', {
-            url: '/commercial/shop/shopDetail/:model',
-            views: {
-                'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/shopDetail.html',
+                    templateUrl: 'scripts/present/views/commercial/commercialShop.html',
                     controller: 'shopDetailController',
                 }
             }
@@ -40,18 +30,28 @@ define(['baseModule', 'objutil'], function (baseModule, objutil) {
             url: '/commercial/cargo',
             views: {
                 'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/cargo.html',
+                    templateUrl: 'scripts/present/views/commercial/commercialCargo.html',
                     controller: 'cargoController',
                 }
             }
         });
         //商品详情页
         this.addView('main.commercialCargoDetail', {
-            url: '/commercial/cargo/cargoDetail/:model',
+            url: '/commercial/cargoDetail/:id/:model',
             views: {
                 'menuContent': {
                     templateUrl: 'scripts/present/views/commercial/cargoDetail.html',
                     controller: 'cargoDetailController',
+                }
+            }
+        });
+        //活动页
+        this.addView('main.commercialActivity', {
+            url: '/commercial/activity',
+            views: {
+                'menuContent': {
+                    templateUrl: 'scripts/present/views/commercial/commercialActivity.html',
+                    controller: 'activityController',
                 }
             }
         });
@@ -60,22 +60,21 @@ define(['baseModule', 'objutil'], function (baseModule, objutil) {
             url: '/commercial/order',
             views: {
                 'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/order.html',
+                    templateUrl: 'scripts/present/views/commercial/commercialOrder.html',
                     controller: 'orderController'
                 }
             }
         });
-        //订单详情
-        this.addView('main.commercialOrderDetail', {
-            url: '/commercial/order/orderDetail/:model',
+        //评论页
+        this.addView('main.commercialReview', {
+            url: '/commercial/review',
             views: {
                 'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/orderDetail.html',
-                    controller: 'orderDetailController'
+                    templateUrl: 'scripts/present/views/commercial/commercialReview.html',
+                    controller: 'reviewController'
                 }
             }
         });
-
     }
 
     return commercialModule;

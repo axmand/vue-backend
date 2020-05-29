@@ -8,23 +8,17 @@
             <div class="modal-body">
                 <!--检索功能栏-->
                 <div class="form-inline item">
-                    <div class="form-group" style="margin-right:10px; text-align:center;">
+                    <div class="form-group" style="margin-right:10px;">
                         <label for="searchname">检索</label>
-                        <input class="form-control" ng-model="searchword" style="width:220px;" type="text" id="searchname" placeholder="输入关键字查找符合条件的结果" />
+                        <input class="form-control" ng-model="searchword" ng-keydown="searchwordGet(searchword,$event)" style="width:220px;" type="text" id="searchname" placeholder="输入关键字查找符合条件的结果" />
                     </div>
-                    <button class="btn btn-primary" ng-click="searchwordGet(searchword)">搜索</button>
-                    <div ng-if="!!feedParams.cMerchantType" class="form-group" style="margin-right:10px;float:right;">
-                        <label>入驻形式</label>
-                        <select class="form-control" ng-model="emerchanttype" ng-options="type.uid as type.name for type in $$cMerchantType" ng-change="typeChanged(emerchanttype,'emerchanttype')">
-                            <option value="">-- 选择店铺入驻形式 --</option>
+                    <button class="btn btn-primary" ng-click="searchwordGet(searchword,{keyCode:13})">搜索</button>
+                    <div ng-if="!!feedParams.eshoptype" class="form-group">
+                        <label>店铺类型</label>
+                        <select class="form-control" ng-model="eshoptype" ng-options="item.uid as item.name for item in $$commercialShopType" ng-change="typeChanged(eshoptype,'eshoptype')" style="margin-right:10px;">
+                            <option value="">-- 选择店铺类型 --</option>
                         </select>
-                    </div>
-                    <div ng-if="!!feedParams.cCargoType" class="form-group" style="margin-right:10px;float:right;">
-                        <label>商品类型</label>
-                        <select class="form-control" ng-model="cargoType" ng-options="m.uid as m.name for m in $$commericalCargoType" ng-change="typeChanged(cargoType,'cargoType')">
-                            <option value="">-- 选择商品类型 --</option>
-                        </select>
-                    </div>                    
+                    </div>                  
                 </div>
                 <div class="item" style="padding:0px;margin:10px 0px;">
                     <div class="button-bar SourceHanSansCN">
@@ -39,21 +33,21 @@
                     <div class="item" style="padding: 16px 0px;" ng-repeat="data in dataList">
                         <div class="button-bar fontVisiable">
                             <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{data.faceImgUrl|imgCdnFilter}})"></div>
-                            <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.title||data.name}}">{{data.title||data.name}}</div>
+                            <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.name}}">{{data.name}}</div>
                             <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.description||data.content}}">{{data.description||data.content}}</div>
                             <button ng-click="addToChosenData(data)" class="button button-clear icon ion-android-add SourceHanSansFontBlod" style="color:darkslategray; width:100%; z-index:999;"></button>
                         </div>
                     </div>
                 </div>
                 <div class="button-bar" ng-show="dataList.length>0">
-                    <div class="button button-clear" ng-click="dataListLoadMore()" style="border: 1px solid #999;color: #999;margin: 10px 0px; width:80px;">查看更多</div>
+                    <div class="button button-clear" ng-click="dataListLoadMore()" style="border: 1px solid #999;color: #999;margin: 10px 0px;">查看更多</div>
                 </div>
                 <p class="SourceHanSansCN" style="font-size:16px;">选中项:</p>
                 <div class="list" style="margin:0px;max-height: 200px;overflow-y:auto;overflow-x:hidden;padding:1px;">
                     <div class="item" style="padding: 16px 0px;" ng-repeat="data in chosenData">
                         <div class="button-bar">
                             <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{data.faceImgUrl|imgCdnFilter}})"></div>
-                            <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.title||data.name}}">{{data.title||data.name}}</div>
+                            <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.name}}">{{data.name}}</div>
                             <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{data.description||data.content}}">{{data.description||data.content}}</div>
                             <button ng-click="deleteFromChosenData(data)" class="button button-clear icon ion-close-round SourceHanSansFontBlod" style="color:darkslategray; width:100%; z-index:999;"></button>
                         </div>

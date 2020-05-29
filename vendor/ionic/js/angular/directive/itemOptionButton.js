@@ -41,9 +41,9 @@ IonicModule.directive('ionOptionButton', [function() {
       return function($scope, $element, $attr, itemCtrl) {
         if (!itemCtrl.optionsContainer) {
           itemCtrl.optionsContainer = jqLite(ITEM_TPL_OPTION_BUTTONS);
-          itemCtrl.$element.prepend(itemCtrl.optionsContainer);
+          itemCtrl.$element.append(itemCtrl.optionsContainer);
         }
-        itemCtrl.optionsContainer.prepend($element);
+        itemCtrl.optionsContainer.append($element);
 
         itemCtrl.$element.addClass('item-right-editable');
 

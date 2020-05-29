@@ -1,0 +1,99 @@
+﻿<ion-view view-title="特约超市" class="ion-view-bg">
+    <!--检索功能栏-->
+    <div class="form-inline item" style="margin:20px;top:44px;">
+        <div class="form-group" style="margin-right:10px;">
+            <label for="searchname">检索</label>
+            <input class="form-control" ng-model="searchword" ng-keydown="searchwordGet(searchword,$event)" style="width:220px;border: 1px solid #ccc;" type="text" id="searchname" placeholder="查找符合条件的商家" />
+        </div>
+        <div class="form-group">
+            <label>店铺类型</label>
+            <select class="form-control" ng-model="eshoptype" ng-change="chooseType(eshoptype)" ng-options="m.uid as m.name for m in $$commercialShopType" style="margin-right:10px;">
+                <option value="">-- 店铺类型 --</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" ng-click="searchwordGet(searchword,{keyCode : 13})">搜索</button>
+    </div>
+    <ion-content style="top:130px;">
+        <ion-refresher pulling-text="下拉更新..." on-refresh="shopListRefresh()" spinner="ios"></ion-refresher>
+        <!--数据列表-->
+        <div class="item" style="padding:0px;margin:20px;">
+            <div class="button-bar SourceHanSansCN">
+                <a class="button">店铺缩略图</a>
+                <a class="button">店铺名称</a>
+                <a class="button">店铺描述</a>
+                <a class="button">操作</a>
+            </div>
+        </div>
+        <div class="list" style="margin:20px;">
+            <div class="item" style="padding: 16px 0px;" ng-repeat="shop in shopList">
+                <div class="button-bar fontVisiable">
+                    <div class="button button-clear" style="background-position: center;background-repeat: no-repeat;background-size:contain;background-image:url({{shop.faceImgUrl|imgCdnFilter}})"></div>
+                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{shop.name}}">{{shop.name}}</div>
+                    <div class="button button-clear" data-toggle="tooltip" data-placement="top" title="{{shop.description}}">{{shop.description}}</div>
+                    <div class="button button-clear">
+                        <a class="button button-clear SourceHanSansFontBlod" ng-click="openShopDetail(shop)" style="color:darkslategray; width:100%; z-index:999;">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll on-infinite="shopListLoadMore()" ng-if="shopListShowInfinite" immediate-check=false spinner="ios"></ion-infinite-scroll>
+        <div class="item-content center-block" style="text-align:center;padding: 5px;font-size: 18px;" ng-hide="shopListShowInfinite || shopList.length == 0">
+            没有更多啦
+        </div>
+        <div class="item-content center-block" ng-show="!shopList||shopList.length == 0" style="text-align: center;font-size: 24px;">
+            目前尚未有店铺
+        </div>
+    </ion-content>  
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="ShopModal" style="width:100%;background-color:rgba(0,0,0,0);top:20px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title SourceHanSansCN" style="text-align:center;">商家信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="item item-image item-borderless">
+                        <img ng-src="{{shopData.faceImgUrl|imgCdnFilter}}" style="width:280px;height:157px; margin-left:auto;margin-right:auto;" />
+                    </div>
+                    <p class="SourceHanSansCN" style="font-size:16px; margin-top:15px;text-align:left;">店铺资料<span ng-show="!!shopData.bargainObjectId" style="color:red;">（合同已绑定）</span></p>
+                    <div class="list SourceHanSansCN">
+                        <label class="item item-input">
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>店名：</span>
+                            <input type="text" placeholder="未填写店名" ng-model="shopData.name" disabled>
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>地址：</span>
+                            <input type="text" placeholder="未填写商铺地址" ng-model="shopData.address" disabled>
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>手机号：</span>
+                            <input type="text" placeholder="未填写手机号码" ng-model="shopData.mobilephone" disabled>
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">座机号：</span>
+                            <input type="text" placeholder="未填写座机" ng-model="shopData.telephone" disabled>
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">经营范围：</span>
+                            <input type="text" placeholder="未填写经营范围" ng-model="shopData.serviceScope" disabled>
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">微信公众号：</span>
+                            <input type="text" placeholder="未填写店铺微信公众号" ng-model="shopData.weiXin" disabled>
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">店铺简介：</span>
+                            <input type="text" placeholder="未填写店铺简介" ng-model="shopData.description" disabled>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="setShop(shopData)">设定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+</ion-view>
+

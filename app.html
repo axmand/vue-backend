@@ -7,7 +7,9 @@
     <link rel="icon" href="http://image.qiongrenkeji.com/favicon.ico" mce_href="http://image.qiongrenkeji.com/favicon.ico" type="image/x-icon">
     <link href="vendor/ionic/release/css/ionic.min.css" rel="stylesheet" />
     <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="vendor/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+    <!--富文本框编辑器样式-->
+    <!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />-->
+    <!--<link href="vendor/summernote/dist/summernote.css" rel="stylesheet" />-->
     <!--图片编辑器样式-->
     <link href="vendor/Croppie/croppie.css" rel="stylesheet" />
     <!--toast样式-->
@@ -16,6 +18,7 @@
     <link href="resource/css/app.css" rel="stylesheet" />
 </head>
 <body>
+
     <div id="loading">
         <div id="loading-center">
             <div id="loading-center-absolute">
@@ -27,7 +30,16 @@
             <div id="loadingProgress" style="position:absolute;top:50%;left:50%;margin-top:100px;margin-left:-150px;width:300px;height:200px;border:none;text-align:center;color:white;">
             </div>
         </div>
+
     </div>
+    <!--<div style="position:absolute;top:0;bottom:0;width:100%;" id="loadpage">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+     
+    </div>-->
+
     <ion-nav-view></ion-nav-view>
     <!--模块加载器-->
     <script src="vendor/requirejs/require.js" data-main="app"></script>

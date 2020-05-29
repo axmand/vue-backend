@@ -1,0 +1,27 @@
+﻿<!--data-tap-disable="true"-->
+<ion-view view-title="货架管理" class="ion-view-bg">
+    <!--检索功能栏-->
+    <div class="form-inline item" style="margin:20px;top:44px;">
+        <div class="form-group" style="margin-right:10px;">
+            <label for="searchname">检索</label>
+            <input class="form-control" ng-model="searchword" style="width:220px;border: 1px solid #ccc;" type="text" id="searchname" placeholder="输入关键字查找符合条件的货架" />
+        </div>
+        <button class="btn btn-primary" ng-click="searchwordGet(searchword)">搜索</button>
+
+        <a ng-click="gotoshelfDetail()" style="float:right;padding: 6px 18px;" class="btn btn-success">创建货架</a>
+    </div>
+    <ion-content style="top:150px;">
+        <ion-refresher pulling-text="下拉更新..." on-refresh="shelfListRefresh()" spinner="ios"></ion-refresher>
+        <a class="item" ng-repeat="shelf in shelfList" ng-click="gotoshelfDetail(shelf)" style="line-height: 60px;margin:0px 20px;">
+            {{shelf.title}}
+            <img ng-src="{{cargo.faceImgUrl|imgCdnFilter}}" alt="{{cargo.name}}" style="max-height:60px;float:right;" ng-repeat="cargo in shelf.cargos" />
+        </a>
+        <ion-infinite-scroll on-infinite="shelfListLoadMore()" ng-if="shelfListShowInfinite" immediate-check=false spinner="ios"></ion-infinite-scroll>
+        <div class="item-content center-block" style="text-align:center;padding: 5px;font-size: 18px;" ng-hide="shelfListShowInfinite || shelfList.length == 0">
+            没有更多啦
+        </div>
+        <div class="item-content center-block" ng-show="!shelfList||shelfList.length == 0" style="text-align: center;font-size: 24px;">
+            目前尚未有货架
+        </div>
+    </ion-content>
+</ion-view>

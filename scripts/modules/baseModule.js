@@ -89,5 +89,50 @@ define(['baseServices'], function (baseServices) {
         this.app.addView(name, url, controller);
     }
 
+    //采用modal方式弹出子层，需要传入scope
+    _baseModule.prototype.addModal = function (name, url) {
+        (function (name, url) {
+            //添加进serciet
+            baseServices.factory(name, ['$rootScope', '$ionicModal', function ($rootScope, $ionicModal) {
+                var _modal = null;
+
+                var _newModal = function (scope) {
+                    if (!!_modal) {
+                        //清理
+                        _modal.remove();
+                        _modal = null;
+                    }
+                    _modal = $ionicModal.fromTemplateUrl(url, {
+                        scope: scope,
+                        animation: 'slide-in-up',
+                        //animation: 'slide-in-right'
+                    }).then(function (modal) {
+                        _modal = modal;
+                        _modal.show();
+                    });
+                }
+
+                var _openModal = function (scope) {
+                    scope = scope || $rootScope;
+                    _newModal(scope);
+                }
+
+                var _closeModal = function () {
+                    if (!!_modal) {
+                        _modal.remove();
+                        _modal = null;
+                    } else {
+                        _modal = null;
+                    }
+                }
+
+                return {
+                    open: _openModal,
+                    close: _closeModal
+                }
+            }]);
+        })(name, url);
+    }
+
     return _baseModule;
 });

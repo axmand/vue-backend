@@ -1,0 +1,157 @@
+﻿/**
+*   总后台服务接口
+*   @author yellow date 2016/4/18
+*/
+
+define(['baseServices', 'objutil'], function (baseServices, objutil) {
+
+    baseServices.factory('$$frontdeskService', ['$http', '$q', 'configService','$$loginService',function ($http, $q, configService,$$loginService) {
+        //克隆操作
+        var clone = objutil.clone;
+        //参数配置
+        var rootUrl = configService.urlRequest.rootUrl,
+            regionId = configService.urlRequest.regionId,
+            
+            appConfig = configService.appConfig,
+            //创建分站接口
+            branchPostUrl = configService.urlRequest.branchPostUrl,
+            //获取分站接口
+            branchlistUrl = configService.urlRequest.branchlistUrl,
+            //搜索用户账户接口
+            searchAccountUrl = configService.urlRequest.searchAccountUrl,
+            //删除信息接口
+            deleteDataPostUrl = configService.urlRequest.deleteDataPostUrl,
+            //设置分站管理员接口
+            setBranchAdminUrl = configService.urlRequest.setBranchAdminUrl,
+
+            //用户信息
+            userInfo = $$loginService.userInfo,
+            //提交信息
+            postData = {
+                customerName: userInfo.userName,
+                customerObjectId:userInfo.objectId,
+                token: userInfo.token,
+                regionId: regionId,
+                content:''
+            };
+        //获取分站列表
+        var _getBranchList = function (pageNumber) {
+            var defer = $q.defer();
+            pageNumber = pageNumber || 0;
+            $http.get(rootUrl + branchlistUrl + '/' + pageNumber)
+            .success(function (data) {
+                var branchs = JSON.parse(data.content);
+                if (data.status == 'ok')
+                    defer.resolve(branchs)
+                else
+                    defer.reject(branchs);
+            }).error(function (error) {
+                defer.reject(error);
+            });
+            return defer.promise;
+        }
+        //设置(修改)分站站长
+        var _setBranchAdmin = function (adminName, adminMailAddress, adminPhone,branchObjectId) {
+            var defer = $q.defer();
+            console.log(rootUrl + userInfo.userName + setBranchAdminUrl + userInfo.userName + '/' + userInfo.token + '/' + adminName + '/' + adminMailAddress + '/' + adminPhone + '/' + branchObjectId);
+            $http.get(rootUrl + userInfo.userName + setBranchAdminUrl + userInfo.userName + '/' + userInfo.token + '/' + adminName + '/' + adminMailAddress + '/' + adminPhone + '/' + branchObjectId)
+            .success(function (data) {
+                if (data.status == 'ok')
+                    defer.resolve(data.content)
+                else
+                    defer.reject(data.content);
+            }).error(function (error) {
+                defer.reject(error);
+            });
+            return defer.promise;
+        }
+        //
+
+        //搜索账户名（管理员才能使用的api）
+        var _getSearchAccount = function (keyWord, pageNumber) {
+            var defer = $q.defer();
+            pageNumber = pageNumber || 0;
+            $http.get(rootUrl + userInfo.userName + '/' + regionId + searchAccountUrl + userInfo.userName + '/' + userInfo.token + '/' + keyWord + '/' + pageNumber)
+                .success(function (data) {
+                    defer.resolve(data);
+                })
+                .error(function (error) {
+                    defer.reject(error);
+                });
+            return defer.promise;
+        }
+        //提交分站信息，用于创建
+        var _postBranchInfo = function (info) {
+            var defer = $q.defer();
+            var _postData = clone(postData);
+            _postData.regionId = info.regionId;
+            _postData.content = JSON.stringify(info);
+            console.log(_postData);
+            $http.post(branchPostUrl, _postData)
+                .success(function (data) {
+                    var res = JSON.parse(data.content);
+                    if (data.status == 'ok')
+                        defer.resolve(res)
+                    else
+                        defer.reject(res);
+                })
+                .error(function (error) {
+                    defer.reject(error);
+                });
+            return defer.promise;
+        }
+        //删除分站
+        var _postDeleteBranch = function (branch) {
+            var defer = $q.defer();
+            var _postData = clone(postData);
+            _postData.modifyType = appConfig.EModifyType.Branch;
+            _postData.content = "";
+            _postData.targetObjectId = branch.objectId;
+            _postData.regionId = branch.regionId;
+            console.log(_postData);
+            $http.post(deleteDataPostUrl, _postData)
+                .success(function (data) {
+                    var res = JSON.parse(data.content);
+                    if (data.status == 'ok')
+                        defer.resolve(res);
+                    else
+                        defer.reject(res);
+                })
+                .error(function (error) {
+                    defer.reject(error);
+                });
+            return defer.promise;
+        }
+        //平台管理员获取订单列表接口
+        var _getOrderList = function (customerName, token, pageNumber, orderState) {
+            var defer = $q.defer();
+            $http.get(rootUrl + userInfo.userName + '/backend/commercial/orderbyorderstate/get/' + customerName + '/' + token + '/' + pageNumber + '/' + orderState).success(function (data) {
+                defer.resolve(data);
+            }).error(function (error) {
+                defer.reject(error);
+            });
+            return defer.promise;
+        };
+        //平台管理员退款操接口
+        var _reimburseOrder = function (customerName, token, orderObjectId) {
+            var defer = $q.defer();
+            $http.get(rootUrl + userInfo.userName + '/backend/commercial/reimburseorder/get/' + customerName + '/' + token + '/' + orderObjectId + '/' + regionId).success(function (data) {
+                defer.resolve(data);
+            }).error(function (error) {
+                defer.reject(error);
+            });
+            return defer.promise;
+        };
+
+        return {
+            getBranchList: _getBranchList,
+            getSearchAccount: _getSearchAccount,
+            postBranchInfo: _postBranchInfo,
+            postDeleteBranch: _postDeleteBranch,
+            getOrderList: _getOrderList,
+            reimburseOrder: _reimburseOrder,
+            setBranchAdmin: _setBranchAdmin
+        }
+    }]);
+
+});

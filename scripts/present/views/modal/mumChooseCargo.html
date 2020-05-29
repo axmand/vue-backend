@@ -8,16 +8,19 @@
             <div class="modal-body" style="position:absolute;top:56px;bottom:0;left:0;right:0;padding:0;">
                 <div class="bar bar-header item-input-inset">
                     <label class="item-input-wrapper" style="margin:0;background-color:#fff;">
-                        选择类别：<select ng-model="searchParams.cargoType" ng-options="m.uid as m.name for m in $$commericalCargoType"></select>
+                        选择类别：
+                        <select ng-model="searchParams.cargoType" ng-options="m.uid as m.name for m in $$commericalCargoType">
+                                                     
+                        </select>
                     </label>
-                    <label class="item-input-wrapper" style="margin:0;background-color:#fff;">
+                    <!--<label class="item-input-wrapper" style="margin:0;background-color:#fff;">
                         搜索模式:
                         <select ng-model="searchParams.eSearchPattern">
                             <option value="1">忽略是否审核</option>
                             <option value="2">审核通过商品</option>
                             <option value="3">未审核商品</option>
                         </select>
-                    </label>
+                    </label>-->
                 </div>
                 <div class="bar bar-header item-input-inset">
                     <label class="item-input-wrapper" style="margin:0;">
@@ -32,10 +35,11 @@
                     <ion-refresher pulling-text="下拉更新..." on-refresh="cargoListRefresh()" spinner="ios"></ion-refresher>
                     <a class="item item-thumbnail-left" ng-repeat="cargo in cargoList" ng-click="addCargo(cargo)" ng-class="{'select':chooseCargo[cargo.objectId]}">
                         <img ng-src="{{cargo.faceImgUrl|imgCdnFilter}}">
-                        <h2>{{cargo.title}}</h2>                       
+                        <h2>{{cargo.name}}</h2>                       
                         <p>{{cargo.content}}</p>
                     </a>
-                    <ion-infinite-scroll on-infinite="cargoListLoadMore()" ng-if="cargoListShowInfinite" immediate-check="false" distance="1%" spinner="ios"></ion-infinite-scroll>
+                    <ion-infinite-scroll on-infinite="cargoListLoadMore()" ng-if="cargoListShowInfinite" immediate-check="false" distance="1%" spinner="ios">
+                    </ion-infinite-scroll>
                     <div class="item borderLess SourceHanSansCN backColor" style="text-align:center;" ng-hide="cargoListShowInfinite">
                         没有更多啦
                     </div>
