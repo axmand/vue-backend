@@ -21,26 +21,6 @@ define(['baseModule', 'objutil'], function (basemodule, objutil) {
                 }
             }
         });
-        //订单管理
-        this.addView('main.orderManagement', {
-            url: '/frontdesk/orderManagement',
-            views: {
-                'menuContent': {
-                    templateUrl: 'scripts/present/views/frontdesk/frontdeskOrderManagement.html',
-                    controller: 'orderManagementController'
-                }
-            }
-        });
-        //目录管理
-        this.addView('main.categoryManagement', {
-            url: '/frontdesk/categoryManagement',
-            views: {
-                'menuContent': {
-                    templateUrl: 'scripts/present/views/frontdesk/frontdeskCategoryManagement.html',
-                    controller: 'categoryManagementController'
-                }
-            }
-        });
     };
 
     return _frontdeskModule;

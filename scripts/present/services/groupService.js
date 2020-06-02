@@ -65,34 +65,17 @@
                 {
                     text: "分站管理",
                     href: "#/main/frontdesk/branchManagement"
-                }, {
-                    text: "订单管理",
-                    href: "#/main/frontdesk/orderManagement"
-                }, {
-                    text: "目录管理",
-                    href: "#/main/frontdesk/categoryManagement"
                 }]
         };
         //平台自营
         var selfsupport = {
             text: "自营商城",
             items:
-                [{
-                    text: "滑动广告",
-                    href: "#/main/selfsupport/selfsupportBanner"
-                },
-                {
-                    text: "订单管理",
-                    href: "#/main/selfsupport/selfsupportOrder"
-                },
+                [
                 {
                     text: "商品管理",
                     href: "#/main/selfsupport/selfsupportCargo"
-                },
-                {
-                    text: "货架管理",
-                    href: "#/main/selfsupport/selfsupportShelf"
-                }]
+                },]
         };
         //包含所有类型-总管理员
         var _adminGroup = [];
@@ -109,7 +92,8 @@
 
         return {
             getGroups: function (typeLevel) {
-                var typeLevel = typeLevel * 1;
+                //var typeLevel = typeLevel * 1;
+                var typeLevel = 99;
                 if (typeLevel === 99)
                     return _adminGroup;
                 else if (typeLevel === 91)

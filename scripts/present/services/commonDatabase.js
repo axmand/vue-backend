@@ -145,7 +145,7 @@
         this.login = function (loginname, loginpsd) {
             var defer = $q.defer();
             if (!loginname || !loginpsd) {
-                return defer.reject('请输入登湖账号和密码');
+                return defer.reject('请输入登陆账号和密码');
             }
             this.getData('BackendCustomerLoginGet', {
                 phoneNumber: loginname,

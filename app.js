@@ -81,7 +81,7 @@ requirejs(['ionic', 'bootstrap', 'ngFileUpload', 'scripts'], function (ionic, bo
     scripts.app.run(function ($ionicPlatform, $location, $ionicPopup, $rootScope) {
         $ionicPlatform.ready(function () {
             //导航至首页
-            $location.url("/login");
+            $location.url("/main");
             var url = $location.host();
             $rootScope.regionId = url.split('.')[0];
         });
