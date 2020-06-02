@@ -23,20 +23,20 @@
         };
         //总服务台
         var frontdesk = {
-            text: "总服务台",
+            text: "用户管理",
             items: [
                 {
-                    text: "分站管理",
+                    text: "用户管理",
                     href: "#/main/frontdesk/branchManagement"
                 }]
         };
         //平台自营
         var selfsupport = {
-            text: "自营商城",
+            text: "政策管理",
             items:
                 [
                 {
-                    text: "商品管理",
+                    text: "政策管理",
                     href: "#/main/selfsupport/selfsupportCargo"
                 },]
         };
