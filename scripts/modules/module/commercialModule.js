@@ -15,13 +15,13 @@ define(['baseModule', 'objutil'], function (baseModule, objutil) {
     extend(commercialModule, baseModule);
 
     commercialModule.prototype.createView = function () {
-        //商户页
-        this.addView('main.shopDetail', {
-            url: '/commercial/shop',
+        //地块管理
+        this.addView('main.dikuai', {
+            url: '/commercial/dikuai',
             views: {
                 'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/commercialShop.html',
-                    controller: 'shopDetailController',
+                    templateUrl: 'scripts/present/views/commercial/dikuai.html',
+                    controller: 'dikuaiController',
                 }
             }
         })
@@ -42,36 +42,6 @@ define(['baseModule', 'objutil'], function (baseModule, objutil) {
                 'menuContent': {
                     templateUrl: 'scripts/present/views/commercial/cargoDetail.html',
                     controller: 'cargoDetailController',
-                }
-            }
-        });
-        //活动页
-        this.addView('main.commercialActivity', {
-            url: '/commercial/activity',
-            views: {
-                'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/commercialActivity.html',
-                    controller: 'activityController',
-                }
-            }
-        });
-        //订单页
-        this.addView('main.commercialOrder', {
-            url: '/commercial/order',
-            views: {
-                'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/commercialOrder.html',
-                    controller: 'orderController'
-                }
-            }
-        });
-        //评论页
-        this.addView('main.commercialReview', {
-            url: '/commercial/review',
-            views: {
-                'menuContent': {
-                    templateUrl: 'scripts/present/views/commercial/commercialReview.html',
-                    controller: 'reviewController'
                 }
             }
         });
