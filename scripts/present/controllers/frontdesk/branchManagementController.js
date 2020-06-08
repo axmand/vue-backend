@@ -1,5 +1,5 @@
 ﻿/**
-*   分站管理
+*   用户管理
 *   @author hk date 2016/4/14
 */
 
@@ -13,7 +13,7 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
 
         var pageNumber = 1;
 
-        //创建分站modal
+        //创建管理员modal
         $scope.openBranchModal = function () {
             $scope.userBranchData = {
                 regionName: "",
@@ -23,7 +23,7 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
             };
             $('#branchModal').modal('show');
         }
-        //设置分站站长账户modal
+        //设置分站管理员账户modal
         $scope.openAdminModal = function (userBranch) {
             console.log(userBranch);
             

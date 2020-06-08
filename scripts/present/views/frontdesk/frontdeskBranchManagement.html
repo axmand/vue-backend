@@ -1,23 +1,23 @@
 ﻿<!--data-tap-disable="true"-->
-<ion-view view-title="分站管理" class="ion-view-bg">
+<ion-view view-title="用户管理" class="ion-view-bg">
     <!--形如表格顶部栏-->
     <div class="bar bar-header list list-inset has-header" style="margin-top:10px;top:44px;">
         <button class="button calm-bg SourceHanSansCN" style="width:200px; margin-left:30%;color:white;" ng-click="openBranchModal()">
-            新增分站
+            新增用户
         </button>
     </div>
 
     <ion-content style="padding:10px 10px 0px 20px;margin-top:54px;">
         <!--形如表格顶部栏-->
         <div class="button-bar SourceHanSansCN">
-            <a class="button">分站名称</a>
-            <a class="button">分站ID</a>
-            <a class="button">分站管理员名</a>
-            <a class="button">联系方式</a>
+            <a class="button">管理名称</a>
+            <a class="button">管理权限</a>
+            <a class="button">管理员</a>
+            <a class="button">管理员联系方式</a>
             <a class="button">管理员邮箱</a>
             <a class="button">操作</a>
         </div>
-        <!--分站信息和分钟管理员-->
+        <!--用户信息-->
         <div class="list">
             <div ng-repeat="userBranch in userBranchs" class="item">
                 <div class="button-bar">
@@ -28,7 +28,7 @@
                     <div class="button button-clear" style="color:black;">{{userBranch.mandatedMailAddress}}</div>
                     <div class="button button-clear">
                         <button class="button button-clear SourceHanSansFontBlod" style="color:darkslategray; width:80px; z-index:999;" ng-click="openAdminModal(userBranch)" ng-bind="userBranch.mandatedObjectId?'修改管理员':'设置管理员'"></button>
-                        <button class="button button-clear SourceHanSansFontBlod" style="color:darkslategray; width:80px; z-index:999;" ng-click="deleteBranch(userBranch)"> 删除分站</button>
+                        <button class="button button-clear SourceHanSansFontBlod" style="color:darkslategray; width:80px; z-index:999;" ng-click="deleteBranch(userBranch)"> 删除用户</button>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
         </div>
     </ion-content>
 
-    <!--创建分站-->
+    <!--创建用户-->
     <div class="modal fade" id="branchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-tap-disabled="true" style="width:100%;background-color:rgba(0,0,0,0);top:20px;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -47,7 +47,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title">
-                        分站信息编辑
+                        用户信息编辑
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -59,16 +59,16 @@
                         <div class="item item-divider"></div>-->
 
                         <label class="item item-input">
-                            <span class="input-label"><span style="color:red;">*&nbsp;</span>分站地区名：</span>
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>用户名：</span>
                             <input type="text" ng-model="userBranchData.regionName">
                         </label>
 
                         <label class="item item-input">
-                            <span class="input-label"><span style="color:red;">*&nbsp;</span>分站地区ID：</span>
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>用户权限：</span>
                             <input type="text" ng-model="userBranchData.regionId">
                         </label>
                         <label class="item item-input">
-                            <span class="input-label">分站描述：</span>
+                            <span class="input-label">用户描述：</span>
                             <input type="text" ng-model="userBranchData.descripiton">
                         </label>
 
@@ -95,21 +95,21 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" ng-bind="adminData.mandatedObjectId?'站长账户修改':'站长账户设置'"></h4>
+                    <h4 class="modal-title" ng-bind="adminData.mandatedObjectId?'用户修改':'用户设置'"></h4>
                 </div>
                 <div class="modal-body">
                     <div class="list">
                         <label class="item item-input">
-                            <span class="input-label"><span style="color:red;">*&nbsp;</span>管理账户名：</span>
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>管理用户名：</span>
                             <input type="text" ng-model="adminData.mandatedName">
                         </label>
 
                         <label class="item item-input">
-                            <span class="input-label"><span style="color:red;">*&nbsp;</span>管理账户邮箱：</span>
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>管理用户邮箱：</span>
                             <input type="text" ng-model="adminData.mandatedMailAddress">
                         </label>
                         <label class="item item-input">
-                            <span class="input-label"><span style="color:red;">*&nbsp;</span>管理账户手机号：</span>
+                            <span class="input-label"><span style="color:red;">*&nbsp;</span>管理用户手机号：</span>
                             <input type="text" ng-model="adminData.mandatedPhone">
                         </label>
 

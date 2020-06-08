@@ -11,7 +11,7 @@ define(['baseModule', 'objutil'], function (basemodule, objutil) {
     extend(_frontdeskModule, basemodule);
 
     _frontdeskModule.prototype.createView = function () {
-        //分站管理
+        //用户管理
         this.addView('main.branchManagement', {
             url: '/frontdesk/branchManagement',
             views: {

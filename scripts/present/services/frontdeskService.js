@@ -34,7 +34,7 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
                 regionId: regionId,
                 content:''
             };
-        //获取分站列表
+        //获取用户（管理员）列表
         var _getBranchList = function (pageNumber) {
             var defer = $q.defer();
             pageNumber = pageNumber || 0;
@@ -50,7 +50,7 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
             });
             return defer.promise;
         }
-        //设置(修改)分站站长
+        //设置(修改)管理员
         var _setBranchAdmin = function (adminName, adminMailAddress, adminPhone,branchObjectId) {
             var defer = $q.defer();
             console.log(rootUrl + userInfo.userName + setBranchAdminUrl + userInfo.userName + '/' + userInfo.token + '/' + adminName + '/' + adminMailAddress + '/' + adminPhone + '/' + branchObjectId);
@@ -80,7 +80,7 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
                 });
             return defer.promise;
         }
-        //提交分站信息，用于创建
+        //提交管理员信息，用于创建
         var _postBranchInfo = function (info) {
             var defer = $q.defer();
             var _postData = clone(postData);
@@ -100,7 +100,7 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
                 });
             return defer.promise;
         }
-        //删除分站
+        //删除管理员
         var _postDeleteBranch = function (branch) {
             var defer = $q.defer();
             var _postData = clone(postData);

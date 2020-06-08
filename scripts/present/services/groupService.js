@@ -1,6 +1,6 @@
 ﻿define(['baseServices'], function (baseServices) {
     baseServices.factory('groupService', ['$http', function ($http) {       
-        //商家菜单
+        //地块管理
         var commercial = {
             text: "地块管理",
             items: [{
@@ -12,7 +12,7 @@
                 href: "#/main/commercial/cargo"
             }]
         };
-        //合作分站管理
+        //楼宇管理
         var cooperation = {
             text: "楼宇管理",
             items: [
@@ -21,7 +21,7 @@
                     href: "#/main/cooperation/shop"
                 }]
         };
-        //总服务台
+        //用户管理
         var frontdesk = {
             text: "用户管理",
             items: [
@@ -30,7 +30,7 @@
                     href: "#/main/frontdesk/branchManagement"
                 }]
         };
-        //平台自营
+        //政策管理
         var selfsupport = {
             text: "政策管理",
             items:
@@ -40,16 +40,16 @@
                     href: "#/main/selfsupport/selfsupportCargo"
                 },]
         };
-        //包含所有类型-总管理员
+        //用户管理员
         var _adminGroup = [];
         _adminGroup.push(frontdesk);
-        //自营商城管理员
+        //政策管理员
         var _selfGroup = [];
         _selfGroup.push(selfsupport);
-        //店铺管理员
+        //地块管理员
         var _commercialGroup = [];
         _commercialGroup.push(commercial);
-        //分站管理员
+        //楼宇管理员
         var _cooperationGroup = [];
        _cooperationGroup.push(cooperation);
 
