@@ -16,12 +16,18 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
         //登录，并增加缓存
         var _login = function (userName, passWord) {
             var defer = $q.defer();
-            var restApi = url + "/" + userName + "/authen/login/get/" + userName + "/" + passWord + "/" + regionId;
-            $http.get(restApi).success(function (data) {
+            //var restapi = url + "/" + username + "/authen/login/get/" + username + "/" + password + "/" + regionid;
+            var restapi = url + "/cms/login"
+            console.log(restapi)
+            var _postData = {
+                userName: userName,
+                userPwd: passWord
+            }
+            $http.post(restapi,_postData).success(function (data) {
                 var rtInfo = JSON.parse(data.content);
                 if (data.status == "ok") {
                     var usrInfo = rtInfo;
-                    rtInfo.userName = rtInfo.phoneNumber || rtInfo.mailAddress;
+                    rtInfo.userName = rtInfo.userName
                     //存储用户信息
                     objutil.cover(_userInfo, usrInfo);
                     defer.resolve(data);

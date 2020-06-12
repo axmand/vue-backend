@@ -23,7 +23,7 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
             };
             $('#branchModal').modal('show');
         }
-        //设置分站管理员账户modal
+        //设置用户组账户modal
         $scope.openAdminModal = function (userBranch) {
             console.log(userBranch);
             

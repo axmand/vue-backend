@@ -34,7 +34,7 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
         //区域读取
         var regionId = ($rootScope.regionId === 'localhost' || $rootScope.regionId === 'bdl') ? 'bdl' : $rootScope.regionId;
         console.log(regionId);
-        var rootUrl = "http://120.55.166.61:10100/";
+        var rootUrl = "http://139.129.7.130:1338/";
         //var rootUrl = "http://127.0.0.1:10100/";
       
         var urlRequest = {   //url请求地址集合处理

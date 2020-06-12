@@ -28,7 +28,29 @@
                 {
                     text: "用户管理",
                     href: "#/main/frontdesk/branchManagement"
-                }]
+                }],
+            text: "业务管理",
+            items: [
+                {
+                    text: "地块管理",
+                    href: "#/main/commercial/dikuai"
+                },
+                {
+                    text: "楼宇管理",
+                    href: "#/main/cooperation/shop"
+                },
+                {
+                    text: "政策管理",
+                    href: "#/main/selfsupport/selfsupportCargo"
+                },]
+        };
+        var frontdesk1 = {
+            text: "用户管理",
+            items: [
+                {
+                    text: "用户管理",
+                    href: "#/main/frontdesk/branchManagement"
+                }],
         };
         //政策管理
         var selfsupport = {
@@ -43,6 +65,7 @@
         //用户管理员
         var _adminGroup = [];
         _adminGroup.push(frontdesk);
+        _adminGroup.push(frontdesk1);
         //政策管理员
         var _selfGroup = [];
         _selfGroup.push(selfsupport);
@@ -55,8 +78,8 @@
 
         return {
             getGroups: function (typeLevel) {
-                //var typeLevel = typeLevel * 1;
-                var typeLevel = 99;
+                var typeLevel = typeLevel * 1;
+               // var typeLevel = 99;
                 if (typeLevel === 99)
                     return _adminGroup;
                 else if (typeLevel === 91)

@@ -3,7 +3,8 @@
         //区域读取
         var regionId = ($rootScope.regionId === 'localhost' || $rootScope.regionId === 'all') ? 'all' : $rootScope.regionId;
         console.log(regionId);
-        var _rootUrl = "http://120.55.166.61:20200/";
+       // var _rootUrl = "http://120.55.166.61:20200/";
+        var _rootUrl = "http://139.129.7.130:1338/"
         var urlRequest = {   //url请求地址集合处理
             rootUrl: _rootUrl, //接口根地址
             regionId: regionId, //区域标识
@@ -164,6 +165,7 @@
             })
             return defer.promise;
         }
+
         //获取服务端配置信息
         this._getAppConfig = function () {
             var defer = $q.defer();

@@ -1,6 +1,6 @@
 ﻿define(['baseControllers'], function (baseControllers) {
     //登录controller
-    baseControllers.controller('loginController', ['$scope', '$location', '$$dataBase', '$$toast', function ($scope, $location, $$dataBase, $$toast) {
+    baseControllers.controller('loginController', ['$scope', '$location', '$$loginService', '$$toast', function ($scope, $location, $$loginService, $$toast) {
         //同时确定用户类型，载入不同的界面
         $scope.login = function (loginname, loginpsd) {
             loginname = loginname || 'axmand';
@@ -10,7 +10,7 @@
                 $$toast("请输入登录账户和密码", "info")
                 return;
             }
-            $$dataBase.login(loginname, loginpsd).then(function (data) {
+            $$loginService.login(loginname, loginpsd).then(function (data) {
                 $$toast(data, "success");
                 $location.path("/main");
             }, function (err) {
