@@ -73,6 +73,7 @@
         return {
             getGroups: function (typeLevel) {
                 var typeLevel = typeLevel * 1;
+                console.log(typeLevel)
                // var typeLevel = 99;
                 if (typeLevel === 99)
                     return _adminGroup;

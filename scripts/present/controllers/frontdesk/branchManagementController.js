@@ -16,10 +16,9 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
         //创建管理员modal
         $scope.openBranchModal = function () {
             $scope.userBranchData = {
-                regionName: "",
-                regionId: "",
-                mandatedObjectId: "",
-                descripiton:""
+                groupName: "",
+                groupDesc: "",
+                groupLevel: 0
             };
             $('#branchModal').modal('show');
         }
@@ -80,12 +79,12 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
         }
 
         $scope.submitBranch = function () {
-            if ($scope.userBranchData.regionName == "" || $scope.userBranchData.regionId == "") {
+            if ($scope.userBranchData.groupName == "" || $scope.userBranchData.groupLevel == null) {
                 console.log("请补全 regionName 和 regionId后提交");
                 
-                return $$toast('请补全分站信息', 'warning');
+                return $$toast('请补全用户信息', 'warning');
             }
-
+            console.log('test')
             $$frontdeskService.postBranchInfo($scope.userBranchData).then(function (data) {
                 $('#branchModal').modal('hide');
                 refreshBranch();

@@ -27,9 +27,11 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
                 var rtInfo = JSON.parse(data.content);
                 if (data.status == "ok") {
                     var usrInfo = rtInfo;
+                    console.log(usrInfo)
                     rtInfo.userName = rtInfo.userName
                     //存储用户信息
                     objutil.cover(_userInfo, usrInfo);
+                    console.log(_userInfo)
                     defer.resolve(data);
                 }
                 else

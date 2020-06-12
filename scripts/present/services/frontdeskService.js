@@ -5,7 +5,7 @@
 
 define(['baseServices', 'objutil'], function (baseServices, objutil) {
 
-    baseServices.factory('$$frontdeskService', ['$http', '$q', 'configService','$$loginService',function ($http, $q, configService,$$loginService) {
+    baseServices.factory('$$frontdeskService', ['$http', '$q', 'configService', '$$dataBase', function ($http, $q, configService, $$dataBase) {
         //克隆操作
         var clone = objutil.clone;
         //参数配置
@@ -25,7 +25,8 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
             setBranchAdminUrl = configService.urlRequest.setBranchAdminUrl,
 
             //用户信息
-            userInfo = $$loginService.userInfo,
+            userInfo = $$dataBase.getUserInfo(),
+ 
             //提交信息
             postData = {
                 customerName: userInfo.userName,
@@ -81,19 +82,36 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
             return defer.promise;
         }
         //提交管理员信息，用于创建
+        //var _postBranchInfo = function (info) {
+        //    var defer = $q.defer();
+        //    var _postData = clone(postData);
+        //    _postData.regionId = info.regionId;
+        //    _postData.content = JSON.stringify(info);
+        //    console.log(_postData);
+        //    $http.post(branchPostUrl, _postData)
+        //        .success(function (data) {
+        //            var res = JSON.parse(data.content);
+        //            if (data.status == 'ok')
+        //                defer.resolve(res)
+        //            else
+        //                defer.reject(res);
+        //        })
+        //        .error(function (error) {
+        //            defer.reject(error);
+        //        });
+        //    return defer.promise;
+        //}
         var _postBranchInfo = function (info) {
             var defer = $q.defer();
-            var _postData = clone(postData);
-            _postData.regionId = info.regionId;
-            _postData.content = JSON.stringify(info);
-            console.log(_postData);
-            $http.post(branchPostUrl, _postData)
+            // pageNumber = pageNumber || 0;
+            var groupName = info.groupName;
+            var groupDesc = info.groupDesc;
+            var groupLevel = info.groupLevel;
+            console.log(rootUrl + '/cms/creategroup/'+ userInfo.userName + '/' + userInfo.token + '/' + groupName + '/' + groupDesc + '/' + groupLevel )
+            $http.get(rootUrl + '/cms/creategroup/'+ userInfo.userName + '/' + userInfo.token + '/' + groupName + '/' + groupDesc + '/' + groupLevel )
                 .success(function (data) {
-                    var res = JSON.parse(data.content);
-                    if (data.status == 'ok')
-                        defer.resolve(res)
-                    else
-                        defer.reject(res);
+                    console.log('success')
+                    defer.resolve(data);
                 })
                 .error(function (error) {
                     defer.reject(error);

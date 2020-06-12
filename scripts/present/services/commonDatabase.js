@@ -143,28 +143,53 @@
             return userInfo;
         }
         //登陆接口
-        this.login = function (loginname, loginpsd) {
+        //this.login = function (loginname, loginpsd) {
+        //    var defer = $q.defer();
+        //    if (!loginname || !loginpsd) {
+        //        return defer.reject('请输入登陆账号和密码');
+        //    }
+        //    this.getData('BackendCustomerLoginGet', {
+        //        phoneNumber: loginname,
+        //        password: loginpsd
+        //    }).then(function (data) {
+        //        if (data.status == 'ok') {
+        //            userInfo = JSON.parse(data.content);
+        //            defer.resolve('登陆成功');
+        //            console.log(userInfo);
+        //        } else {
+        //            defer.reject(data.content);
+        //        }
+
+        //    }, function (err) {
+        //        defer.reject(null);
+        //    })
+        //    return defer.promise;
+        //}
+
+        this.login = function (userName, passWord) {
+            console.log(111)
             var defer = $q.defer();
-            if (!loginname || !loginpsd) {
-                return defer.reject('请输入登陆账号和密码');
+            //var restapi = url + "/" + username + "/authen/login/get/" + username + "/" + password + "/" + regionid;
+            var restapi = _rootUrl + "/cms/login"
+            console.log(restapi)
+            var _postData = {
+                userName: userName,
+                userPwd: passWord
             }
-            this.getData('BackendCustomerLoginGet', {
-                phoneNumber: loginname,
-                password: loginpsd
-            }).then(function (data) {
-                if (data.status == 'ok') {
-                    userInfo = JSON.parse(data.content);
+            $http.post(restapi, _postData).success(function (data) {
+                var rtInfo = JSON.parse(data.content);
+                if (data.status == "ok") {
+                    userInfo = rtInfo
                     defer.resolve('登陆成功');
                     console.log(userInfo);
-                } else {
-                    defer.reject(data.content);
                 }
-
-            }, function (err) {
-                defer.reject(null);
-            })
+                else
+                    defer.reject(data.content);
+            }).error(function (data, status) {
+                defer.reject('网络异常');
+            });
             return defer.promise;
-        }
+        };
 
         //获取服务端配置信息
         this._getAppConfig = function () {
