@@ -23,12 +23,6 @@
         };
         //用户管理
         var frontdesk = {
-            text: "用户管理",
-            items: [
-                {
-                    text: "用户管理",
-                    href: "#/main/frontdesk/branchManagement"
-                }],
             text: "业务管理",
             items: [
                 {
