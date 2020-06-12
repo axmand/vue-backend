@@ -44,6 +44,7 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
         var refreshBranch = function () {
             $$frontdeskService.getBranchList(0).then(function (data) {
                 $scope.userBranchs = data;
+                console.log($scope.userBranchs)
             }, function (err) {
                 $$toast(err, 'error');
             });
@@ -109,7 +110,7 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
         }
 
         $scope.deleteBranch = function (branch) {
-            $$confirmModal('确认删除此分站？').then(function () {
+            $$confirmModal('确认删除此用户？').then(function () {
                 $$frontdeskService.postDeleteBranch(branch).then(function (data) {
                     refreshBranch();
                     $$toast(data, 'success');

@@ -10,11 +10,11 @@
     <ion-content style="padding:10px 10px 0px 20px;margin-top:54px;">
         <!--形如表格顶部栏-->
         <div class="button-bar SourceHanSansCN">
-            <a class="button">管理名称</a>
-            <a class="button">管理权限</a>
-            <a class="button">管理员</a>
-            <a class="button">管理员联系方式</a>
-            <a class="button">管理员邮箱</a>
+            <a class="button">用户名称</a>
+            <a class="button">用户等级(数值)</a>
+            <a class="button">用户描述</a>
+            <!--<a class="button">管理员联系方式</a>
+            <a class="button">管理员邮箱</a>-->
             <a class="button">操作</a>
         </div>
         <!--用户信息-->
@@ -22,19 +22,19 @@
             <div ng-repeat="userBranch in userBranchs" class="item">
                 <div class="button-bar">
                     <div class="button button-clear" style="color:black;">{{userBranch.groupName}}</div>
-                    <div class="button button-clear" style="color:black;">{{userBranch.groupLevel}}</div>
-                    <div class="button button-clear" style="color:black;">{{userBranch.mandatedName}}</div>
-                    <div class="button button-clear" style="color:black;">{{userBranch.mandatedPhone}}</div>
-                    <div class="button button-clear" style="color:black;">{{userBranch.mandatedMailAddress}}</div>
+                    <div class="button button-clear" style="color:black;">{{userBranch.level}}</div>
+                    <div class="button button-clear" style="color:black;">{{userBranch.description}}</div>
+                    <!--<div class="button button-clear" style="color:black;">{{userBranch.mandatedPhone}}</div>
+                    <div class="button button-clear" style="color:black;">{{userBranch.mandatedMailAddress}}</div>-->
                     <div class="button button-clear">
-                        <button class="button button-clear SourceHanSansFontBlod" style="color:darkslategray; width:80px; z-index:999;" ng-click="openAdminModal(userBranch)" ng-bind="userBranch.mandatedObjectId?'修改管理员':'设置管理员'"></button>
+                        <!--<button class="button button-clear SourceHanSansFontBlod" style="color:darkslategray; width:80px; z-index:999;" ng-click="openAdminModal(userBranch)" ng-bind="userBranch.mandatedObjectId?'修改管理员':'设置管理员'"></button>-->
                         <button class="button button-clear SourceHanSansFontBlod" style="color:darkslategray; width:80px; z-index:999;" ng-click="deleteBranch(userBranch)"> 删除用户</button>
                     </div>
                 </div>
             </div>
-            <div class="button button-full item SourceHanSansFontBlod" style="border-radius:5px; margin-top:0;background-color:#11C1F3;color:white;" ng-click="showMoreBranch()">
+            <!--<div class="button button-full item SourceHanSansFontBlod" style="border-radius:5px; margin-top:0;background-color:#11C1F3;color:white;" ng-click="showMoreBranch()">
                 点击查看更多...
-            </div>
+            </div>-->
         </div>
     </ion-content>
 

@@ -39,15 +39,25 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
         var _getBranchList = function (pageNumber) {
             var defer = $q.defer();
             pageNumber = pageNumber || 0;
-            $http.get(rootUrl + branchlistUrl + '/' + pageNumber)
+            //$http.get(rootUrl + branchlistUrl + '/' + pageNumber)
+            //.success(function (data) {
+            //    var branchs = JSON.parse(data.content);
+            //    if (data.status == 'ok')
+            //        defer.resolve(branchs)
+            //    else
+            //        defer.reject(branchs);
+            //}).error(function (error) {
+            //    defer.reject(error);
+            //});
+            $http.get(rootUrl + '/cms/getgrouplist/' + userInfo.userName + '/' + userInfo.token)
             .success(function (data) {
                 var branchs = JSON.parse(data.content);
                 if (data.status == 'ok')
-                    defer.resolve(branchs)
+                   defer.resolve(branchs)
                 else
-                    defer.reject(branchs);
+                defer.reject(branchs);
             }).error(function (error) {
-                defer.reject(error);
+               defer.reject(error);
             });
             return defer.promise;
         }
@@ -106,8 +116,7 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
             // pageNumber = pageNumber || 0;
             var groupName = info.groupName;
             var groupDesc = info.groupDesc;
-            var groupLevel = info.groupLevel;
-            console.log(rootUrl + '/cms/creategroup/'+ userInfo.userName + '/' + userInfo.token + '/' + groupName + '/' + groupDesc + '/' + groupLevel )
+            var groupLevel = info.groupLevel
             $http.get(rootUrl + '/cms/creategroup/'+ userInfo.userName + '/' + userInfo.token + '/' + groupName + '/' + groupDesc + '/' + groupLevel )
                 .success(function (data) {
                     console.log('success')
@@ -119,15 +128,30 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
             return defer.promise;
         }
         //删除管理员
+        //var _postDeleteBranch = function (branch) {
+        //    var defer = $q.defer();
+        //    var _postData = clone(postData);
+        //    _postData.modifyType = appConfig.EModifyType.Branch;
+        //    _postData.content = "";
+        //    _postData.targetObjectId = branch.objectId;
+        //    _postData.regionId = branch.regionId;
+        //    console.log(_postData);
+        //    $http.post(deleteDataPostUrl, _postData)
+        //        .success(function (data) {
+        //            var res = JSON.parse(data.content);
+        //            if (data.status == 'ok')
+        //                defer.resolve(res);
+        //            else
+        //                defer.reject(res);
+        //        })
+        //        .error(function (error) {
+        //            defer.reject(error);
+        //        });
+        //    return defer.promise;
+        //}
         var _postDeleteBranch = function (branch) {
             var defer = $q.defer();
-            var _postData = clone(postData);
-            _postData.modifyType = appConfig.EModifyType.Branch;
-            _postData.content = "";
-            _postData.targetObjectId = branch.objectId;
-            _postData.regionId = branch.regionId;
-            console.log(_postData);
-            $http.post(deleteDataPostUrl, _postData)
+            $http.get(rootUrl + '/cms/deletegroup/' + userInfo.userName + '/' + userInfo.token + '/' + branch.objectId)
                 .success(function (data) {
                     var res = JSON.parse(data.content);
                     if (data.status == 'ok')
