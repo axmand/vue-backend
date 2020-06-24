@@ -35,6 +35,21 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
                 regionId: regionId,
                 content:''
             };
+        //获取组管理权限列表
+        var _getAPIList = function () {
+            var defer = $q.defer();
+            $http.get(rootUrl + '/cms/getconfigureableapilist/')
+                .success(function (data) {
+                    var branchs = JSON.parse(data.content);
+                    if (data.status == 'ok')
+                        defer.resolve(branchs)
+                    else
+                        defer.reject(branchs);
+                }).error(function (error) {
+                    defer.reject(error);
+                });
+            return defer.promise;
+        }
         //获取用户（管理员）列表
         var _getBranchList = function (pageNumber) {
             var defer = $q.defer();
@@ -164,6 +179,38 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
                 });
             return defer.promise;
         }
+        //用户组授权
+        var _postAPIAuthorize = function (branch,id) {
+            var defer = $q.defer()
+            $http.get(rootUrl + '/cms/authorizegroupapi/' + userInfo.userName + '/' + userInfo.token + '/' + id + '/' + branch.Name)
+                .success(function (data) {
+                    var res = JSON.parse(data.content);
+                    if (data.status == 'ok')
+                        defer.resolve(res);
+                    else
+                        defer.reject(res);
+                })
+                .error(function (error) {
+                    defer.reject(error);
+                });
+            return defer.promise;
+        }
+        //用户组收回权限
+        var _postAPIWithdraw = function (branch,id) {
+            var defer = $q.defer();
+            $http.get(rootUrl + '/cms/withdrawgroupapi/' + userInfo.userName + '/' + userInfo.token + '/' + id + '/' + branch.Name)
+                .success(function (data) {
+                    var res = JSON.parse(data.content);
+                    if (data.status == 'ok')
+                        defer.resolve(res);
+                    else
+                        defer.reject(res);
+                })
+                .error(function (error) {
+                    defer.reject(error);
+                });
+            return defer.promise;
+        }
         //平台管理员获取订单列表接口
         var _getOrderList = function (customerName, token, pageNumber, orderState) {
             var defer = $q.defer();
@@ -186,13 +233,16 @@ define(['baseServices', 'objutil'], function (baseServices, objutil) {
         };
 
         return {
+            getAPIList: _getAPIList,
             getBranchList: _getBranchList,
             getSearchAccount: _getSearchAccount,
             postBranchInfo: _postBranchInfo,
             postDeleteBranch: _postDeleteBranch,
             getOrderList: _getOrderList,
             reimburseOrder: _reimburseOrder,
-            setBranchAdmin: _setBranchAdmin
+            setBranchAdmin: _setBranchAdmin,
+            postAPIWithdraw: _postAPIWithdraw,
+            postAPIAuthorize: _postAPIAuthorize,
         }
     }]);
 

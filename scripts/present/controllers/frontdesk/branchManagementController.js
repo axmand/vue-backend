@@ -10,7 +10,7 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
         $scope.searchAccountWord = null;
         $scope.account = null;
         $scope.adminData = {};
-
+        $scope.userAPIlist = [];
         var pageNumber = 1;
 
         //创建管理员modal
@@ -25,19 +25,20 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
         //设置用户组账户modal
         $scope.openAdminModal = function (userBranch) {
             console.log(userBranch);
-            
             $scope.adminData = {
                 mandatedName: userBranch.mandatedName||'',
                 mandatedMailAddress: userBranch.mandatedMailAddress || '',
                 mandatedPhone: userBranch.mandatedPhone || '',
                 branchObjectId: userBranch.objectId
             }
+            $scope.adminID = userBranch.objectId
             $('#adminModal').modal('show');          
         }
 
         $scope.$on("$ionicView.enter", function () {
             if (arguments[0].targetScope == arguments[0].currentScope) {
                 refreshBranch();
+                getAPIlist();
             }
         });
 
@@ -49,6 +50,24 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
                 $$toast(err, 'error');
             });
             pageNumber = 1;
+        };
+
+        var getAPIlist = function () {
+            $$frontdeskService.getAPIList().then(function (data) {
+                var i = 0;
+                for (var key in data) {
+                    var json = {}
+                    json.Id = i + 1
+                    json.Name = key
+                    json.Desc = data[key]
+                    $scope.userAPIlist.push(json)
+                    i++
+                }
+                //$scope.userAPIlist = data
+                console.log($scope.userAPIlist)
+            }, function (err) {
+                $$toast(err, 'error');
+            });
         };
 
         $scope.showMoreBranch = function () {
@@ -118,6 +137,28 @@ define(['baseControllers', 'frontdeskService'], function (baseControllers, front
                     $$toast(err, 'error');
                 });
             }) 
+        }
+
+        $scope.APIAuthorize = function (branch) {
+            $$confirmModal('确认为此用户组授权？').then(function () {
+                $$frontdeskService.postAPIAuthorize(branch, $scope.adminID).then(function (data) {
+                    refreshBranch();
+                    $$toast(data, 'success');
+                }, function (err) {
+                    $$toast(err, 'error');
+                });
+            })
+        }
+
+        $scope.APIWithdraw = function (branch) {
+            $$confirmModal('确认收回用户组此权限？').then(function () {
+                $$frontdeskService.postAPIWithdraw(branch,$scope.adminID).then(function (data) {
+                    refreshBranch();
+                    $$toast(data, 'success');
+                }, function (err) {
+                    $$toast(err, 'error');
+                });
+            })
         }
 
     });
