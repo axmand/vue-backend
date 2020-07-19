@@ -25,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     LoginComponent,
     MainComponent,
     UserComponent,
-    Code404Component
+    Code404Component,
+    MapComponent
   ],
   imports: [
     BrowserModule,
