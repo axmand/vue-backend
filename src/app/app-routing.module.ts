@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { Code404Component } from './code404/code404.component';
-import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
-import { UserComponent } from './user/user.component';
+/**
+ * component
+ */
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { UserComponent } from './components/user/user.component';
 
 /**
  * @author yellow 2020/7/18
@@ -28,8 +29,7 @@ const routes: Routes = [
     path: 'main', component: MainComponent, children: [
       { path: 'user', component: UserComponent }
     ]
-  },
-  { path: '**', component: Code404Component }  // 错误页面，放在匹配最后
+  }
 ];
 
 @NgModule({

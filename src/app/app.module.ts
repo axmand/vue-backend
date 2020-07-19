@@ -4,28 +4,26 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 
 /**
  * ui
  */
-
+import { LoginComponent } from './/components/login/login.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { MainComponent } from './main/main.component';
+import { MainComponent } from './components/main/main.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
-import { UserComponent } from './user/user.component';
-import { Code404Component } from './code404/code404.component';
+import { UserComponent } from './components/user/user.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MapComponent } from './map/map.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +31,6 @@ import { MapComponent } from './map/map.component';
     LoginComponent,
     MainComponent,
     UserComponent,
-    Code404Component,
     MapComponent
   ],
   imports: [
