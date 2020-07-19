@@ -1,0 +1,43 @@
+<mat-drawer-container class="example-container" autosize>
+    <!-- 侧边栏 -->
+    <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+        <!-- 管理员信息 -->
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>欢迎你</mat-card-title>
+                <mat-card-subtitle>管理员</mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+        <!-- 功能栏导航 -->
+        <mat-list>
+            <div mat-subheader>功能导航</div>
+            <mat-list-item *ngFor="let nav of navs">
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <div mat-line>{{nav}}</div>
+                <div mat-line>最后修改：2020.7.19</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let nav of navs">
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <div mat-line>{{nav}}</div>
+                <div mat-line>最后修改：昨天</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-selection-list  #navlist [multiple]="false">
+                <mat-list-option *ngFor="let nav of navs" [value] = 'nav'>
+                    <mat-icon mat-list-icon>folder</mat-icon>
+                    <div mat-line>{{nav}}</div>
+                    <div mat-line>最后修改：6分钟前</div>
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-list>
+    </mat-drawer>
+    <!-- 主功能区 -->
+    <div class="example-sidenav-content">
+        <!-- <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+        </button> -->
+        <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>
