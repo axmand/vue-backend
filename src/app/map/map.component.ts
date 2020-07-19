@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as maptalks from 'maptalks';
-
+/**
+ * 地图功能模块，需要提供以下功能：
+ * 1. 地图显示
+ * 2. 地图GeoJson加载
+ * 3. GeoJson编辑
+ * @author yellow 2020/7/19
+ */
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
