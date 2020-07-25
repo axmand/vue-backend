@@ -24,6 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MapComponent } from './components/map/map.component';
+import { AuthorityComponent } from './components/main/authority/authority.component';
+import { ParcelComponent } from './components/main/parcel/parcel.component';
+import { BuildingComponent } from './components/main/building/building.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { MapComponent } from './components/map/map.component';
     LoginComponent,
     MainComponent,
     UserComponent,
-    MapComponent
+    MapComponent,
+    AuthorityComponent,
+    ParcelComponent,
+    BuildingComponent
   ],
   imports: [
     BrowserModule,

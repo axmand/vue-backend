@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { UserComponent } from './components/user/user.component';
+import { AuthorityComponent } from './components/main/authority/authority.component';
+import { ParcelComponent } from './components/main/parcel/parcel.component';
+import { BuildingComponent } from './components/main/building/building.component';
 
 /**
  * @author yellow 2020/7/18
@@ -27,7 +30,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'main', component: MainComponent, children: [
-      { path: 'user', component: UserComponent }
+      { path: 'user', component: UserComponent },
+      { path: 'authority', component: AuthorityComponent },
+      { path: 'parcel', component: ParcelComponent },
+      { path: 'building', component: BuildingComponent },
+      { path: '**', redirectTo: 'authority' },
     ]
   }
 ];
