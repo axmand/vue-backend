@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~10.0.4",
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
+    "axios": "^0.19.2",
     "maptalks": "^0.47.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

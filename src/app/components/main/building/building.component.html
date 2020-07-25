@@ -1,1 +1,43 @@
-<p>building works!</p>
+<div class="example-button-row" style="margin-top:20px;margin-bottom:10px;">
+    <button mat-raised-button color="primary" style="width:150px; margin-left:40%;">
+        添加楼宇
+    </button>
+</div>
+<mat-divider></mat-divider>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="操作">
+    <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+    <mat-cell *matCellDef="let element">     
+        <button mat-raised-button color="primary">编辑</button>
+        &nbsp;
+        <button mat-raised-button color="primary">删除</button>
+    </mat-cell>   
+  </ng-container> 
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

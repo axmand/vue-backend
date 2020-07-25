@@ -27,6 +27,10 @@ import { MapComponent } from './components/map/map.component';
 import { AuthorityComponent } from './components/main/authority/authority.component';
 import { ParcelComponent } from './components/main/parcel/parcel.component';
 import { BuildingComponent } from './components/main/building/building.component';
+import {MatTableModule} from '@angular/material/table';
+
+import { HttpClientModule } from "@angular/common/http";
+import { DataserviveService } from './services/dataservive.service';
 
 @NgModule({
   declarations: [
@@ -55,9 +59,11 @@ import { BuildingComponent } from './components/main/building/building.component
     MatListModule,
     MatIconModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataserviveService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
