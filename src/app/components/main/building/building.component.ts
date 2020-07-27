@@ -1,6 +1,8 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { DataserviveService } from '../../../services/dataservive.service';
+import {MatDialog} from '@angular/material/dialog';
+import { AddlyComponent } from './addly/addly.component';
 
 export interface PeriodicElement {
   floor_area:string,
@@ -26,6 +28,20 @@ export interface PeriodicElement {
 })
 export class BuildingComponent implements OnInit {
 
+  public name:string="";
+  public floor_area:string="";
+  public floor_height:string="";
+  public passager_num:string="";
+  public parking_num:string="";
+  public rental:string="";
+  public property_fee:string="";
+  public vacant_area:string="";
+  public settled:string="";
+  public ID:number;
+  public address:string="";
+  public street:string="";
+  public volume:string="";
+
   @ViewChild("lytable") lytable:any;
   public displayedColumns: string[] = ["ID","name","address","street","volume","floor_area","floor_height","passager_num","parking_num","rental","property_fee","vacant_area","settled","操作"];
   public dataSource: PeriodicElement[]=[];
@@ -39,7 +55,7 @@ export class BuildingComponent implements OnInit {
   public httpoptions={headers:new HttpHeaders({"Content-Type":"application/json"})};
 // [{"type":"Feature","geometry":{"type":"Point","coordinates":[114.2401869,30.56871864]},"properties":{"name":"中海大厦","volume":"56000","floor_area":"1512.08","floor_height":"4.15","passager_num":"9","parking_num":"340","rental":"80","property_fee":"15","vacant_area":"9000","settled":"36","address":"湖北省武汉市汉阳区晴川街道知音大道257号","ID":1,"street":"晴川街道"}}]
 
-  constructor(public http:HttpClient,public httpservice:DataserviveService) { }
+  constructor(public http:HttpClient,public httpservice:DataserviveService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // let rootapi="http://139.129.7.130:1338/";
@@ -74,7 +90,7 @@ export class BuildingComponent implements OnInit {
   view(){
     this.lytable.renderRows();
   }
-  addly(){
+  addly2(){
     this.dataSource=[];
     this.LYlist.push({"type":"Feature","geometry":{"type":"Point","coordinates":[114.2401869,30.56871864]},"properties":{"name":"中海大厦2","volume":"56000","floor_area":"1512.08","floor_height":"4.15","passager_num":"9","parking_num":"340","rental":"80","property_fee":"15","vacant_area":"9000","settled":"36","address":"湖北省武汉市汉阳区晴川街道知音大道257号","ID":1,"street":"晴川街道"}})
     this.content.features=this.LYlist
@@ -94,7 +110,11 @@ export class BuildingComponent implements OnInit {
     })
     
   }
-  ngAfterViewInit(){ 
+  addly() {
+    const dialogRef = this.dialog.open(AddlyComponent,{data:{type:"Feature",geometry:{"type":"Point",coordinates:[114.2401869,30.56871864]},properties:{name:this.name,floor_area:this.floor_area,floor_height:this.floor_height,passager_num:this.passager_num,parking_num:this.parking_num,rental:this.rental,property_fee:this.property_fee,vacant_area:this.vacant_area,settled:this.settled,ID:this.ID,address:this.address,street:this.street,volume:this.volume}}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result:`, result);
+    });
   }
 
 }

@@ -31,6 +31,8 @@ import {MatTableModule} from '@angular/material/table';
 
 import { HttpClientModule } from "@angular/common/http";
 import { DataserviveService } from './services/dataservive.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddlyComponent } from './components/main/building/addly/addly.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { DataserviveService } from './services/dataservive.service';
     MapComponent,
     AuthorityComponent,
     ParcelComponent,
-    BuildingComponent
+    BuildingComponent,
+    AddlyComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { DataserviveService } from './services/dataservive.service';
     MatSnackBarModule,
     MatExpansionModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [DataserviveService],
   bootstrap: [AppComponent]

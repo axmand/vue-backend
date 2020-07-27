@@ -1,0 +1,82 @@
+<h1 mat-dialog-title>添加楼宇</h1>
+<div mat-dialog-content>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>ID &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.ID" placeholder="ID">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>楼宇名称 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.name" placeholder="楼宇名称">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>楼宇地址 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.address" placeholder="楼宇地址">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>所属街道 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.street" placeholder="所属街道">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>建筑体量 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.volume" placeholder="建筑体量">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>标准层面积 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.floor_area" placeholder="标准层面积">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>楼层净高 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.floor_height" placeholder="楼层净高">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>客梯数量 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.passager_num" placeholder="客梯数量">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>停车位 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.parking_num" placeholder="停车位">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>月租金 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.rental" placeholder="月租金">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>物业管理费 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.property" placeholder="物业管理费">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>空置面积 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.vacant_area" placeholder="空置面积">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>已入驻企业 &nbsp;</span>
+    <input matInput [(ngModel)]="data.properties.settled" placeholder="已入驻企业">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">关闭</button>
+  <button mat-raised-button  [mat-dialog-close]="data"  cdkFocusInitial  color="primary">提交</button>
+</div>
+
+<!--<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Develop across all platforms</h3>
+  <p>Learn one way to build applications with Angular and reuse your code and abilities to build
+    apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
+
+  <h3>Speed &amp; Performance</h3>
+  <p>Achieve the maximum speed possible on the Web Platform today, and take it further, via Web
+    Workers and server-side rendering. Angular puts you in control over scalability. Meet huge
+    data requirements by building data models on RxJS, Immutable.js or another push-model.</p>
+
+  <h3>Incredible tooling</h3>
+  <p>Build features quickly with simple, declarative templates. Extend the template language with
+    your own components and use a wide array of existing components. Get immediate Angular-specific
+    help and feedback with nearly every IDE and editor. All this comes together so you can focus
+    on building amazing apps rather than trying to make the code work.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>-->
+
