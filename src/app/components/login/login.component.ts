@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { DataserviveService } from '../../services/dataservive.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { DataserviveService } from '../../services/dataservive.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private snackBar: MatSnackBar,public http:HttpClient,public httpservice:DataserviveService) { }
+  constructor(private router: Router, private snackBar: MatSnackBar, public http: HttpClient, public httpservice: DataserviveService) { }
 
   ngOnInit(): void {
   }
@@ -21,28 +21,27 @@ export class LoginComponent implements OnInit {
   passWord: string;
 
   onLogin() {
-    let api="http://139.129.7.130:1338/cms/login";
-    // this.httpservice.postdata(api,{userName:this.userName,userPwd:this.passWord}).then((response:any)=>{   
-    //   console.log(response);
-    //   var rtInfo = JSON.parse(response.content);
-    //   if (response.status == "ok") {
-    //       this.httpservice.userInfo = rtInfo;
-    //   }
-    // })
-    const httpoptions={headers:new HttpHeaders({"Content-Type":"application/json"})};
-    this.http.post("cms/login",{"userName":this.userName,"userPwd":this.passWord},httpoptions).subscribe((response:any)=>{
-      console.log(response);
+    let api = "http://139.129.7.130:1338/cms/login";
+    const httpoptions = { headers: new HttpHeaders({ "Content-Type": "application/json" }) };
+    this.http.post("cms/login", { "userName": this.userName, "userPwd": this.passWord }, httpoptions).subscribe((response: any) => {
       if (response.status == "ok") {
-          this.httpservice.userInfo = JSON.parse(response.content);
-      }     
+        this.httpservice.userInfo = JSON.parse(response.content);
+        // 跳转到main-用户管理
+        this.router.navigate(['/main'])
+        //提示
+        this.snackBar.open("登录成功", "关闭", {
+          duration: 2 * 1000,
+          horizontalPosition: "end",
+          verticalPosition: "bottom"
+        });
+      } else {
+        this.snackBar.open(response.content, "确定", {
+          duration: 2 * 1000,
+          horizontalPosition: "end",
+          verticalPosition: "bottom"
+        });
+      }
     })
-    // 跳转到main-用户管理
-    this.router.navigate(['/main'])
-    //提示
-    this.snackBar.open("登录成功", "关闭", {
-      duration: 2 * 1000,
-      horizontalPosition: "end",
-      verticalPosition: "bottom"
-    });
   }
+
 }

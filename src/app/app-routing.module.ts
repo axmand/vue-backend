@@ -24,7 +24,7 @@ import { BuildingComponent } from './components/main/building/building.component
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   { path: 'login', component: LoginComponent },
