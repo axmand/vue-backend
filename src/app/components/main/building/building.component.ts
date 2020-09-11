@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { DataserviveService } from '../../../services/dataservive.service';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddlyComponent } from './addly/addly.component';
 
 export interface PeriodicElement {

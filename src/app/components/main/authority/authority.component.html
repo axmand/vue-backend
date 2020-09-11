@@ -1,1 +1,37 @@
-<p>authority works!</p>
+<div class="example-button-row" style="margin-top:20px;margin-bottom:10px;">
+    <button mat-raised-button color="primary" style="width:150px;" (click)="addyh()">
+        新增用户组
+    </button>
+</div>
+<mat-divider></mat-divider>
+<mat-table #yhtable [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Name Column -->
+  <ng-container matColumnDef="groupName">
+    <mat-header-cell *matHeaderCellDef> 用户组名称 </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.groupName}} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="level">
+    <mat-header-cell *matHeaderCellDef> 用户等级 </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.level}} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> 用户描述 </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="操作">
+    <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+    <mat-cell *matCellDef="let element">     
+        <button mat-raised-button color="primary" style="width:50px;padding: 0%;">设置权限</button>
+        &nbsp;
+        <button mat-raised-button color="primary" style="width:50px;margin-left: 5%;" (click)="deleteyh(element.objectId)">删除</button>
+    </mat-cell>   
+  </ng-container> 
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

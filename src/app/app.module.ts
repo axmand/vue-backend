@@ -33,6 +33,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { DataserviveService } from './services/dataservive.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddlyComponent } from './components/main/building/addly/addly.component';
+import { AddYHComponent } from './components/main/authority/addYH/addYH.component';
+import { DeleteYHComponent } from './components/main/authority/delete-yh/delete-yh.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AddlyComponent } from './components/main/building/addly/addly.component
     ParcelComponent,
     BuildingComponent,
     AddlyComponent,
+    AddYHComponent,
+    DeleteYHComponent
   ],
   imports: [
     BrowserModule,

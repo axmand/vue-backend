@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     this.http.post("cms/login", { "userName": this.userName, "userPwd": this.passWord }, httpoptions).subscribe((response: any) => {
       if (response.status == "ok") {
         this.httpservice.userInfo = JSON.parse(response.content);
+        console.log(this.httpservice.userInfo)
         // 跳转到main-用户管理
         this.router.navigate(['/main'])
         //提示
