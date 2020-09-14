@@ -5,6 +5,7 @@ import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddYHComponent } from './addYH/addYH.component';
 import {DeleteYHComponent} from'./delete-yh/delete-yh.component';
+import {OpenAPIComponent} from'./open-api/open-api.component';
 
 export interface PeriodicElement {
   apiList:[];
@@ -127,6 +128,13 @@ export class AuthorityComponent implements OnInit {
           console.log('failed')
         }
       })
+    })
+  }
+
+  openAPI(objectId){
+    console.log(objectId)
+    const dialogRef= this.dialog.open(OpenAPIComponent,{data:objectId})
+    dialogRef.afterClosed().subscribe(result => {
     })
   }
 }

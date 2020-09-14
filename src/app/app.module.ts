@@ -35,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddlyComponent } from './components/main/building/addly/addly.component';
 import { AddYHComponent } from './components/main/authority/addYH/addYH.component';
 import { DeleteYHComponent } from './components/main/authority/delete-yh/delete-yh.component';
+import { OpenAPIComponent } from './components/main/authority/open-api/open-api.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { DeleteYHComponent } from './components/main/authority/delete-yh/delete-
     BuildingComponent,
     AddlyComponent,
     AddYHComponent,
-    DeleteYHComponent
+    DeleteYHComponent,
+    OpenAPIComponent
   ],
   imports: [
     BrowserModule,

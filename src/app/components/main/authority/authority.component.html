@@ -26,7 +26,7 @@
   <ng-container matColumnDef="操作">
     <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
     <mat-cell *matCellDef="let element">     
-        <button mat-raised-button color="primary" style="width:50px;padding: 0%;">设置权限</button>
+        <button mat-raised-button color="primary" style="width:50px;padding: 0%;"  (click)="openAPI(element.objectId)">设置权限</button>
         &nbsp;
         <button mat-raised-button color="primary" style="width:50px;margin-left: 5%;" (click)="deleteyh(element.objectId)">删除</button>
     </mat-cell>   

@@ -1,0 +1,19 @@
+<mat-table #qxtable [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> 权限描述 </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="操作">
+    <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+    <mat-cell *matCellDef="let element">     
+        <button mat-raised-button color="primary" style="width:50px;padding: 0%;"  (click)="APIAuthorize(element.name,data)">授予权限</button>
+        &nbsp;
+        <button mat-raised-button color="primary" style="width:50px;margin-left: 5%;padding: 0%;" (click)="APIWithdraw(element.name,data)">收回权限</button>
+    </mat-cell>   
+  </ng-container> 
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
