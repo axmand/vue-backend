@@ -34,6 +34,7 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+Vue.prototype.mapInstance = {};
 
 new Vue({
   el: '#app',

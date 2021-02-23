@@ -58,7 +58,6 @@ export const constantRoutes = [
   {
     path: '/example',
     component: Layout,
-    // redirect: '/example/table',
     name: 'Example',
     meta: { title: '用户管理', icon: 'el-icon-s-help' },
     children: [
@@ -72,16 +71,15 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/WebMap',
     component: Layout,
-    // redirect: '/example/table',
-    name: 'Example',
+    name: 'WebMap',
     meta: { title: '地块管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
+        path: 'WebMap',
+        name: 'WebMap',
+        component: () => import('@/views/map/index'),
         meta: { title: '地块管理', icon: 'table' }
       },
     ]
