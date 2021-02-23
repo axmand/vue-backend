@@ -75,7 +75,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: 'admin1'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -106,13 +106,29 @@ export default {
       })
     },
     handleLogin() {
+      console.log(1)
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
-          }).catch(() => {
+          })        
+          // const data = {'userName':'admin','userPwd':'admin1'}
+          //       console.log(1)
+          // fetch('http://121.196.60.135:1338/cms/login',{
+          //       method: "POST",
+          //       body: JSON.stringify(data),
+          //       mode: 'cors',
+          //       headers: {
+          //           "Content-type": "application/json"
+          //       }
+          // }).then(result => result.json())
+          // .then(() => {
+          //    this.$router.push({ path: this.redirect || '/' })
+          //    this.loading = false
+          // })
+          .catch(() => {
             this.loading = false
           })
         } else {
