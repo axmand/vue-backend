@@ -23,6 +23,12 @@ export default {
       LYid: 0,
       TDid: 0,
       imglist: [],
+      target: [],
+      clickedObj: [],
+      editingLabel:[],
+      linePoiArr :[],
+      deleteObj:[], 
+      recoverObj:[], 
     };
   },
   //监听属性 类似于data概念
@@ -31,36 +37,10 @@ export default {
   watch: {},
   //方法集合
   methods: {
-
-    //加载影像底图
-    hybird_map() {
-      Vue.mapInstance.removeLayer("base");
-      Vue.mapInstance.setBaseLayer(
-        new maptalks.TileLayer("base", {
-          urlTemplate: "http://121.196.60.135:1338/bms/tmslayer/{z}/{x}/{y}",
-          attribution:
-            '&copy; <a href="https://map.tianditu.gov.cn//">天地图</a>,&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>',
-        })
-      );
-    },
-    //加载矢量地图e
-    Vector_map() {
-      Vue.mapInstance.removeLayer("base");
-      const dpr = Vue.mapInstance.getDevicePixelRatio();
-      const scaler = dpr > 1 ? 2 : 1;
-      //tdt
-      Vue.mapInstance.setBaseLayer(
-        new maptalks.TileLayer("base", {
-          urlTemplate:
-            "http://{s}.tianditu.gov.cn/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=d0c3c3be64e0042982f3d4a94cb15298",
-          subdomains: ["t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7"],
-          attribution:
-            '&copy; <a href="https://map.tianditu.gov.cn//">天地图</a>,&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>',
-        })
-      );
-      // console.log(Vue.mapInstance)
-    },
-
+    //画点
+    drawpoint(){
+      Vue.drawTool.setMode('Point').enable();
+    }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
@@ -68,10 +48,32 @@ export default {
   mounted() {
     //构建map
     var image = new Image();
+   
+
     Vue.mapInstance = new maptalks.Map("WebMap", {
       center: [114.190649, 30.570374],
       zoom: 15,
     });
+    
+    var layer = new maptalks.VectorLayer('vector').addTo(Vue.mapInstance);
+    //添加画图工具
+    Vue.drawTool = new maptalks.DrawTool({
+      mode: "Point",
+      symbol: {
+        lineColor: "#000000",
+        lineWidth: 1.5,
+        polygonFill: "#FFFFFF",
+        markerWidth : 20,
+        markerHeight: 20,
+        markerType : 'ellipse',
+      }
+    }).addTo(Vue.mapInstance).disable();
+
+    Vue.drawTool.on('drawend', function (param) {
+      console.log(param.geometry);
+      layer.addGeometry(param.geometry);
+    });
+
 
     // Vue.mapInstance.setBaseLayer(
     //   new maptalks.TileLayer("base", {
@@ -80,6 +82,7 @@ export default {
     //       '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
     //   })
     // );
+
     Vue.mapInstance.setBaseLayer(
       new maptalks.TileLayer("base", {
         urlTemplate:
@@ -89,6 +92,7 @@ export default {
           '&copy; <a href="https://map.tianditu.gov.cn//">天地图</a>,&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>',
       })
     );
+
     Vue.mapInstance.addLayer(
       new maptalks.TileLayer("base2", {
         urlTemplate:
@@ -96,6 +100,7 @@ export default {
         subdomains: ["t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7"],
       })
     );
+
     Vue.mapInstance.setMaxZoom(18);
   },
 
