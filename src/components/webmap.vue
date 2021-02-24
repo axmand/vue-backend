@@ -8,8 +8,6 @@ import Vue from "vue";
 import * as maptalks from "maptalks";
 import "maptalks/dist/maptalks.css";
 
-// import tdxx from '../assets/tdxx.js'
-// import lyxx from '../assets/lyxx.js'
 
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';

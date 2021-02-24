@@ -58,61 +58,55 @@ export const constantRoutes = [
   {
     path: '/example',
     component: Layout,
-    name: 'Example',
-    meta: { title: '用户管理', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: '用户管理', icon: 'table' }
+        meta: { title: '用户管理', icon: 'user' }
       },
     ]
   },
 
   {
-    path: '/WebMap',
+    path: '/tdxx',
     component: Layout,
-    name: 'WebMap',
-    meta: { title: '地块管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'WebMap',
-        name: 'WebMap',
-        component: () => import('@/views/map/index'),
+        path: 'tdxx',
+        name: 'tdxx',
+        component: () => import('@/views/map/tdxx'),
         meta: { title: '地块管理', icon: 'table' }
       },
     ]
   },
 
   {
-    path: '/example',
+    path: '/lyxx',
     component: Layout,
     // redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '楼宇管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '楼宇管理', icon: 'table' }
+        path: 'lyxx',
+        name: 'lyxx',
+        component: () => import('@/views/map/lyxx'),
+        meta: { title: '楼宇管理', icon: 'form' }
       },
     ]
   },
 
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Form', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
   // {
   //   path: '/nested',
@@ -173,16 +167,16 @@ export const constantRoutes = [
   //   ]
   // },
 
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
+  // {
+  //   path: 'external-link',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+  //       meta: { title: 'External Link', icon: 'link' }
+  //     }
+  //   ]
+  // },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
