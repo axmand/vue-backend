@@ -56,46 +56,46 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/yhgl',
     component: Layout,
-    name: 'Example',
+    name: 'yhgl',
     meta: { title: '用户管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
+        path: 'yhgl',
+        name: 'yhgl',
+        component: () => import('@/views/YHGL/index'),
         meta: { title: '用户管理', icon: 'table' }
       },
     ]
   },
 
   {
-    path: '/WebMap',
+    path: '/dkgl',
     component: Layout,
-    name: 'WebMap',
+    name: 'dkgl',
     meta: { title: '地块管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'WebMap',
-        name: 'WebMap',
-        component: () => import('@/views/map/index'),
+        path: 'dkgl',
+        name: 'dkgl',
+        component: () => import('@/views/DKGL/index'),
         meta: { title: '地块管理', icon: 'table' }
       },
     ]
   },
 
   {
-    path: '/example',
+    path: '/lygl',
     component: Layout,
     // redirect: '/example/table',
-    name: 'Example',
+    name: 'lygl',
     meta: { title: '楼宇管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
+        path: 'lygl',
+        name: 'lygl',
+        component: () => import('@/views/LYGL/index'),
         meta: { title: '楼宇管理', icon: 'table' }
       },
     ]
