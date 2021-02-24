@@ -7,6 +7,7 @@
           <el-button type="primary" icon="el-icon-edit" >地块</el-button>
           <el-button type="warning" icon="el-icon-s-grid" @click="tabledialog = true">属性表</el-button>
           <el-button type="warning" icon="el-icon-thumb" >选中</el-button>
+          <el-button type="warning" icon="el-icon-video-play" @click="pausedraw">暂停</el-button>
           <el-button type="warning" icon="el-icon-star-off" @click="savedialog = true">保存</el-button>
           <el-button type="danger" icon="el-icon-delete" @click="deletedialog = true">删除</el-button>
         </el-row>
@@ -254,6 +255,9 @@ export default {
   methods: {
     drawpoint() {
       this.$parent.drawpoint();
+    },
+    pausedraw(){
+      this.$parent.pausedraw();
     },
     handleClose(done) {
         this.$confirm('确认关闭？')

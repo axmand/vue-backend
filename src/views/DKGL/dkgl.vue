@@ -47,6 +47,9 @@ export default {
     drawpoint() {
       this.$refs.webmap.drawpoint();
     },
+    pausedraw(){
+      this.$refs.webmap.pausedraw();
+    }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},

@@ -40,7 +40,10 @@ export default {
     //画点
     drawpoint(){
       Vue.drawTool.setMode('Point').enable();
-    }
+    },
+    pausedraw(){
+      Vue.drawTool.disable();
+    }  
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
