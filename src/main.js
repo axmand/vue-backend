@@ -35,6 +35,7 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 Vue.prototype.mapInstance = {};
+Vue.prototype.drawTool = {};
 
 new Vue({
   el: '#app',

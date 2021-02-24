@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="24"><div class="grid-content bg-purple-dark">
         <el-row>
-          <el-button type="primary" icon="el-icon-map-location" >画点</el-button>
+          <el-button type="primary" icon="el-icon-map-location" @click="drawpoint">画点</el-button>
           <el-button type="primary" icon="el-icon-edit" >地块</el-button>
           <el-button type="warning" icon="el-icon-s-grid" @click="tabledialog = true">属性表</el-button>
           <el-button type="warning" icon="el-icon-thumb" >选中</el-button>
@@ -228,6 +228,7 @@
 </template>
 
 <script>
+import { config } from '@vue/test-utils';
 export default {
   name: "SketchToolBar",
   data() {
@@ -251,13 +252,17 @@ export default {
   },
 
   methods: {
-      handleClose(done) {
+    drawpoint() {
+      this.$parent.drawpoint();
+    },
+    handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
             done();
           })
           .catch(_ => {});
-      }
+    }
+
   },
   mounted() {},
 };
