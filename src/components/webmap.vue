@@ -41,7 +41,7 @@ export default {
     drawpoint(){
       Vue.drawTool.setMode('Point').enable();
     },
-    pausedraw(){
+    stopdraw(){
       Vue.drawTool.disable();
     }  
   },
