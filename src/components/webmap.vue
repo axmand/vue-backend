@@ -30,6 +30,8 @@ export default {
       TDid: 0,
       imglist: [],
       target: [],
+      clickedObj:[],
+      linePoiArr:[],
     };
   },
   //监听属性 类似于data概念
@@ -84,11 +86,117 @@ export default {
 
    //选中
     chooseObj() {
+      var that = this
       Vue.drawTool.disable();
+      var geos = Vue.mapInstance.getLayer("vector").getGeometries()
+      console.log(geos)
+      if(geos.length){
+        for (let i = 0; i < geos.length; i++) {
+          Vue.mapInstance.getLayer("vector").getGeometries()[i].on("click", function(param){      
+            that.target = param.target;
+            console.log(that.target);
+            that.target.config('isClicked',!that.target.options.isClicked)
+            //判断是首次点击高亮还是第二次点击取消选中
+            if (that.target.getJSONType() === "Marker") {
+              //首次点击高亮显示选中对象，并添加至存储选中对象的数组
+              if (that.target.options.isClicked) {
+                that.target.updateSymbol({
+                  markerFile: imgURL_loc2,
+                  markerWidth: {
+                    stops: [
+                      [6, 0],
+                      [14, 40],
+                    ],
+                  },
+                  markerHeight: {
+                    stops: [
+                      [6, 0],
+                      [14, 50],
+                    ],
+                  },
+                });
+                // that.linePoiArr.push(target.getId());
+                that.clickedObj.push(that.target);
+              }else {//第二次点击取消高亮效果，并从存储选中对象的数组中移除
+                for(let i=0;i<that.clickedObj.length;i++){
+                  if(that.clickedObj[i].getId() === that.target.getId()){
+                    that.clickedObj.splice(i, 1);
+                    break;
+                  }
+                }
+                that.target.updateSymbol({
+                  markerFile: imgURL_loc,
+                  markerWidth: {
+                    stops: [
+                      [6, 0],
+                      [14, 30],
+                    ],
+                  },
+                  markerHeight: {
+                    stops: [
+                      [6, 0],
+                      [14, 40],
+                    ],
+                  },
+                });
+              }   
+            }
+            //选中地块
+            if (that.target.getJSONType() === "Polygon") {
+              if (that.target.options.isClicked) {
+                that.target.updateSymbol({
+                  lineColor: "#E52323",
+                  lineWidth: 4,
+                  polygonFill: "#FA3535",
+                  polygonOpacity: 0.6,
+                  markerFile: imgURL_loc2_area,
+                  markerWidth: {
+                    stops: [
+                      [6, 0],
+                      [14, 40],
+                    ],
+                  },
+                  markerHeight: {
+                    stops: [
+                      [6, 0],
+                      [14, 54],
+                    ],
+                  },
+                });
+                that.clickedObj.push(that.target);
+              }else {
+                for(let i=0;i<that.clickedObj.length;i++){
+                  if(that.clickedObj[i].getId() === that.target.getId()){
+                    that.clickedObj.splice(i, 1);
+                    break;
+                    }
+                }
+
+                that.target.updateSymbol({ 
+                    lineColor: "#2348E5",
+                    lineWidth: 2,
+                    polygonFill: "#355BFA",
+                    polygonOpacity: 0.6,
+                    markerFile: imgURL_loc_area,
+                    markerWidth: {
+                      stops: [
+                        [6, 0],
+                        [14, 30],
+                      ],
+                    },
+                    markerHeight: {
+                      stops: [
+                        [6, 0],
+                        [14, 40],
+                      ],
+                    },
+                 });           
+                }
+            }
+            console.log(that.clickedObj)});
+        }
+      }
     },
-
-
-
     stopdraw(){
       Vue.drawTool.disable();
     },
@@ -100,7 +208,8 @@ export default {
     },
     savetable() {
       console.log("选中地块属性数据已经保存");
-    } 
+    } ,
+
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
@@ -126,6 +235,28 @@ export default {
       layer.addGeometry(param.geometry);
     });
 
+    var geos = Vue.mapInstance.getLayer("vector").getGeometries()
+    console.log(geos)
+    if(geos.length){
+      console.log(111)
+        for (let i = 0; i < geos.length; i++) {
+          console.log(111)
+          Vue.mapInstance.getLayer("vector").getGeometries()[i].on("click", this.clickObj());
+        }
+    }
+
+    //添加界址点图层数据
+    // if(LayerData.jzdJSONData){
+    //   let jzd_geos;
+    //   jzd_geos=JSON.parse(LayerData.jzdJSONData).geometries;
+    //   //为地图对象添加点击绑定事件
+    //   if(jzd_geos){
+    //     jzd.addGeometry(jzd_geos);
+    //     for (let i = 0; i < jzd_geos.length; i++) {
+    //       jzd.getGeometries()[i].on("click", clickObj);
+    //     }
+    //   }
+    // }
 
     // Vue.mapInstance.setBaseLayer(
     //   new maptalks.TileLayer("base", {
@@ -162,7 +293,8 @@ export default {
   updated() {}, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
-  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
+ 
+ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 };
 </script>
 
