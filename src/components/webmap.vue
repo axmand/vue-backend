@@ -42,6 +42,7 @@ export default {
   methods: {
     //画点
     drawpoint(){
+      this.recoverObj()
       Vue.drawTool.setMode('Point').enable();
       Vue.drawTool.setSymbol({
         markerFile: imgURL_loc,
@@ -62,6 +63,7 @@ export default {
 
     //画面
     drawpolygon(){
+      this.recoverObj()
       Vue.drawTool.setMode('Polygon').enable()
       Vue.drawTool.setSymbol({
         lineColor: "#2348E5",
@@ -141,6 +143,7 @@ export default {
                 });
               }   
             }
+
             //选中地块
             if (that.target.getJSONType() === "Polygon") {
               if (that.target.options.isClicked) {
@@ -171,7 +174,6 @@ export default {
                     break;
                     }
                 }
-
                 that.target.updateSymbol({ 
                     lineColor: "#2348E5",
                     lineWidth: 2,
@@ -197,15 +199,76 @@ export default {
         }
       }
     },
+    //清除选中效果
+    recoverObj(){
+      var that = this
+      let num = that.clickedObj.length;
+      that.target = null;
+      for (let i = 0; i < num; i++) {
+        if (that.clickedObj[i].getJSONType()  === "Marker") {
+          that.clickedObj[i].config('isClicked',false);
+          that.clickedObj[i].updateSymbol({
+            markerFile: imgURL_loc,
+            markerWidth: {
+              stops: [
+                [6, 0],
+                [14, 30],
+              ],
+            },
+            markerHeight: {
+              stops: [
+                [6, 0],
+                [14, 40],
+              ],
+            },
+          });
+        }
+        if (that.clickedObj[i].getJSONType() === "Polygon") {
+          that.clickedObj[i].config('isClicked',false);
+          that.clickedObj[i].updateSymbol({ 
+            lineColor: "#2348E5",
+            lineWidth: 2,
+            polygonFill: "#355BFA",
+            polygonOpacity: 0.6,
+            markerFile: imgURL_loc_area,
+            markerWidth: {
+              stops: [
+                [6, 0],
+                [14, 30],
+              ],
+            },
+            markerHeight: {
+              stops: [
+                [6, 0],
+                [14, 40],
+              ],
+            },
+          });
+        }
+      }
+      console.log(that.clickedObj)
+      that.clickedObj=[];
+  },
+
     stopdraw(){
       Vue.drawTool.disable();
     },
+
     savedata() {
       console.log("选中地块数据已经保存");
     },
+
     deletedata(){
-      console.log("选中地块数据已经删除");
+      var that = this
+      //批量删除存储在选中数组中的所有地图对象
+      let num = that.clickedObj.length;
+      for(let i=0;i<num;i++){
+        that.target=that.clickedObj[i];
+        that.target.remove();
+      }
+      console.log("选中数据已经删除");
     },
+
     savetable() {
       console.log("选中地块属性数据已经保存");
     } ,
