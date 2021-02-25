@@ -46,6 +46,18 @@ export default {
     chooseObj() {
       Vue.drawTool.disable();
     },
+    stopdraw(){
+      Vue.drawTool.disable();
+    },
+    savedata() {
+      console.log("选中地块数据已经保存");
+    },
+    deletedata(){
+      console.log("选中地块数据已经删除");
+    },
+    savetable() {
+      console.log("选中地块属性数据已经保存");
+    } 
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},

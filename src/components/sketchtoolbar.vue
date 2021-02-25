@@ -5,8 +5,9 @@
         <el-row>
           <el-button type="primary" icon="el-icon-map-location" @click="drawpoint">画点</el-button>
           <el-button type="primary" icon="el-icon-edit" >地块</el-button>
-          <el-button type="warning" icon="el-icon-s-grid" @click="tabledialog = true">属性表</el-button>
+          <el-button type="warning" icon="el-icon-s-grid" @click="tabledialog = true">属性</el-button>
           <el-button type="warning" icon="el-icon-thumb" @click="chooseObj">选中</el-button>
+          <el-button type="warning" icon="el-icon-video-play" @click="stopdraw">暂停</el-button>
           <el-button type="warning" icon="el-icon-star-off" @click="savedialog = true">保存</el-button>
           <el-button type="danger" icon="el-icon-delete" @click="deletedialog = true">删除</el-button>
         </el-row>
@@ -22,7 +23,7 @@
       <span>确认删除？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="deletedialog = false">取 消</el-button>
-        <el-button type="primary" @click="deletedialog = false">确 定</el-button>
+        <el-button type="primary" @click="deletedialog = false;deletedata()">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -34,7 +35,7 @@
       <span>确认保存绘制图形？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="savedialog = false">取 消</el-button>
-        <el-button type="primary" @click="savedialog = false">确 定</el-button>
+        <el-button type="primary" @click="savedialog = false;savedata()">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -52,7 +53,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="tabledialog = false">取 消</el-button>
-        <el-button type="primary" @click="tabledialog = false">确 定</el-button>
+        <el-button type="primary" @click="tabledialog = false;savetable()">确 定</el-button>
       </div>
     </el-dialog>
         
@@ -260,6 +261,18 @@ export default {
       this.$parent.chooseObj();
     },
 
+    stopdraw(){
+      this.$parent.stopdraw();
+    },
+    savedata() {
+      this.$parent.savedata();
+    },
+    deletedata(){
+      this.$parent.deletedata();
+    },
+    savetable() {
+      this.$parent.savetable();
+    },
     handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {

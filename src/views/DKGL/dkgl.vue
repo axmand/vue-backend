@@ -50,6 +50,19 @@ export default {
     chooseObj() {
       this.$refs.webmap.chooseObj();
     },
+    stopdraw(){
+      this.$refs.webmap.stopdraw();
+    },
+    savedata() {
+      this.$refs.webmap.savedata();
+    },
+    deletedata(){
+      this.$refs.webmap.deletedata();
+    },
+    savetable() {
+      this.$refs.webmap.savetable();
+    }
+
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
