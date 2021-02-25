@@ -3,8 +3,8 @@
     <el-row>
       <el-col :span="24"><div class="grid-content bg-purple-dark">
         <el-row>
-          <el-button type="primary" icon="el-icon-map-location" @click="drawpoint">画点</el-button>
-          <el-button type="primary" icon="el-icon-edit" >地块</el-button>
+          <el-button type="primary" icon="el-icon-map-location" @click="drawpoint">楼宇</el-button>
+          <el-button type="primary" icon="el-icon-edit" @click="drawpolygon">地块</el-button>
           <el-button type="warning" icon="el-icon-s-grid" @click="tabledialog = true">属性</el-button>
           <el-button type="warning" icon="el-icon-thumb" @click="chooseObj">选中</el-button>
           <el-button type="warning" icon="el-icon-video-play" @click="stopdraw">暂停</el-button>
@@ -257,6 +257,10 @@ export default {
       this.$parent.drawpoint();
     },
 
+    drawpolygon(){
+      this.$parent.drawpolygon();
+    },
+
     chooseObj() {
       this.$parent.chooseObj();
     },
@@ -273,6 +277,7 @@ export default {
     savetable() {
       this.$parent.savetable();
     },
+
     handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -313,7 +318,7 @@ export default {
   padding: 0;
 }
 .el-col {
-  width: 40%;
+  width: 50%;
   text-align: center;
 }
 

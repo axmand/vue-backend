@@ -44,9 +44,16 @@ export default {
   //方法集合
   methods: {
     drawpoint() {
-      this.$refs.webmap.drawpoint();
+      this.$message({
+        message: '请绘制地块',
+        type: 'warning'
+      });
     },
     
+    drawpolygon(){
+      this.$refs.webmap.drawpolygon();
+    },
+
     chooseObj() {
       this.$refs.webmap.chooseObj();
     },

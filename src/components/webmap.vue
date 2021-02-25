@@ -41,11 +41,54 @@ export default {
     //画点
     drawpoint(){
       Vue.drawTool.setMode('Point').enable();
+      Vue.drawTool.setSymbol({
+        markerFile: imgURL_loc,
+        markerWidth: {
+          stops: [
+            [6, 0],
+            [14, 30],
+          ],
+        },
+        markerHeight: {
+          stops: [
+            [6, 0],
+            [14, 40],
+          ],
+        },
+      })
     },
-    //选中
+
+    //画面
+    drawpolygon(){
+      Vue.drawTool.setMode('Polygon').enable()
+      Vue.drawTool.setSymbol({
+        lineColor: "#2348E5",
+        lineWidth: 2,
+        polygonFill: "#355BFA",
+        polygonOpacity: 0.6,
+        markerFile: imgURL_loc_area,
+        markerWidth: {
+          stops: [
+            [6, 0],
+            [14, 30],
+          ],
+        },
+        markerHeight: {
+          stops: [
+            [6, 0],
+            [14, 40],
+          ],
+        },
+      });
+    },
+
+   //选中
     chooseObj() {
       Vue.drawTool.disable();
     },
+
+
+
     stopdraw(){
       Vue.drawTool.disable();
     },
@@ -76,26 +119,7 @@ export default {
   
   //添加画图工具
     Vue.drawTool = new maptalks.DrawTool({
-      mode: "Point",
-      symbol: {
-        lineColor: "#000000",
-        lineWidth: 1.5,
-        polygonFill: "#FFFFFF",
-        markerFile: imgURL_loc2,
-        markerWidth: {
-          stops: [
-            [6, 0],
-            [14, 40],
-          ],
-        },
-        markerHeight: {
-          stops: [
-            [6, 0],
-            [14, 54],
-          ],
-        },
-      }
-    }).addTo(Vue.mapInstance).disable();
+      mode: "Point" }).addTo(Vue.mapInstance).disable();
 
     Vue.drawTool.on('drawend', function (param) {
       console.log(param.geometry);
