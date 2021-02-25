@@ -19,7 +19,8 @@
       title="提示"
       :visible.sync="deletedialog"
       width="30%"
-      :before-close="handleClose">
+      :before-close="handleClose"
+      :modal="false">
       <span>确认删除？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="deletedialog = false">取 消</el-button>
@@ -31,7 +32,8 @@
       title="提示"
       :visible.sync="savedialog"
       width="30%"
-      :before-close="handleClose">
+      :before-close="handleClose"
+      :modal="false">
       <span>确认保存绘制图形？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="savedialog = false">取 消</el-button>
@@ -39,7 +41,7 @@
       </span>
     </el-dialog>
 
-    <el-dialog title="地块属性表" :visible.sync="tabledialog">
+    <el-dialog title="地块属性表" :visible.sync="tabledialog" :modal="false">
       <el-form :model="form">
         <el-form-item label="活动名称" :label-width="formLabelWidth">
           <el-input v-model="form.name" autocomplete="off"></el-input>
