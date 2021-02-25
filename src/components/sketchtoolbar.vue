@@ -6,7 +6,7 @@
           <el-button type="primary" icon="el-icon-map-location" @click="drawpoint">画点</el-button>
           <el-button type="primary" icon="el-icon-edit" >地块</el-button>
           <el-button type="warning" icon="el-icon-s-grid" @click="tabledialog = true">属性表</el-button>
-          <el-button type="warning" icon="el-icon-thumb" >选中</el-button>
+          <el-button type="warning" icon="el-icon-thumb" @click="chooseObj">选中</el-button>
           <el-button type="warning" icon="el-icon-star-off" @click="savedialog = true">保存</el-button>
           <el-button type="danger" icon="el-icon-delete" @click="deletedialog = true">删除</el-button>
         </el-row>
@@ -255,6 +255,11 @@ export default {
     drawpoint() {
       this.$parent.drawpoint();
     },
+
+    chooseObj() {
+      this.$parent.chooseObj();
+    },
+
     handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import webmap from "./../../components/webmap.vue";
 import sketchtoolbar from "./../../components/sketchtoolbar";
 
@@ -46,6 +45,10 @@ export default {
   methods: {
     drawpoint() {
       this.$refs.webmap.drawpoint();
+    },
+    
+    chooseObj() {
+      this.$refs.webmap.chooseObj();
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）

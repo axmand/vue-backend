@@ -8,6 +8,12 @@ import Vue from "vue";
 import * as maptalks from "maptalks";
 import "maptalks/dist/maptalks.css";
 
+import imgURL_loc from "../assets/marker.png";
+import imgURL_loc2 from "../assets/choosed.png";
+
+import imgURL_loc_area from "./../assets/marker_area.png";
+import imgURL_loc2_area from "./../assets/choosed_area.png";
+
 
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
@@ -24,11 +30,6 @@ export default {
       TDid: 0,
       imglist: [],
       target: [],
-      clickedObj: [],
-      editingLabel:[],
-      linePoiArr :[],
-      deleteObj:[], 
-      recoverObj:[], 
     };
   },
   //监听属性 类似于data概念
@@ -40,7 +41,11 @@ export default {
     //画点
     drawpoint(){
       Vue.drawTool.setMode('Point').enable();
-    }
+    },
+    //选中
+    chooseObj() {
+      Vue.drawTool.disable();
+    },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
@@ -56,16 +61,27 @@ export default {
     });
     
     var layer = new maptalks.VectorLayer('vector').addTo(Vue.mapInstance);
-    //添加画图工具
+  
+  //添加画图工具
     Vue.drawTool = new maptalks.DrawTool({
       mode: "Point",
       symbol: {
         lineColor: "#000000",
         lineWidth: 1.5,
         polygonFill: "#FFFFFF",
-        markerWidth : 20,
-        markerHeight: 20,
-        markerType : 'ellipse',
+        markerFile: imgURL_loc2,
+        markerWidth: {
+          stops: [
+            [6, 0],
+            [14, 40],
+          ],
+        },
+        markerHeight: {
+          stops: [
+            [6, 0],
+            [14, 54],
+          ],
+        },
       }
     }).addTo(Vue.mapInstance).disable();
 
