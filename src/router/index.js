@@ -30,9 +30,11 @@ import Layout from '@/layout'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
+
+
 export const constantRoutes = [
   {
-    path: '/login',
+    path:'/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
@@ -43,20 +45,22 @@ export const constantRoutes = [
     hidden: true
   },
 
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
-    }]
-  },
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   children: [{
+  //     path: 'dashboard',
+  //     name: 'Dashboard',
+  //     component: () => import('@/views/dashboard/index'),
+  //     meta: { title: 'Dashboard', icon: 'dashboard' }
+  //   }],
+  //   hidden: true
+  // },
 
   {
-    path: '/yhgl',
+    path: '/',
+    redirect: '/yhgl',
     component: Layout,
     children: [
       {
@@ -188,12 +192,21 @@ const createRouter = () => new Router({
   routes: constantRoutes
 })
 
+
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
+  console.log(router.matcher)
 }
+
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.title) {
+//       document.title = to.meta.title;
+//   }
+//   next();
+// });
 
 export default router

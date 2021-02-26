@@ -94,6 +94,7 @@ export default {
     return {
       list: null,
       listLoading: true,
+      loading: false,
       gridData: [{
         date: '2016-05-02',
         name: '王小虎',

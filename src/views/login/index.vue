@@ -57,6 +57,7 @@ import { validUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
+
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
@@ -106,36 +107,49 @@ export default {
       })
     },
     handleLogin() {
-      console.log(1)
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
+      var that = this
+      // this.$refs.loginForm.validate(valid => {
+      //   if (valid) {
+      //     that.loading = true
+      //     this.$store.dispatch('user/login', this.loginForm).then(() => {
+      //       console.log(111)
+      //       this.$router.push({ path: this.redirect || '/' })
+      //       this.loading = false
+      //     })        
+      //     .catch(() => {
+      //       that.loading = false
+      //     })
+      //   } else {
+      //     console.log('error submit!!')
+      //     return false
+      //   }
+      // })
+      let userName = that.$refs.loginForm.model.username
+      let userPwd = that.$refs.loginForm.model.password
+      let data = { 'userName': userName,'userPwd':userPwd}
+      console.log(data)
+
+      fetch('http://121.196.60.135:1338/cms/login',{
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          console.log(result)
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
-          })        
-          // const data = {'userName':'admin','userPwd':'admin1'}
-          //       console.log(1)
-          // fetch('http://121.196.60.135:1338/cms/login',{
-          //       method: "POST",
-          //       body: JSON.stringify(data),
-          //       mode: 'cors',
-          //       headers: {
-          //           "Content-type": "application/json"
-          //       }
-          // }).then(result => result.json())
-          // .then(() => {
-          //    this.$router.push({ path: this.redirect || '/' })
-          //    this.loading = false
-          // })
-          .catch(() => {
-            this.loading = false
           })
-        } else {
-          console.log('error submit!!')
-          return false
         }
-      })
+        else{
+          this.$message({
+            message: result.content,
+            type: 'warning'
+          });
+        }
+      })          
+
     }
   }
 }
