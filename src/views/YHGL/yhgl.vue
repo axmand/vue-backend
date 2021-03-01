@@ -11,7 +11,7 @@
     >
       <el-table-column align="center" label="用户组名称" width="150">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ scope.row.groupName }}
         </template>
       </el-table-column>
       <!-- <el-table-column label="用户等级" width="110">
@@ -21,14 +21,19 @@
       </el-table-column> -->
       <el-table-column label="用户描述" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.title }}</span>
+          <span>{{ scope.row.description }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="创建时间" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.date }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作"  align="center">
-        <template >
+        <template slot-scope="scope">
           <el-button  type="primary" style="width:20%;" @click="dialogTableVisible = true">设置权限</el-button>
           &nbsp;
-          <el-button  type="primary" style="width:20%;" >删除</el-button>
+          <el-button  type="primary" style="width:20%;" @click="deleteYH(scope.row.objectId)">删除</el-button>
         </template>
       </el-table-column>
       <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
@@ -50,24 +55,27 @@
           <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="用户描述" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+          <el-input v-model="form.desc" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="用户等级" :label-width="formLabelWidth">
+          <el-input v-model="form.level" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addYH">确 定</el-button>
       </div>
     </el-dialog>
 
     <el-dialog title="权限设置" :visible.sync="dialogTableVisible">
       <el-table :data="gridData">
-        <el-table-column property="date" label="权限描述" >
+        <el-table-column property="desc" label="权限描述" >
         </el-table-column>
         <el-table-column label="操作" >
           <template >
             <el-button  type="primary" style="width:20%;">设置权限</el-button>
             &nbsp;
-            <el-button  type="primary" style="width:20%;" >删除</el-button>
+            <el-button  type="primary" style="width:20%;">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -78,6 +86,7 @@
 
 <script>
 import { getList } from '@/api/table'
+import Vue from "vue";
 
 export default {
   filters: {
@@ -96,48 +105,121 @@ export default {
       listLoading: true,
       loading: false,
       gridData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        key: 'Client.HYY.Routes.BMSTDXXGeoDataUpdate',
+        desc: '修改土地信息接口，需要用户权限',
       }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        key: 'Client.HYY.Routes.BMSLYXXGeoDataUpdate',
+        desc: '修改楼宇信息接口，需要用户权限',
       }],
+      apidata:null,
       dialogTableVisible: false,
       dialogFormVisible: false,
       form: {
         name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        desc: '',
+        level:'',
       },
       formLabelWidth: '120px'
     }
   },
   created() {
     this.fetchData()
+    // this.fetchAPI()
   },
+
   methods: {
+
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
-        this.list = response.data.items
-        this.listLoading = false
-      })
+      // getList().then(response => {
+      //   this.list = response.data.items
+      //   console.log(this.list)
+      //   this.listLoading = false
+      // })
+
+      //获取用户列表
+      let url = 'http://121.196.60.135:1338/cms/getgrouplist/'+ Vue.userName + '/' + Vue.token
+      fetch(url).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          let groupdata = JSON.parse(result.content)
+          this.list = groupdata
+          console.log(this.list)
+          this.listLoading = false
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+    },
+    
+    fetchAPI() {
+      this.listLoading = true
+      // getList().then(response => {
+      //   this.list = response.data.items
+      //   console.log(this.list)
+      //   this.listLoading = false
+      // })
+
+      //获取用户权限列表
+      let url = 'http://121.196.60.135:1338/cms/getconfigureableapilist'
+      fetch(url).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          let apidata = JSON.parse(result.content)
+          console.log(Object.keys(apidata))
+          console.log(apidata)
+          for (var i = 0; i < Object.keys(apidata).length; i++) {
+            this.gridData[i].key = Object.keys(apidata)[i]
+            let key0 = Object.keys(apidata)[i]
+            this.gridData[i].desc = apidata[key0]
+          }
+          console.log(this.gridData)
+          this.listLoading = false
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+    },
+
+    addYH(){
+      this.dialogFormVisible = false
+      let url = 'http://121.196.60.135:1338/cms/creategroup/'+ Vue.userName + '/' + Vue.token +'/' + this.form.name +'/' + this.form.desc +'/' + this.form.level
+      //新增用户组
+      fetch(url).then(result => result.json())
+      .then((result) => {
+        if(result.content == "\"用户组创建成功\""){
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+      this.fetchData()
+    },
+
+    deleteYH(id){
+      let url = 'http://121.196.60.135:1338/cms/deletegroup/'+ Vue.userName + '/' + Vue.token +'/' + id
+      console.log(url)
+       // 删除用户组
+      fetch(url)
+      this.fetchData()
     }
+
+
   }
 }
 </script>

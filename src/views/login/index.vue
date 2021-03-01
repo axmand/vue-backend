@@ -54,6 +54,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import Vue from "vue";
 
 export default {
   name: 'Login',
@@ -124,7 +125,7 @@ export default {
       let userName = this.$refs.loginForm.model.username
       let userPwd = this.$refs.loginForm.model.password
       let data = { 'userName': userName,'userPwd':userPwd}
-      console.log(this.$router)
+
       //登陆接口
       fetch('http://121.196.60.135:1338/cms/login',{
         method: "POST",
@@ -132,9 +133,14 @@ export default {
       }).then(result => result.json())
       .then((result) => {
         if(result.status == "ok"){
-          console.log(result)
+          
+          let userdata = JSON.parse(result.content)
+          console.log(userdata)
           this.loading = true
-          //为什么页面跳转一直有问题，没搞懂这里
+          Vue.token = userdata.token
+          Vue.userName = userdata.userName
+          Vue.groupName = userdata.groupName
+
           // this.$store.dispatch('user/login', this.loginForm).then(() => {
           //   console.log(this.$route.path)
           //   console.log(this.redirect)
@@ -142,12 +148,13 @@ export default {
           //   console.log(this.$route.path)
           //   this.loading = false
           // })
+
           this.$router.push({ path: this.redirect || '/' })
         }
         else{
           this.$message({
             message: result.content,
-            type: 'warning'
+            type: 'error'
           });
         }
       })          
