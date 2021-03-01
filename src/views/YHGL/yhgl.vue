@@ -31,7 +31,7 @@
       </el-table-column>
       <el-table-column label="操作"  align="center">
         <template slot-scope="scope">
-          <el-button  type="primary" style="width:20%;" @click="dialogTableVisible = true">设置权限</el-button>
+          <el-button  type="primary" style="width:20%;" @click="apiYH(scope.row.objectId)">设置权限</el-button>
           &nbsp;
           <el-button  type="primary" style="width:20%;" @click="deleteYH(scope.row.objectId)">删除</el-button>
         </template>
@@ -72,10 +72,10 @@
         <el-table-column property="desc" label="权限描述" >
         </el-table-column>
         <el-table-column label="操作" >
-          <template >
-            <el-button  type="primary" style="width:20%;">设置权限</el-button>
+          <template slot-scope="scope">
+            <el-button  type="primary" style="width:20%;" @click="APIAuthorize(scope.row.key)">权限授予</el-button>
             &nbsp;
-            <el-button  type="primary" style="width:20%;">删除</el-button>
+            <el-button  type="primary" style="width:20%;" @click="APIWithdraw(scope.row.key)">权限收回</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -101,6 +101,7 @@ export default {
   },
   data() {
     return {
+      ObjectId:'',
       list: null,
       listLoading: true,
       loading: false,
@@ -158,12 +159,6 @@ export default {
     
     fetchAPI() {
       this.listLoading = true
-      // getList().then(response => {
-      //   this.list = response.data.items
-      //   console.log(this.list)
-      //   this.listLoading = false
-      // })
-
       //获取用户权限列表
       let url = 'http://121.196.60.135:1338/cms/getconfigureableapilist'
       fetch(url).then(result => result.json())
@@ -215,10 +210,73 @@ export default {
       let url = 'http://121.196.60.135:1338/cms/deletegroup/'+ Vue.userName + '/' + Vue.token +'/' + id
       console.log(url)
        // 删除用户组
-      fetch(url)
+      fetch(url).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
       this.fetchData()
-    }
+    },
 
+
+    //获取ObjectId的中间件
+    apiYH(id){
+      this.dialogTableVisible = true
+      this.ObjectId = id
+      console.log(this.ObjectId)
+    },
+
+    //权限授予
+    APIAuthorize(key){
+      let url = 'http://121.196.60.135:1338/cms/authorizegroupapi/'+ Vue.userName + '/' + Vue.token +'/' + this.ObjectId + '/' +key
+      console.log(url)
+      fetch(url).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+    },
+
+    //权限收回
+    APIWithdraw(key){
+      let url = 'http://121.196.60.135:1338/cms/withdrawgroupapi/'+ Vue.userName + '/' + Vue.token +'/' + this.ObjectId + '/' +key
+      console.log(url)
+      fetch(url).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+    },
 
   }
 }
