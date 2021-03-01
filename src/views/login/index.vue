@@ -43,10 +43,10 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
-      <div class="tips">
+      <!-- <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: any</span>
-      </div>
+      </div> -->
 
     </el-form>
   </div>
@@ -88,12 +88,9 @@ export default {
     }
   },
   watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
+　　'$route' (to, from) {
+  　　this.$router.go(0);
+　　}
   },
   methods: {
     showPwd() {
@@ -124,11 +121,11 @@ export default {
       //     return false
       //   }
       // })
-      let userName = that.$refs.loginForm.model.username
-      let userPwd = that.$refs.loginForm.model.password
+      let userName = this.$refs.loginForm.model.username
+      let userPwd = this.$refs.loginForm.model.password
       let data = { 'userName': userName,'userPwd':userPwd}
-      console.log(data)
-
+      console.log(this.$router)
+      //登陆接口
       fetch('http://121.196.60.135:1338/cms/login',{
         method: "POST",
         body: JSON.stringify(data),
@@ -137,10 +134,15 @@ export default {
         if(result.status == "ok"){
           console.log(result)
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-          })
+          //为什么页面跳转一直有问题，没搞懂这里
+          // this.$store.dispatch('user/login', this.loginForm).then(() => {
+          //   console.log(this.$route.path)
+          //   console.log(this.redirect)
+          //   this.$router.push({ path: this.redirect || '/' })
+          //   console.log(this.$route.path)
+          //   this.loading = false
+          // })
+          this.$router.push({ path: this.redirect || '/' })
         }
         else{
           this.$message({
@@ -149,9 +151,11 @@ export default {
           });
         }
       })          
-
     }
-  }
+
+    
+  },
+  
 }
 </script>
 
