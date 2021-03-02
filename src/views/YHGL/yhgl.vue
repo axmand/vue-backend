@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
-    <el-button :loading="loading" type="primary" style="width:20%;margin-bottom:30px;" @click="dialogFormVisible = true">新增用户组</el-button>
+    <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="dialogFormVisible = true">新增用户组</el-button>
+    <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="dialogFormVisible = true">用户注册</el-button>
+
+    <el-row>
+      <el-col :span="24"><div>
+        <p style="font-weight: 700">用户组列表</p> 
+      </div></el-col>
+    </el-row>
+
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -31,9 +39,9 @@
       </el-table-column>
       <el-table-column label="操作"  align="center">
         <template slot-scope="scope">
-          <el-button  type="primary" style="width:20%;" @click="apiYH(scope.row.objectId)">设置权限</el-button>
+          <el-button  type="primary" style="width:30%;" @click="apiYH(scope.row.objectId)">设置权限</el-button>
           &nbsp;
-          <el-button  type="primary" style="width:20%;" @click="deleteYH(scope.row.objectId)">删除</el-button>
+          <el-button  type="primary" style="width:30%;" @click="deleteYH(scope.row.objectId)">删除</el-button>
         </template>
       </el-table-column>
       <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
@@ -45,6 +53,50 @@
         <template slot-scope="scope">
           <i class="el-icon-time" />
           <span>{{ scope.row.display_time }}</span>
+        </template>
+      </el-table-column> -->
+    </el-table>
+
+    <el-row>
+      <el-col :span="24"><div>
+        <p style="font-weight: 700">用户列表</p> 
+      </div></el-col>
+    </el-row>
+
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="Loading"
+      border
+      fit
+      highlight-current-row
+      style="width: 60%"
+    >
+      <el-table-column align="center" label="ID" width="150">
+        <template slot-scope="scope">
+          {{ scope.row.groupName }}
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="用户等级" width="110">
+        <template slot-scope="scope">
+          {{ scope.row.author}}
+        </template>
+      </el-table-column> -->
+      <el-table-column label="用户名称" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.description }}</span>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="创建时间" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.date }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作"  align="center">
+        <template slot-scope="scope">
+          <el-button  type="primary" style="width:30%;" @click="apiYH(scope.row.objectId)">设置权限</el-button>
+          &nbsp;
+          <el-button  type="primary" style="width:30%;" @click="deleteYH(scope.row.objectId)">删除</el-button>
         </template>
       </el-table-column> -->
     </el-table>
