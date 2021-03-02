@@ -34,6 +34,8 @@ import Layout from '@/layout'
 
 export const constantRoutes = [
   {
+    // path: '/',
+    // redirect: '/login',
     path:'/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -61,6 +63,7 @@ export const constantRoutes = [
   {
     path: '/',
     redirect: '/yhgl',
+    // path:'/yhgl',
     component: Layout,
     children: [
       {
