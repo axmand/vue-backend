@@ -1,13 +1,13 @@
 <template>
   <div class="app-container">
     <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="dialogFormVisible = true">新增用户组</el-button>
-    <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="dialogFormVisible = true">用户注册</el-button>
+    <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="RegisterdialogVisible = true">用户注册</el-button>
 
-    <el-row>
+    <!-- <el-row>
       <el-col :span="24"><div>
         <p style="font-weight: 700">用户组列表</p> 
       </div></el-col>
-    </el-row>
+    </el-row> -->
 
     <el-table
       v-loading="listLoading"
@@ -57,13 +57,13 @@
       </el-table-column> -->
     </el-table>
 
-    <el-row>
+    <!-- <el-row>
       <el-col :span="24"><div>
         <p style="font-weight: 700">用户列表</p> 
       </div></el-col>
-    </el-row>
+    </el-row> -->
 
-    <el-table
+    <!-- <el-table
       v-loading="listLoading"
       :data="list"
       element-loading-text="Loading"
@@ -77,17 +77,12 @@
           {{ scope.row.groupName }}
         </template>
       </el-table-column>
-      <!-- <el-table-column label="用户等级" width="110">
-        <template slot-scope="scope">
-          {{ scope.row.author}}
-        </template>
-      </el-table-column> -->
       <el-table-column label="用户名称" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.description }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="创建时间" align="center">
+      <el-table-column label="创建时间" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.date }}</span>
         </template>
@@ -98,8 +93,8 @@
           &nbsp;
           <el-button  type="primary" style="width:30%;" @click="deleteYH(scope.row.objectId)">删除</el-button>
         </template>
-      </el-table-column> -->
-    </el-table>
+      </el-table-column>
+    </el-table> -->
 
     <el-dialog title="新增用户组" :visible.sync="dialogFormVisible">
       <el-form :model="form">
@@ -116,6 +111,39 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="addYH">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="用户注册" :visible.sync="RegisterdialogVisible" 
+    style="width: 70%;left:15%">
+      <el-form :model="Register">
+        <el-form-item label="用户名称" :label-width="formLabelWidth">
+          <el-input v-model="Register.RegisterName"          
+          ref="username"
+          placeholder="Username"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"></el-input>
+        </el-form-item>
+        <el-form-item label="用户密码" :label-width="formLabelWidth">
+          <el-input v-model="Register.RegisterPwd"         
+          :key="passwordType"
+          ref="password"
+          :type="passwordType"
+          placeholder="Password"
+          name="password"
+          tabindex="2"
+          auto-complete="on">
+          </el-input>
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          </span>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="RegisterdialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="RegisterYH">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -167,12 +195,18 @@ export default {
       apidata:null,
       dialogTableVisible: false,
       dialogFormVisible: false,
+      RegisterdialogVisible: false,
       form: {
         name: '',
         desc: '',
         level:'',
       },
-      formLabelWidth: '120px'
+      Register:{
+        RegisterName:'',
+        RegisterPwd:'',
+      },
+      formLabelWidth: '120px',
+      passwordType: 'password',
     }
   },
   created() {
@@ -181,6 +215,16 @@ export default {
   },
 
   methods: {
+    showPwd() {
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
+      } else {
+        this.passwordType = 'password'
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus()
+      })
+    },
 
     fetchData() {
       this.listLoading = true
@@ -226,6 +270,37 @@ export default {
           }
           console.log(this.gridData)
           this.listLoading = false
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+    },
+
+    //注册新用户
+    RegisterYH(){
+      this.RegisterdialogVisible = false
+      let url = 'http://121.196.60.135:1338/cms/register'
+      
+      let RegisterName = this.Register.RegisterName
+      let RegisterPwd = this.Register.RegisterPwd
+      let data = { 'userName': RegisterName,'userPwd':RegisterPwd}
+      
+      //新增用户组
+      fetch(url,{
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          console.log(result.content)
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
         }
         else{
           this.$message({
@@ -333,3 +408,16 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss" scoped>
+
+  .show-pwd {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+</style>
