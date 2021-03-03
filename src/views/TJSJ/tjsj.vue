@@ -201,6 +201,8 @@
 <script>
 import { getList } from '@/api/table'
 import Vue from "vue";
+import lyxx from "./../../assets/lyxx";
+import tdxx from "./../../assets/tdxx";
 
 export default {
   filters: {
@@ -328,11 +330,11 @@ export default {
     //搜索用户
     SearchYH(){
       this.SearchdialogVisible = false
-      let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
+      let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
 
       let lyxxName = Vue.userName
       let lyxxtoken = Vue.token
-      let lyxxcontent = this.Searchdata
+      let lyxxcontent = JSON.stringify(tdxx.tdxx)
 
       let data = { 'userName': lyxxName,'token':lyxxtoken, 'content':lyxxcontent}
       //新增用户组
@@ -344,7 +346,7 @@ export default {
         if(result.status == "ok"){
           console.log(result.content)
           this.$message({
-            message: "result.content",
+            message: result.content,
             type: 'success'
           });
         }
