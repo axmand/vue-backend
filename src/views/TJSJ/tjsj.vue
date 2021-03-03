@@ -165,11 +165,11 @@
     <el-dialog title="用户搜索" :visible.sync="SearchdialogVisible" 
     style="width: 70%;left:15%">
       <el-form>
-        <el-form-item label="用户名称" :label-width="formLabelWidth">
+        <el-form-item label="JSON数据" :label-width="formLabelWidth">
           <el-input v-model="Searchdata"          
-          ref="username"
-          placeholder="Username"
-          name="username"
+          ref="JSON数据"
+          placeholder="JSON数据"
+          name="JSON数据"
           type="text"
           tabindex="1"
           auto-complete="on"></el-input>
@@ -252,8 +252,7 @@ export default {
     }
   },
   created() {
-    this.fetchData()
-    // this.fetchAPI()
+
   },
 
   methods: {
@@ -268,32 +267,6 @@ export default {
       })
     },
 
-    fetchData() {
-      this.listLoading = true
-      // getList().then(response => {
-      //   this.list = response.data.items
-      //   console.log(this.list)
-      //   this.listLoading = false
-      // })
-
-      //获取用户列表
-      let url = 'http://121.196.60.135:1338/cms/getgrouplist/'+ Vue.userName + '/' + Vue.token
-      fetch(url).then(result => result.json())
-      .then((result) => {
-        if(result.status == "ok"){
-          let groupdata = JSON.parse(result.content)
-          this.list = groupdata
-          console.log(this.list)
-          this.listLoading = false
-        }
-        else{
-          this.$message({
-            message: result.content,
-            type: 'error'
-          });
-        }
-      }) 
-    },
     
     fetchAPI() {
       this.listLoading = true
@@ -355,19 +328,25 @@ export default {
     //搜索用户
     SearchYH(){
       this.SearchdialogVisible = false
-      let url = 'http://121.196.60.135:1338/cms/searchcustomerbyname/'+ Vue.userName + '/' + Vue.token +'/' + this.Searchdata
+      let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
+
+      let lyxxName = Vue.userName
+      let lyxxtoken = Vue.token
+      let lyxxcontent = this.Searchdata
+
+      let data = { 'userName': lyxxName,'token':lyxxtoken, 'content':lyxxcontent}
       //新增用户组
-      fetch(url).then(result => result.json())
+      fetch(url,{
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(result => result.json())
       .then((result) => {
         if(result.status == "ok"){
           console.log(result.content)
           this.$message({
-            message: "搜索成功",
+            message: "result.content",
             type: 'success'
           });
-          this.YHdata = JSON.parse(result.content)
-          this.customerObjectId = this.YHdata[0].objectId
-          console.log(this.customerObjectId)
         }
         else{
           this.$message({
@@ -376,7 +355,6 @@ export default {
           });
         }
       }) 
-      this.fetchData()
     },
 
     //分配用户组权限

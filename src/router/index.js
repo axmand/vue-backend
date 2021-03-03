@@ -101,7 +101,20 @@ export const constantRoutes = [
       },
     ]
   },
-
+  
+  {
+    path: '/tjsj',
+    // path:'/yhgl',
+    component: Layout,
+    children: [
+      {
+        path: 'tjsj',
+        name: 'tjsj',
+        component: () => import('@/views/TJSJ/tjsj'),
+        meta: { title: '用户管理', icon: 'user' }
+      },
+    ]
+  },
   // {
   //   path: '/form',
   //   component: Layout,
