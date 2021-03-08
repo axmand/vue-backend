@@ -35,6 +35,8 @@ export default {
       LYid: 0,
       TDid: 0,
       imglist: [],
+      lytabledialog:false,
+      dktabledialog:false,
     };
   },
   //监听属性 类似于data概念
@@ -68,13 +70,30 @@ export default {
     },
     savetable() {
       this.$refs.webmap.savetable();
-    }
-
+    },
+    showdk(){
+      this.$refs.webmap.showdk();
+    },
+    showtable(){
+      //判断选中对象是楼宇还是地块
+      let num = this.$refs.webmap.clickedObj.length;
+      console.log(num);
+      if(num!=0){
+        if(this.$refs.webmap.clickedObj[0].getJSONType() === "Marker"){
+          this.lytabledialog=true;
+          this.dktabledialog=false;
+        }else{
+          this.lytabledialog=false;
+          this.dktabledialog=true;
+        }
+      }
+    },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
+    this.showdk()
   },
 
   beforeCreate() {}, //生命周期 - 创建之前rk

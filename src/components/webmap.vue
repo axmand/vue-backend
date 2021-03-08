@@ -24,6 +24,8 @@ export default {
   data() {
     //这里存放数据
     return {
+      lydata:{},
+      dkdata:{},
       TDitem: [],
       LYitem: [],
       LYid: 0,
@@ -32,6 +34,7 @@ export default {
       target: [],
       clickedObj:[],
       linePoiArr:[],
+      listLoading:false,
     };
   },
   //监听属性 类似于data概念
@@ -273,6 +276,84 @@ export default {
       console.log("选中地块属性数据已经保存");
     } ,
 
+    showly(){
+      fetch("http://121.196.60.135:1338/bms/geoprovider/LYXX")
+        .then((result) => result.json())
+        .then((result) => {
+          //Vue.mapInstance.addLayer(new maptalks.VectorLayer("vector"));
+          this.lydata = JSON.parse(result.content);
+          const geometries = maptalks.GeoJSON.toGeometry(this.lydata);
+          console.log(geometries)
+          for (var i = 0; i < geometries.length; i++) {
+            this.LYitem[i] = geometries[i];
+          }
+          const vectorLayer = Vue.mapInstance
+            .getLayer("vector")
+            .addGeometry(this.LYitem);
+          //设置style
+          vectorLayer.setStyle([
+            {
+              symbol: {
+                markerFile: imgURL_loc,
+                markerWidth: {
+                  stops: [
+                    [6, 0],
+                    [14, 30],
+                  ],
+                },
+                markerHeight: {
+                  stops: [
+                    [6, 0],
+                    [14, 40],
+                  ],
+                },
+              },
+            },
+          ]);
+          Vue.mapInstance.getLayer("vector").bringToBack();
+      })
+    },
+
+    showdk(){
+      fetch("http://121.196.60.135:1338/bms/geoprovider/TDXX")
+        .then((result) => result.json())
+        .then((result) => {
+          //Vue.mapInstance.addLayer(new maptalks.VectorLayer("dk"));
+          this.dkdata = JSON.parse(result.content);
+          const geometries = maptalks.GeoJSON.toGeometry(this.dkdata);
+          for (var i = 0; i < geometries.length; i++) {
+            this.TDitem[i]=geometries[i]
+          }
+          const vectorLayer = Vue.mapInstance
+            .getLayer("vector")
+            .addGeometry(this.TDitem);
+          //设置style
+          vectorLayer.setStyle([
+            {
+              symbol: {
+                lineColor: "#2348E5",
+                lineWidth: 2,
+                polygonFill: "#355BFA",
+                polygonOpacity: 0.6,
+                markerFile: imgURL_loc_area,
+                markerWidth: {
+                  stops: [
+                    [6, 0],
+                    [14, 30],
+                  ],
+                },
+                markerHeight: {
+                  stops: [
+                    [6, 0],
+                    [14, 40],
+                  ],
+                },
+              },
+            },
+          ]);
+          Vue.mapInstance.getLayer("vector").bringToBack();
+      })
+    },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
@@ -356,8 +437,7 @@ export default {
   updated() {}, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
- 
- activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
+  activated() {},//如果页面有keep-alive缓存功能，这个函数会触发
 };
 </script>
 
