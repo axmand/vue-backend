@@ -65,10 +65,10 @@ export default {
       this.$refs.webmap.stopdraw();
     },
     savedata() {
-      this.$refs.webmap.savedata();
+      this.$refs.webmap.savetddata();
     },
     deletedata(){
-      this.$refs.webmap.deletedata();
+      this.$refs.webmap.deletetddata();
     },
     savetable() {
       this.$refs.webmap.savetable();

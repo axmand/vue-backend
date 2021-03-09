@@ -13,6 +13,7 @@ import imgURL_loc2 from "../assets/choosed.png";
 
 import imgURL_loc_area from "./../assets/marker_area.png";
 import imgURL_loc2_area from "./../assets/choosed_area.png";
+import tdxx from "./../assets/tdxx";
 
 
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
@@ -308,53 +309,17 @@ export default {
       Vue.drawTool.disable();
     },
 
-    savedata() {
-      console.log("选中已经保存");
+    savetddata() {
       let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
       let features=[]
-      for (let i = 0; i < this.TDitem.length; i++){
-        let coors=[]
-        if(this.TDitem[i].type === "Polygon"){
-          let coorss=[]
-          for(let j=0;j<this.TDitem[i]._coordinates.length;j++){
-            let coor=[]
-            coor.push(this.TDitem[i]._coordinates[j].x)
-            coor.push(this.TDitem[i]._coordinates[j].y)
-            coorss.push(coor)
-          }
-          coors.push(coorss)
-        }else{
-          let coorsss=[]
-          for(let j=0;j<this.TDitem[i].getCoordinates().length;j++){
-            let coorssss=[]
-            for(let k=0;k<this.TDitem[i].getCoordinates()[j].length;k++){
-              let coorss=[]
-              for(let m=0;m<this.TDitem[i].getCoordinates()[j][k].length;m++){
-                let coor=[]
-                coor.push(this.TDitem[i].getCoordinates()[j][k][m].x)
-                coor.push(this.TDitem[i].getCoordinates()[j][k][m].y)
-                coorss.push(coor)
-              }
-            }
-            coorsss.push(coorssss)
-          }
-          coors.push(coorsss)
-        }
-        let feature={
-          "type":"Feature",
-          "geometry":{
-            "type":this.TDitem[i].type,
-            "coordinates":coors,
-            "properties":this.TDitem[i].properties,
-          },
-        }
+      for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
+        let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
         features.push(feature)
       }
       let tdxxName = Vue.userName
       let tdxxtoken = Vue.token
       let content = {"type":"FeatureCollection","features":features}
       let tdxxcontent = JSON.stringify(content)
-      console.log(tdxxcontent)
       let data = { 'userName': tdxxName,'token':tdxxtoken, 'content':tdxxcontent}
       fetch(url,{
         method: "POST",
@@ -375,17 +340,113 @@ export default {
           });
         }
       }) 
+      console.log("土地信息已经保存");
+      this.showdk();
     },
-
-    deletedata(){
-      var that = this
-      //批量删除存储在选中数组中的所有地图对象
-      let num = that.clickedObj.length;
-      for(let i=0;i<num;i++){
-        that.target=that.clickedObj[i];
-        that.target.remove();
+    savelydata() {
+      let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
+      let features=[]
+      for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
+        let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
+        features.push(feature)
       }
-      console.log("选中数据已经删除");
+      let lyxxName = Vue.userName
+      let lyxxtoken = Vue.token
+      let content = {"type":"FeatureCollection","features":features}
+      let lyxxcontent = JSON.stringify(content)
+      let data = { 'userName': lyxxName,'token':lyxxtoken, 'content':lyxxcontent}
+      fetch(url,{
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          console.log(result.content)
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+      console.log("楼宇信息已经保存");
+      this.showly();
+    },
+    deletetddata(){
+      var that = this
+      Vue.mapInstance.getLayer("vector").removeGeometry(that.clickedObj[0]);
+      let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
+      let features=[]
+      for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
+        let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
+        features.push(feature)
+      }
+      console.log(Vue.mapInstance.getLayer("vector").getGeometries().length)
+      let tdxxName = Vue.userName
+      let tdxxtoken = Vue.token
+      let content = {"type":"FeatureCollection","features":features}
+      let tdxxcontent = JSON.stringify(content)
+      let data = { 'userName': tdxxName,'token':tdxxtoken, 'content':tdxxcontent}
+      fetch(url,{
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          console.log(result.content)
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
+      console.log("选中地块数据已经删除");
+    },
+    deletelydata(){
+      var that = this
+      Vue.mapInstance.getLayer("vector").removeGeometry(that.clickedObj[0]);
+      let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
+      let features=[]
+      for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
+        let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
+        features.push(feature)
+      }
+      let lyxxName = Vue.userName
+      let lyxxtoken = Vue.token
+      let content = {"type":"FeatureCollection","features":features}
+      let lyxxcontent = JSON.stringify(content)
+      let data = { 'userName': lyxxName,'token':lyxxtoken, 'content':lyxxcontent}
+      fetch(url,{
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          console.log(result.content)
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      })     
+      console.log("选中楼宇数据已经删除");
     },
 
     savetable() {
@@ -502,7 +563,7 @@ export default {
       console.log(param.geometry);
       layer.addGeometry(param.geometry);
       console.log(param.geometry.type);
-      if(param.geometry.type==="Polygon"){
+      if(param.geometry.type==="Polygon" || param.geometry.type==="MultPolygon"){
         param.geometry.properties={
                 Id: that.TDitem.length+1,
                 name: '',
