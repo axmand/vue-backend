@@ -282,11 +282,14 @@ export default {
         .then((result) => {
           //Vue.mapInstance.addLayer(new maptalks.VectorLayer("vector"));
           this.lydata = JSON.parse(result.content);
-          const geometries = maptalks.GeoJSON.toGeometry(this.lydata);
-          console.log(geometries)
-          for (var i = 0; i < geometries.length; i++) {
-            this.LYitem[i] = geometries[i];
-          }
+          //console.log(this.lydata);
+          //const geometries = maptalks.GeoJSON.toGeometry(this.lydata);
+          //console.log(geometries[0].properties)
+          //for (var i = 0; i < geometries.length; i++) {
+            //this.LYitem[i] = geometries[i];
+          //}
+          this.LYitem = maptalks.GeoJSON.toGeometry(this.lydata);
+          //console.log("LY"+this.LYitem[0].properties.x);
           const vectorLayer = Vue.mapInstance
             .getLayer("vector")
             .addGeometry(this.LYitem);
@@ -320,10 +323,12 @@ export default {
         .then((result) => {
           //Vue.mapInstance.addLayer(new maptalks.VectorLayer("dk"));
           this.dkdata = JSON.parse(result.content);
-          const geometries = maptalks.GeoJSON.toGeometry(this.dkdata);
+          /*const geometries = maptalks.GeoJSON.toGeometry(this.dkdata);
           for (var i = 0; i < geometries.length; i++) {
             this.TDitem[i]=geometries[i]
-          }
+          }*/
+          this.TDitem = maptalks.GeoJSON.toGeometry(this.dkdata);
+          //console.log("TD"+this.TDitem);
           const vectorLayer = Vue.mapInstance
             .getLayer("vector")
             .addGeometry(this.TDitem);
@@ -359,6 +364,7 @@ export default {
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
+    let that=this;
     //构建map
     var image = new Image();
    
@@ -377,6 +383,49 @@ export default {
     Vue.drawTool.on('drawend', function (param) {
       console.log(param.geometry);
       layer.addGeometry(param.geometry);
+      console.log(param.geometry.type);
+      if(param.geometry.type==="Polygon"){
+        param.geometry.properties={
+                Id: that.TDitem.length+1,
+                name: '',
+                location: '',
+                area: '',
+                area1: '',
+                use_str: '',
+                use: '',
+                proportion: '',
+                street1: '',
+                street: '',
+                dev_degree: '',
+                around: '', 
+        };
+        console.log(param.geometry);
+        that.TDitem.push(param.geometry);
+      }else{
+        param.geometry.properties={
+                id: that.LYitem.length+1,
+                name: '',
+                x: param.geometry._coordinates.x,
+                y: param.geometry._coordinates.y,
+                address: '',
+                street: '',
+                street1: '',
+                volumn: '',
+                volumn1: '',
+                floor_num: '',
+                Standard_f: '',
+                net_height: '',
+                passenger_: '',
+                parking_nu: '',
+                monthly_re: '',
+                property_m: '',   
+                vacant_are: '', 
+                vacant1: '',
+                settled_en: '',   
+                qj_url: '',
+        };
+        that.LYitem.push(param.geometry);
+      }
     });
 
     var geos = Vue.mapInstance.getLayer("vector").getGeometries()

@@ -84,6 +84,12 @@
         <el-form-item label="名称" :label-width="formLabelWidth">
           <el-input v-model="lyform.name" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label="x坐标" :label-width="formLabelWidth">
+          <el-input v-model="lyform.x" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="y坐标" :label-width="formLabelWidth">
+          <el-input v-model="lyform.y" autocomplete="off"></el-input>
+        </el-form-item>
         <el-form-item label="地址" :label-width="formLabelWidth">
           <el-input v-model="lyform.address" autocomplete="off"></el-input>
         </el-form-item>
@@ -150,7 +156,7 @@
         <el-form-item label="地址" :label-width="formLabelWidth">
           <el-input v-model="dkform.location" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="面积" :label-width="formLabelWidth">
+        <el-form-item label="面积（亩）" :label-width="formLabelWidth">
           <el-input v-model="dkform.area" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="面积等级" :label-width="formLabelWidth">
@@ -166,10 +172,10 @@
           <el-input v-model="dkform.proportion" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="所属街道" :label-width="formLabelWidth">
-          <el-input v-model="dkform.street" autocomplete="off"></el-input>
+          <el-input v-model="dkform.street1" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="所属街道编号" :label-width="formLabelWidth">
-          <el-input v-model="dkform.street1" autocomplete="off"></el-input>
+          <el-input v-model="dkform.street" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="发展程度" :label-width="formLabelWidth">
           <el-input v-model="dkform.dev_degree" autocomplete="off"></el-input>
@@ -252,8 +258,8 @@ export default {
       this.$parent.showtable();
       this.lytabledialog=this.$parent.lytabledialog;
       this.dktabledialog=this.$parent.dktabledialog;
-      //console.log("zi"+this.lytabledialog);
-      //console.log("fu"+this.$parent.dktabledialog);
+      this.lyform=this.$parent.lyform;
+      this.dkform=this.$parent.dkform;
     },
 
   },

@@ -38,6 +38,8 @@ export default {
       imglist: [],
       lytabledialog:false,
       dktabledialog:false,
+      lyform:{},
+      dkform:{},
     };
   },
   //监听属性 类似于data概念
@@ -83,9 +85,11 @@ export default {
         if(this.$refs.webmap.clickedObj[0].getJSONType() === "Marker"){
           this.lytabledialog=true;
           this.dktabledialog=false;
+          this.lyform = this.$refs.webmap.clickedObj[0].properties; 
         }else{
           this.lytabledialog=false;
           this.dktabledialog=true;
+          this.dkform=this.$refs.webmap.clickedObj[0].properties;
         }
       }
     },
