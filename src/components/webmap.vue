@@ -95,12 +95,62 @@ export default {
       Vue.drawTool.disable();
       var geos = Vue.mapInstance.getLayer("vector").getGeometries()
       console.log(geos)
+
       if(geos.length){
         for (let i = 0; i < geos.length; i++) {
           Vue.mapInstance.getLayer("vector").getGeometries()[i].on("click", function(param){      
             that.target = param.target;
             console.log(that.target);
             that.target.config('isClicked',!that.target.options.isClicked)
+            
+            //重置样式和数组，每次只能选中一个geo
+            that.clickedObj=[];
+            for (var a = 0; a < geos.length; a++) {
+              if(Vue.mapInstance.getLayer("vector").getGeometries()[0].getJSONType() === "Marker"){
+                    Vue.mapInstance
+                    .getLayer("vector")
+                    .getGeometries()[a]
+                    .updateSymbol({
+                      markerFile: imgURL_loc,
+                      markerWidth: {
+                        stops: [
+                          [6, 0],
+                          [14, 30],
+                        ],
+                      },
+                      markerHeight: {
+                        stops: [
+                          [6, 0],
+                          [14, 40],
+                        ],
+                      },
+                    });
+                }else{
+                    Vue.mapInstance
+                    .getLayer("vector")
+                    .getGeometries()[a]
+                    .updateSymbol({
+                        lineColor: "#2348E5",
+                        lineWidth: 2,
+                        polygonFill: "#355BFA",
+                        polygonOpacity: 0.6,
+                        markerFile: imgURL_loc_area,
+                        markerWidth: {
+                          stops: [
+                            [6, 0],
+                            [14, 30],
+                          ],
+                        },
+                        markerHeight: {
+                          stops: [
+                            [6, 0],
+                            [14, 40],
+                          ],
+                        },
+                    });
+                }
+            }
+
             //判断是首次点击高亮还是第二次点击取消选中
             if (that.target.getJSONType() === "Marker") {
               //首次点击高亮显示选中对象，并添加至存储选中对象的数组
@@ -202,6 +252,7 @@ export default {
         }
       }
     },
+    
     //清除选中效果
     recoverObj(){
       var that = this
