@@ -258,7 +258,40 @@ export default {
     },
 
     savedata() {
-      console.log("选中地块数据已经保存");
+      console.log("选中已经保存");
+      let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
+      let features=[]
+      for (let i = 0; i < this.TDitem.length; i++){
+        let feature={
+          "type":"Feature",
+          "geometry":{
+            "type":this.TDitem[i].type,
+            "coordinates":this.TDitem[i]._coordinates,
+            "properties":this.TDitem[i].properties,
+          },
+        }
+        features.push(feature)
+      }
+      let data = {"type":"FeatureCollection","features":features}
+      fetch(url,{
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(result => result.json())
+      .then((result) => {
+        if(result.status == "ok"){
+          console.log(result.content)
+          this.$message({
+            message: result.content,
+            type: 'success'
+          });
+        }
+        else{
+          this.$message({
+            message: result.content,
+            type: 'error'
+          });
+        }
+      }) 
     },
 
     deletedata(){
@@ -273,7 +306,7 @@ export default {
     },
 
     savetable() {
-      console.log("选中地块属性数据已经保存");
+      console.log("属性数据已经保存");
     } ,
 
     showly(){
@@ -323,12 +356,14 @@ export default {
         .then((result) => {
           //Vue.mapInstance.addLayer(new maptalks.VectorLayer("dk"));
           this.dkdata = JSON.parse(result.content);
+          console.log(this.dkdata);
           /*const geometries = maptalks.GeoJSON.toGeometry(this.dkdata);
           for (var i = 0; i < geometries.length; i++) {
             this.TDitem[i]=geometries[i]
           }*/
           this.TDitem = maptalks.GeoJSON.toGeometry(this.dkdata);
           //console.log("TD"+this.TDitem);
+          console.log(this.TDitem);
           const vectorLayer = Vue.mapInstance
             .getLayer("vector")
             .addGeometry(this.TDitem);
