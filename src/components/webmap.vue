@@ -148,7 +148,7 @@ export default {
             }
 
             //选中地块
-            if (that.target.getJSONType() === "Polygon") {
+            if (that.target.getJSONType() === "Polygon" || that.target.getJSONType() === "MultiPolygon") {
               if (that.target.options.isClicked) {
                 that.target.updateSymbol({
                   lineColor: "#E52323",
@@ -262,17 +262,49 @@ export default {
       let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
       let features=[]
       for (let i = 0; i < this.TDitem.length; i++){
+        let coors=[]
+        if(this.TDitem[i].type === "Polygon"){
+          let coorss=[]
+          for(let j=0;j<this.TDitem[i]._coordinates.length;j++){
+            let coor=[]
+            coor.push(this.TDitem[i]._coordinates[j].x)
+            coor.push(this.TDitem[i]._coordinates[j].y)
+            coorss.push(coor)
+          }
+          coors.push(coorss)
+        }else{
+          let coorsss=[]
+          for(let j=0;j<this.TDitem[i].getCoordinates().length;j++){
+            let coorssss=[]
+            for(let k=0;k<this.TDitem[i].getCoordinates()[j].length;k++){
+              let coorss=[]
+              for(let m=0;m<this.TDitem[i].getCoordinates()[j][k].length;m++){
+                let coor=[]
+                coor.push(this.TDitem[i].getCoordinates()[j][k][m].x)
+                coor.push(this.TDitem[i].getCoordinates()[j][k][m].y)
+                coorss.push(coor)
+              }
+            }
+            coorsss.push(coorssss)
+          }
+          coors.push(coorsss)
+        }
         let feature={
           "type":"Feature",
           "geometry":{
             "type":this.TDitem[i].type,
-            "coordinates":this.TDitem[i]._coordinates,
+            "coordinates":coors,
             "properties":this.TDitem[i].properties,
           },
         }
         features.push(feature)
       }
-      let data = {"type":"FeatureCollection","features":features}
+      let tdxxName = Vue.userName
+      let tdxxtoken = Vue.token
+      let content = {"type":"FeatureCollection","features":features}
+      let tdxxcontent = JSON.stringify(content)
+      console.log(tdxxcontent)
+      let data = { 'userName': tdxxName,'token':tdxxtoken, 'content':tdxxcontent}
       fetch(url,{
         method: "POST",
         body: JSON.stringify(data),
@@ -356,14 +388,14 @@ export default {
         .then((result) => {
           //Vue.mapInstance.addLayer(new maptalks.VectorLayer("dk"));
           this.dkdata = JSON.parse(result.content);
-          console.log(this.dkdata);
+          //console.log(this.dkdata);
           /*const geometries = maptalks.GeoJSON.toGeometry(this.dkdata);
           for (var i = 0; i < geometries.length; i++) {
             this.TDitem[i]=geometries[i]
           }*/
           this.TDitem = maptalks.GeoJSON.toGeometry(this.dkdata);
           //console.log("TD"+this.TDitem);
-          console.log(this.TDitem);
+          //console.log(this.TDitem);
           const vectorLayer = Vue.mapInstance
             .getLayer("vector")
             .addGeometry(this.TDitem);
