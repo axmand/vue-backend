@@ -41,7 +41,7 @@
       </span>
     </el-dialog>
 
-    <el-dialog title="楼宇属性表" :visible.sync="lytabledialog" :modal="false">
+    <!--<el-dialog title="楼宇属性表" :visible.sync="lytabledialog" :modal="false">
       <el-form :model="form">
         <el-form-item label="活动名称" :label-width="formLabelWidth">
           <el-input v-model="form.name" autocomplete="off"></el-input>
@@ -57,9 +57,9 @@
         <el-button @click="lytabledialog = false">取 消</el-button>
         <el-button type="primary" @click="lytabledialog = false;savetable()">确 定</el-button>
       </div>
-    </el-dialog>
+    </el-dialog>-->
 
-    <el-dialog title="地块属性表" :visible.sync="dktabledialog" :modal="false">
+    <!--<el-dialog title="地块属性表" :visible.sync="dktabledialog" :modal="false">
       <el-form :model="form">
         <el-form-item label="活动名称" :label-width="formLabelWidth">
           <el-input v-model="form.name" autocomplete="off"></el-input>
@@ -75,31 +75,114 @@
         <el-button @click="dktabledialog = false">取 消</el-button>
         <el-button type="primary" @click="dktabledialog = false;savetable()">确 定</el-button>
       </div>
-    </el-dialog>
-
-    <!--<el-dialog title="地块属性表" :visible.sync="dktabledialog" :modal="false">
-      <el-form :model="form">
+    </el-dialog>-->
+    <el-dialog title="楼宇属性表" :visible.sync="lytabledialog" :modal="false">
+      <el-form :model="lyform">
         <el-form-item label="ID" :label-width="formLabelWidth">
-          <el-input v-model="form.Id" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="地址" :label-width="formLabelWidth">
-          <el-input v-model="form.location" autocomplete="off"></el-input>
+          <el-input v-model="lyform.id" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="名称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="面积" :label-width="formLabelWidth">
-          <el-input v-model="form.area" autocomplete="off"></el-input>
+          <el-input v-model="lyform.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="地址" :label-width="formLabelWidth">
-          <el-input v-model="form.location" autocomplete="off"></el-input>
+          <el-input v-model="lyform.address" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="所属街道" :label-width="formLabelWidth">
+          <el-input v-model="lyform.street" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="所属街道编号" :label-width="formLabelWidth">
+          <el-input v-model="lyform.street1" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="建筑体量（㎡）" :label-width="formLabelWidth">
+          <el-input v-model="lyform.volume" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="建筑体量等级" :label-width="formLabelWidth">
+          <el-input v-model="lyform.volume1" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="层数" :label-width="formLabelWidth">
+          <el-input v-model="lyform.floor_num" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="标准层面积（㎡）" :label-width="formLabelWidth">
+          <el-input v-model="lyform.Standard_f" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="楼层净高（m）" :label-width="formLabelWidth">
+          <el-input v-model="lyform.net_height" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="客梯数量" :label-width="formLabelWidth">
+          <el-input v-model="lyform.passenger_" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="停车位数量" :label-width="formLabelWidth">
+          <el-input v-model="lyform.parking_nu" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="租金（元/㎡每月）" :label-width="formLabelWidth">
+          <el-input v-model="lyform.monthly_re" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="物业管理费（元/㎡每月）" :label-width="formLabelWidth">
+          <el-input v-model="lyform.property_m" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="空置面积（㎡）" :label-width="formLabelWidth">
+          <el-input v-model="lyform.vacant_are" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="空置面积等级" :label-width="formLabelWidth">
+          <el-input v-model="lyform.vacant1" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="已入驻企业数（家）" :label-width="formLabelWidth">
+          <el-input v-model="lyform.settled_en" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="全景链接" :label-width="formLabelWidth">
+          <el-input v-model="lyform.qj_url" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="lytabledialog = false">取 消</el-button>
+        <el-button type="primary" @click="lytabledialog = false;savetable()">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="地块属性表" :visible.sync="dktabledialog" :modal="false">
+      <el-form :model="dkform">
+        <el-form-item label="ID" :label-width="formLabelWidth">
+          <el-input v-model="dkform.Id" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="名称" :label-width="formLabelWidth">
+          <el-input v-model="dkform.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="地址" :label-width="formLabelWidth">
+          <el-input v-model="dkform.location" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="面积" :label-width="formLabelWidth">
+          <el-input v-model="dkform.area" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="面积等级" :label-width="formLabelWidth">
+          <el-input v-model="dkform.area1" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="用途" :label-width="formLabelWidth">
+          <el-input v-model="dkform.use_str" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="用途编号" :label-width="formLabelWidth">
+          <el-input v-model="dkform.use" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="公建比" :label-width="formLabelWidth">
+          <el-input v-model="dkform.proportion" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="所属街道" :label-width="formLabelWidth">
+          <el-input v-model="dkform.street" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="所属街道编号" :label-width="formLabelWidth">
+          <el-input v-model="dkform.street1" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="发展程度" :label-width="formLabelWidth">
+          <el-input v-model="dkform.dev_degree" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="描述" :label-width="formLabelWidth">
+          <el-input v-model="dkform.around" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dktabledialog = false">取 消</el-button>
         <el-button type="primary" @click="dktabledialog = false;savetable()">确 定</el-button>
       </div>
-    </el-dialog> -->  
+    </el-dialog>  
 
   </div>
 </template>
@@ -114,7 +197,7 @@ export default {
       deletedialog:false,
       savedialog:false,
       //tabledialog:false,
-      form: {
+      /*form: {
           name: '',
           region: '',
           date1: '',
@@ -123,7 +206,9 @@ export default {
           type: [],
           resource: '',
           desc: ''
-      },
+      },*/
+      lyform:{},
+      dkform:{},
       formLabelWidth: '120px',
       lytabledialog:false,
       dktabledialog:false,
