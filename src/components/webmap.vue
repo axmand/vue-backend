@@ -95,63 +95,68 @@ export default {
       var that = this
       Vue.drawTool.disable();
       var geos = Vue.mapInstance.getLayer("vector").getGeometries()
+  
       console.log(geos)
+      console.log(geos.length)
 
       if(geos.length){
         for (let i = 0; i < geos.length; i++) {
+          console.log(geos.length)
+          
           Vue.mapInstance.getLayer("vector").getGeometries()[i].on("click", function(param){      
+            //重置样式和数组，每次只能选中一个geo
+            that.recoverObj()
+            
             that.target = param.target;
-            console.log(that.target);
             that.target.config('isClicked',!that.target.options.isClicked)
             
             //重置样式和数组，每次只能选中一个geo
-            that.clickedObj=[];
-            for (var a = 0; a < geos.length; a++) {
-              if(Vue.mapInstance.getLayer("vector").getGeometries()[0].getJSONType() === "Marker"){
-                    Vue.mapInstance
-                    .getLayer("vector")
-                    .getGeometries()[a]
-                    .updateSymbol({
-                      markerFile: imgURL_loc,
-                      markerWidth: {
-                        stops: [
-                          [6, 0],
-                          [14, 30],
-                        ],
-                      },
-                      markerHeight: {
-                        stops: [
-                          [6, 0],
-                          [14, 40],
-                        ],
-                      },
-                    });
-                }else{
-                    Vue.mapInstance
-                    .getLayer("vector")
-                    .getGeometries()[a]
-                    .updateSymbol({
-                        lineColor: "#2348E5",
-                        lineWidth: 2,
-                        polygonFill: "#355BFA",
-                        polygonOpacity: 0.6,
-                        markerFile: imgURL_loc_area,
-                        markerWidth: {
-                          stops: [
-                            [6, 0],
-                            [14, 30],
-                          ],
-                        },
-                        markerHeight: {
-                          stops: [
-                            [6, 0],
-                            [14, 40],
-                          ],
-                        },
-                    });
-                }
-            }
-
+            // that.clickedObj=[];
+            // for (var a = 0; a < geos.length; a++) {
+            //   if(Vue.mapInstance.getLayer("vector").getGeometries()[0].getJSONType() === "Marker"){
+            //         Vue.mapInstance
+            //         .getLayer("vector")
+            //         .getGeometries()[a]
+            //         .updateSymbol({
+            //           markerFile: imgURL_loc,
+            //           markerWidth: {
+            //             stops: [
+            //               [6, 0],
+            //               [14, 30],
+            //             ],
+            //           },
+            //           markerHeight: {
+            //             stops: [
+            //               [6, 0],
+            //               [14, 40],
+            //             ],
+            //           },
+            //         });
+            //     }else{
+            //         Vue.mapInstance
+            //         .getLayer("vector")
+            //         .getGeometries()[a]
+            //         .updateSymbol({
+            //             lineColor: "#2348E5",
+            //             lineWidth: 2,
+            //             polygonFill: "#355BFA",
+            //             polygonOpacity: 0.6,
+            //             markerFile: imgURL_loc_area,
+            //             markerWidth: {
+            //               stops: [
+            //                 [6, 0],
+            //                 [14, 30],
+            //               ],
+            //             },
+            //             markerHeight: {
+            //               stops: [
+            //                 [6, 0],
+            //                 [14, 40],
+            //               ],
+            //             },
+            //         });
+            //     }
+            // }
             //判断是首次点击高亮还是第二次点击取消选中
             if (that.target.getJSONType() === "Marker") {
               //首次点击高亮显示选中对象，并添加至存储选中对象的数组
@@ -343,6 +348,7 @@ export default {
       console.log("土地信息已经保存");
       this.showdk();
     },
+
     savelydata() {
       let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
       let features=[]
@@ -377,79 +383,47 @@ export default {
       console.log("楼宇信息已经保存");
       this.showly();
     },
+
     deletetddata(){
       var that = this
       Vue.mapInstance.getLayer("vector").removeGeometry(that.clickedObj[0]);
-      let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
+      console.log(Vue.mapInstance.getLayer("vector"))
+
       let features=[]
       for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
         let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
         features.push(feature)
       }
-      console.log(Vue.mapInstance.getLayer("vector").getGeometries().length)
-      let tdxxName = Vue.userName
-      let tdxxtoken = Vue.token
-      let content = {"type":"FeatureCollection","features":features}
-      let tdxxcontent = JSON.stringify(content)
-      let data = { 'userName': tdxxName,'token':tdxxtoken, 'content':tdxxcontent}
-      fetch(url,{
-        method: "POST",
-        body: JSON.stringify(data),
-      }).then(result => result.json())
-      .then((result) => {
-        if(result.status == "ok"){
-          console.log(result.content)
-          this.$message({
-            message: result.content,
-            type: 'success'
-          });
-        }
-        else{
-          this.$message({
-            message: result.content,
-            type: 'error'
-          });
-        }
-      }) 
+      
+      this.$message({
+        message: "选中地块数据已经删除,请保存",
+        type: 'success'
+      });
       console.log("选中地块数据已经删除");
+      this.recoverObj()
+      
     },
+
     deletelydata(){
       var that = this
       Vue.mapInstance.getLayer("vector").removeGeometry(that.clickedObj[0]);
-      let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
       let features=[]
       for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
         let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
         features.push(feature)
       }
-      let lyxxName = Vue.userName
-      let lyxxtoken = Vue.token
-      let content = {"type":"FeatureCollection","features":features}
-      let lyxxcontent = JSON.stringify(content)
-      let data = { 'userName': lyxxName,'token':lyxxtoken, 'content':lyxxcontent}
-      fetch(url,{
-        method: "POST",
-        body: JSON.stringify(data),
-      }).then(result => result.json())
-      .then((result) => {
-        if(result.status == "ok"){
-          console.log(result.content)
-          this.$message({
-            message: result.content,
-            type: 'success'
-          });
-        }
-        else{
-          this.$message({
-            message: result.content,
-            type: 'error'
-          });
-        }
-      })     
-      console.log("选中楼宇数据已经删除");
+      
+      this.$message({
+        message: "选中楼宇数据已经删除，请保存",
+        type: 'success'
+      });
     },
 
     savetable() {
+      this.$message({
+        message: "属性数据已经保存",
+        type: 'success'
+      });
       console.log("属性数据已经保存");
     } ,
 

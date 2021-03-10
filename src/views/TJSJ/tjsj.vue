@@ -330,11 +330,11 @@ export default {
     //搜索用户
     SearchYH(){
       this.SearchdialogVisible = false
-      let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
+      let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
 
       let lyxxName = Vue.userName
       let lyxxtoken = Vue.token
-      let lyxxcontent = JSON.stringify(tdxx.tdxx)
+      let lyxxcontent = JSON.stringify(lyxx.lyxx)
 
       let data = { 'userName': lyxxName,'token':lyxxtoken, 'content':lyxxcontent}
       //新增用户组

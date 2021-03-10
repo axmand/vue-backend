@@ -291,6 +291,7 @@ export default {
             message: result.content,
             type: 'error'
           });
+          this.listLoading = false
         }
       }) 
     },
@@ -318,6 +319,7 @@ export default {
             message: result.content,
             type: 'error'
           });
+          this.listLoading = false
         }
       }) 
     },

@@ -8,8 +8,8 @@
           <el-button type="warning" icon="el-icon-s-grid" @click="showtable">属性</el-button>
           <el-button type="warning" icon="el-icon-thumb" @click="chooseObj">选中</el-button>
           <el-button type="warning" icon="el-icon-video-play" @click="stopdraw">暂停</el-button>
-          <el-button type="warning" icon="el-icon-star-off" @click="savedialog = true">保存</el-button>
           <el-button type="danger" icon="el-icon-delete" @click="deletedialog = true">删除</el-button>
+          <el-button type="warning" icon="el-icon-star-off" @click="savedialog = true">保存</el-button>
         </el-row>
       </div>
       </el-col>
