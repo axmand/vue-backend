@@ -346,7 +346,7 @@ export default {
         }
       }) 
       console.log("土地信息已经保存");
-      this.showdk();
+      //this.showdk();
     },
 
     savelydata() {
@@ -381,7 +381,7 @@ export default {
         }
       }) 
       console.log("楼宇信息已经保存");
-      this.showly();
+      //this.showly();
     },
 
     deletetddata(){
@@ -400,8 +400,8 @@ export default {
         type: 'success'
       });
       console.log("选中地块数据已经删除");
-      this.recoverObj()
-      
+      console.log(Vue.mapInstance.getLayer("vector").getGeometries().length);
+      this.recoverObj() 
     },
 
     deletelydata(){
@@ -417,14 +417,15 @@ export default {
         message: "选中楼宇数据已经删除，请保存",
         type: 'success'
       });
+      this.recoverObj()
     },
 
     savetable() {
       this.$message({
-        message: "属性数据已经保存",
+        message: "属性数据修改成功，请保存",
         type: 'success'
       });
-      console.log("属性数据已经保存");
+      console.log("属性数据修改成功，请保存");
     } ,
 
     showly(){
