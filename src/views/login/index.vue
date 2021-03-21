@@ -127,7 +127,7 @@ export default {
       let data = { 'userName': userName,'userPwd':userPwd}
 
       //登陆接口
-      fetch('http://121.196.60.135:1338/cms/login',{
+      fetch('http://121.196.60.135:1337/cms/login',{
         method: "POST",
         body: JSON.stringify(data),
       }).then(result => result.json())

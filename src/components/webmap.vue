@@ -315,7 +315,7 @@ export default {
     },
 
     savetddata() {
-      let url = 'http://121.196.60.135:1338//bms/geodatatdxxupdate'
+      let url = 'http://121.196.60.135:1337//bms/geodatatdxxupdate'
       let features=[]
       for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
         let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
@@ -350,7 +350,7 @@ export default {
     },
 
     savelydata() {
-      let url = 'http://121.196.60.135:1338//bms/geodatalyxxupdate'
+      let url = 'http://121.196.60.135:1337//bms/geodatalyxxupdate'
       let features=[]
       for (let i = 0; i < Vue.mapInstance.getLayer("vector").getGeometries().length; i++){
         let feature=Vue.mapInstance.getLayer("vector").toJSON().geometries[i].feature
@@ -429,7 +429,7 @@ export default {
     } ,
 
     showly(){
-      fetch("http://121.196.60.135:1338/bms/geoprovider/LYXX")
+      fetch("http://121.196.60.135:1337/bms/geoprovider/LYXX")
         .then((result) => result.json())
         .then((result) => {
           //Vue.mapInstance.addLayer(new maptalks.VectorLayer("vector"));
@@ -470,7 +470,7 @@ export default {
     },
 
     showdk(){
-      fetch("http://121.196.60.135:1338/bms/geoprovider/TDXX")
+      fetch("http://121.196.60.135:1337/bms/geoprovider/TDXX")
         .then((result) => result.json())
         .then((result) => {
           //Vue.mapInstance.addLayer(new maptalks.VectorLayer("dk"));
@@ -607,7 +607,7 @@ export default {
 
     // Vue.mapInstance.setBaseLayer(
     //   new maptalks.TileLayer("base", {
-    //     urlTemplate: "http://121.196.60.135:1338/layer/google/{z}/{x}/{y}",
+    //     urlTemplate: "http://121.196.60.135:1337/layer/google/{z}/{x}/{y}",
     //     attribution:
     //       '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
     //   })

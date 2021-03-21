@@ -277,7 +277,7 @@ export default {
       // })
 
       //获取用户列表
-      let url = 'http://121.196.60.135:1338/cms/getgrouplist/'+ Vue.userName + '/' + Vue.token
+      let url = 'http://121.196.60.135:1337/cms/getgrouplist/'+ Vue.userName + '/' + Vue.token
       fetch(url).then(result => result.json())
       .then((result) => {
         if(result.status == "ok"){
@@ -299,7 +299,7 @@ export default {
     fetchAPI() {
       this.listLoading = true
       //获取用户权限列表
-      let url = 'http://121.196.60.135:1338/cms/getconfigureableapilist'
+      let url = 'http://121.196.60.135:1337/cms/getconfigureableapilist'
       fetch(url).then(result => result.json())
       .then((result) => {
         if(result.status == "ok"){
@@ -327,7 +327,7 @@ export default {
     //注册新用户
     RegisterYH(){
       this.RegisterdialogVisible = false
-      let url = 'http://121.196.60.135:1338/cms/register'
+      let url = 'http://121.196.60.135:1337/cms/register'
       
       let RegisterName = this.Register.RegisterName
       let RegisterPwd = this.Register.RegisterPwd
@@ -357,7 +357,7 @@ export default {
     //搜索用户
     SearchYH(){
       this.SearchdialogVisible = false
-      let url = 'http://121.196.60.135:1338/cms/searchcustomerbyname/'+ Vue.userName + '/' + Vue.token +'/' + this.Searchdata
+      let url = 'http://121.196.60.135:1337/cms/searchcustomerbyname/'+ Vue.userName + '/' + Vue.token +'/' + this.Searchdata
       //新增用户组
       fetch(url).then(result => result.json())
       .then((result) => {
@@ -384,7 +384,7 @@ export default {
     //分配用户组权限
     Setgroup(){
       this.SetGroupdialogVisible = false
-      let url = 'http://121.196.60.135:1338/cms/setcustomergroup/'+ Vue.userName + '/' + Vue.token +'/' + this.customerObjectId +'/' + this.SetGroup.groupObjectId
+      let url = 'http://121.196.60.135:1337/cms/setcustomergroup/'+ Vue.userName + '/' + Vue.token +'/' + this.customerObjectId +'/' + this.SetGroup.groupObjectId
       console.log(url)
       fetch(url).then(result => result.json())
       .then((result) => {
@@ -406,7 +406,7 @@ export default {
 
     addYH(){
       this.dialogFormVisible = false
-      let url = 'http://121.196.60.135:1338/cms/creategroup/'+ Vue.userName + '/' + Vue.token +'/' + this.form.name +'/' + this.form.desc +'/' + this.form.level
+      let url = 'http://121.196.60.135:1337/cms/creategroup/'+ Vue.userName + '/' + Vue.token +'/' + this.form.name +'/' + this.form.desc +'/' + this.form.level
       //新增用户组
       fetch(url).then(result => result.json())
       .then((result) => {
@@ -427,7 +427,7 @@ export default {
     },
 
     deleteYH(id){
-      let url = 'http://121.196.60.135:1338/cms/deletegroup/'+ Vue.userName + '/' + Vue.token +'/' + id
+      let url = 'http://121.196.60.135:1337/cms/deletegroup/'+ Vue.userName + '/' + Vue.token +'/' + id
       console.log(url)
        // 删除用户组
       fetch(url).then(result => result.json())
@@ -458,7 +458,7 @@ export default {
 
     //权限授予
     APIAuthorize(key){
-      let url = 'http://121.196.60.135:1338/cms/authorizegroupapi/'+ Vue.userName + '/' + Vue.token +'/' + this.ObjectId + '/' + key
+      let url = 'http://121.196.60.135:1337/cms/authorizegroupapi/'+ Vue.userName + '/' + Vue.token +'/' + this.ObjectId + '/' + key
       console.log(url)
       fetch(url).then(result => result.json())
       .then((result) => {
@@ -479,7 +479,7 @@ export default {
 
     //权限收回
     APIWithdraw(key){
-      let url = 'http://121.196.60.135:1338/cms/withdrawgroupapi/'+ Vue.userName + '/' + Vue.token +'/' + this.ObjectId + '/' +key
+      let url = 'http://121.196.60.135:1337/cms/withdrawgroupapi/'+ Vue.userName + '/' + Vue.token +'/' + this.ObjectId + '/' +key
       console.log(url)
       fetch(url).then(result => result.json())
       .then((result) => {
