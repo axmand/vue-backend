@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="dialogFormVisible = true">新增用户组</el-button>
     <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="RegisterdialogVisible = true">用户注册</el-button>
-    <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="SearchdialogVisible = true">用户搜索</el-button>
+    <el-button :loading="loading" type="primary" style="width:10%;margin-bottom:10px;" @click="SearchdialogVisible = true">数据更新</el-button>
 
     <el-row>
       <el-col :span="24"><div>
@@ -162,7 +162,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="用户搜索" :visible.sync="SearchdialogVisible" 
+    <el-dialog title="数据提交" :visible.sync="SearchdialogVisible" 
     style="width: 70%;left:15%">
       <el-form>
         <el-form-item label="JSON数据" :label-width="formLabelWidth">
@@ -177,7 +177,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="SearchdialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="SearchYH">确 定</el-button>
+        <el-button type="primary" @click="SearchYH">确定提交</el-button>
       </div>
     </el-dialog>
 
