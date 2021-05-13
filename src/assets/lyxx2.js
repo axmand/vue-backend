@@ -33,7 +33,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "单一商用",
           "settled_en": "0.8",
-          "volume": "28000"
+          "volume": "28000",
+          "chanquan":"自持"
         },
         "id": 0
       },
@@ -68,7 +69,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "单一商用",
           "settled_en": "0.9",
-          "volume": "48000"
+          "volume": "48000",
+          "chanquan":"自持"
         },
         "id": 1
       },
@@ -103,7 +105,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "工业",
           "settled_en": "/",
-          "volume": "46137"
+          "volume": "46137",
+          "chanquan":"/"
         },
         "id": 2
       },
@@ -138,7 +141,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "商住两用",
           "settled_en": "0.5",
-          "volume": "14689.74"
+          "volume": "14689.74",
+          "chanquan":"散售"
         },
         "id": 3
       },
@@ -158,7 +162,7 @@ var lyxx2 =
           "y": 30.55150469,
           "name": "汉商大厦写字楼",
           "floor_num": "20",
-          "Standard_f": "待定",
+          "Standard_f": "1512.08",
           "net_height": "3.6",
           "passenger_": "3",
           "parking_nu": "无",
@@ -173,7 +177,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "商住两用",
           "settled_en": "0.5",
-          "volume": "20000"
+          "volume": "20000",
+          "chanquan":"散售"
         },
         "id": 4
       },
@@ -208,7 +213,8 @@ var lyxx2 =
           "vacant1": 2,
           "use": "单一商用",
           "settled_en": "0.88",
-          "volume": "29000"
+          "volume": "29000",
+          "chanquan":"散售"
         },
         "id": 5
       },
@@ -243,7 +249,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "商住两用",
           "settled_en": "0.57",
-          "volume": "29000"
+          "volume": "29000",
+          "chanquan":"散售"
         },
         "id": 6
       },
@@ -278,7 +285,8 @@ var lyxx2 =
           "vacant1": 2,
           "use": "商住两用",
           "settled_en": "0.86",
-          "volume": "20000"
+          "volume": "20000",
+          "chanquan":"部分散售，部分产权属于政府"
         },
         "id": 7
       },
@@ -313,7 +321,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "商服",
           "settled_en": "0.6",
-          "volume": "40000"
+          "volume": "40000",
+          "chanquan":"40年"
         },
         "id": 8
       },
@@ -348,7 +357,8 @@ var lyxx2 =
           "vacant1": 2,
           "use": "单一商用",
           "settled_en": "0.7",
-          "volume": "8000"
+          "volume": "8000",
+          "chanquan":"自持（东风宏泰）"
         },
         "id": 9
       },
@@ -368,13 +378,13 @@ var lyxx2 =
           "y": 30.55644575,
           "name": "万科未来中心（在建）",
           "floor_num": "51",
-          "Standard_f": "1800-2000㎡",
+          "Standard_f": "1800-2024㎡",
           "net_height": "/",
           "passenger_": "/",
-          "parking_nu": "/",
-          "monthly_re": "90",
+          "parking_nu": "2000+",
+          "monthly_re": "75",
           "property_m": "20",
-          "vacant_are": 0,
+          "vacant_are": "/",
           "old_settle": "/",
           "address": "湖北省武汉市汉阳区五里墩街街道万科未来中心",
           "street": "五里墩街街道",
@@ -383,7 +393,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "单一商用",
           "settled_en": "/",
-          "volume": "72030"
+          "volume": "72030",
+          "chanquan":"自持"
         },
         "id": 10
       },
@@ -418,7 +429,8 @@ var lyxx2 =
           "vacant1": 1,
           "use": "单一商用",
           "settled_en": "0.95",
-          "volume": "18000"
+          "volume": "18000",
+          "chanquan":"整售（汉阳控股集团有限公司）"
         },
         "id": 11
       },
@@ -453,7 +465,8 @@ var lyxx2 =
           "vacant1": 2,
           "use": "单一商用",
           "settled_en": "0.77",
-          "volume": "18000"
+          "volume": "18000",
+          "chanquan":"自持"
         },
         "id": 12
       },
@@ -488,7 +501,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "只租不售",
           "settled_en": " ",
-          "volume": "36000"
+          "volume": "36000",
+          "chanquan":"村所有"
         },
         "id": 13
       },
@@ -514,16 +528,17 @@ var lyxx2 =
           "parking_nu": "800",
           "monthly_re": "100",
           "property_m": "3.8",
-          "vacant_are": 1500,
+          "vacant_are": 900,
           "old_settle": "50",
           "address": "湖北省武汉市汉阳区江汉二桥街道汉阳大道582号",
           "street": "江汉二桥街道",
           "street1": 9,
           "volumn1": 6,
-          "vacant1": 2,
+          "vacant1": 1,
           "use": "单一商用",
           "settled_en": "0.45",
-          "volume": "125000"
+          "volume": "125000",
+          "chanquan":"自持"
         },
         "id": 14
       },
@@ -557,8 +572,9 @@ var lyxx2 =
           "volumn1": 4,
           "vacant1": 6,
           "use": "单一商用",
-          "settled_en": "0",
-          "volume": "46000"
+          "settled_en": "/",
+          "volume": "46000",
+          "chanquan":"半租半售"
         },
         "id": 15
       },
@@ -581,7 +597,7 @@ var lyxx2 =
           "Standard_f": "1100",
           "net_height": "4",
           "passenger_": "6",
-          "parking_nu": "780（共用地下停车场）",
+          "parking_nu": "693（共用地下停车场）",
           "monthly_re": "毛坯：49-69",
           "property_m": "5",
           "vacant_are": 38968.3488,
@@ -593,7 +609,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "商住两用",
           "settled_en": "0.04",
-          "volume": "40592.03"
+          "volume": "40592.03",
+          "chanquan":"散售（还建楼）"
         },
         "id": 16
       },
@@ -628,7 +645,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "商住两用",
           "settled_en": "0.85",
-          "volume": "48923"
+          "volume": "48923",
+          "chanquan":"散售"
         },
         "id": 17
       },
@@ -663,7 +681,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "商住两用",
           "settled_en": "0.52",
-          "volume": "43737"
+          "volume": "43737",
+          "chanquan":"散售"
         },
         "id": 18
       },
@@ -688,7 +707,7 @@ var lyxx2 =
           "passenger_": "14",
           "parking_nu": "320（共用地下停车场）",
           "monthly_re": "40",
-          "property_m": "4",
+          "property_m": "5",
           "vacant_are": 61000,
           "old_settle": "35",
           "address": "湖北省武汉市汉阳区洲头街街道鹦鹉大道493号",
@@ -698,7 +717,8 @@ var lyxx2 =
           "vacant1": 5,
           "use": "单一商用",
           "settled_en": "0.45",
-          "volume": "100000"
+          "volume": "100000",
+          "chanquan":"散售"
         },
         "id": 19
       },
@@ -726,14 +746,15 @@ var lyxx2 =
           "property_m": "6",
           "vacant_are": 35000,
           "old_settle": "15",
-          "address": "湖北省武汉市汉阳区四新地区管委会梅林西路12附4",
-          "street": "四新地区管委会",
+          "address": "湖北省武汉市汉阳区四新街道办事处梅林西路12附4",
+          "street": "四新街道办事处",
           "street1": 5,
           "volumn1": 5,
           "vacant1": 4,
           "use": "商住两用",
           "settled_en": "0.3",
-          "volume": "50000"
+          "volume": "50000",
+          "chanquan":"半租半售/自持"
         },
         "id": 20
       },
@@ -761,14 +782,15 @@ var lyxx2 =
           "property_m": "2.3",
           "vacant_are": 32711.04,
           "old_settle": "35",
-          "address": "湖北省武汉市汉阳区四新地区管委会江城大道358号",
-          "street": "四新地区管委会",
+          "address": "湖北省武汉市汉阳区四新街道办事处江城大道358号",
+          "street": "四新街道办事处",
           "street1": 5,
           "volumn1": 4,
           "vacant1": 4,
           "use": "单一商用",
           "settled_en": "0.28",
-          "volume": "45432"
+          "volume": "45432",
+          "chanquan":"散售"
         },
         "id": 21
       },
@@ -796,14 +818,15 @@ var lyxx2 =
           "property_m": "9",
           "vacant_are": 6600,
           "old_settle": "19",
-          "address": "湖北省武汉市汉阳区四新地区管委会江城大道1872号",
-          "street": "四新地区管委会",
+          "address": "湖北省武汉市汉阳区四新街道办事处江城大道1872号",
+          "street": "四新街道办事处",
           "street1": 5,
           "volumn1": 1,
           "vacant1": 3,
           "use": "商住两用",
           "settled_en": "0.5",
-          "volume": "15000"
+          "volume": "15000",
+          "chanquan":"散售"
         },
         "id": 22
       },
@@ -838,7 +861,8 @@ var lyxx2 =
           "vacant1": 5,
           "use": "单一商用",
           "settled_en": "0.2",
-          "volume": "69800"
+          "volume": "69800",
+          "chanquan":"自持"
         },
         "id": 23
       },
@@ -862,9 +886,9 @@ var lyxx2 =
           "net_height": "3.9",
           "passenger_": "8",
           "parking_nu": "881",
-          "monthly_re": "50-70",
-          "property_m": "23",
-          "vacant_are": 42730.06,
+          "monthly_re": "40-60",
+          "property_m": "22",
+          "vacant_are": 32000,
           "old_settle": "1",
           "address": "湖北省武汉市汉阳区江堤街街道四新南路195号",
           "street": "江堤街街道",
@@ -873,7 +897,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "单一商用",
           "settled_en": "0.25",
-          "volume": "51482"
+          "volume": "51482",
+          "chanquan":"自持"
         },
         "id": 24
       },
@@ -908,7 +933,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "单一商用",
           "settled_en": "/",
-          "volume": "72626"
+          "volume": "72626",
+          "chanquan":"半租半售"
         },
         "id": 25
       },
@@ -943,7 +969,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "单一商用",
           "settled_en": "0.58",
-          "volume": "25321"
+          "volume": "25321",
+          "chanquan":"散售"
         },
         "id": 26
       },
@@ -952,18 +979,18 @@ var lyxx2 =
         "geometry": {
           "type": "Point",
           "coordinates": [
-            114.1951238,
-            30.56782726
+            114.203324,
+            30.561601
           ]
         },
         "properties": {
           "FID": 27,
           "id": 22,
-          "x": 114.1951238,
-          "y": 30.56782726,
+          "x": 114.203324,
+          "y": 30.561601,
           "name": "王家湾中央生活区1号楼",
           "floor_num": "27",
-          "Standard_f": "约1100",
+          "Standard_f": "1100",
           "net_height": "5.2",
           "passenger_": "3",
           "parking_nu": "36",
@@ -978,7 +1005,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "商住两用",
           "settled_en": "0.7",
-          "volume": "36000"
+          "volume": "36000",
+          "chanquan":"散售"
         },
         "id": 27
       },
@@ -1004,7 +1032,7 @@ var lyxx2 =
           "parking_nu": "411",
           "monthly_re": "65-80",
           "property_m": "6.45",
-          "vacant_are": 1636.007,
+          "vacant_are": 1636,
           "old_settle": "107",
           "address": "湖北省武汉市汉阳区永丰街街道龙阳大道46号",
           "street": "永丰街街道",
@@ -1013,7 +1041,8 @@ var lyxx2 =
           "vacant1": 2,
           "use": "单一商用",
           "settled_en": "0.95",
-          "volume": "32720.14"
+          "volume": "32720.14",
+          "chanquan":"散售"
         },
         "id": 28
       },
@@ -1048,7 +1077,8 @@ var lyxx2 =
           "vacant1": 2,
           "use": "单一商用",
           "settled_en": "0.85",
-          "volume": "24000"
+          "volume": "24000",
+          "chanquan":"自持"
         },
         "id": 29
       },
@@ -1083,7 +1113,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "单一商用",
           "settled_en": "0.3",
-          "volume": "24000"
+          "volume": "24000",
+          "chanquan":"自持"
         },
         "id": 30
       },
@@ -1118,7 +1149,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "商住两用",
           "settled_en": "0.45",
-          "volume": "23000"
+          "volume": "23000",
+          "chanquan":"自持"
         },
         "id": 31
       },
@@ -1153,7 +1185,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "单一商用",
           "settled_en": "0.8",
-          "volume": "40200"
+          "volume": "40200",
+          "chanquan":"自持"
         },
         "id": 32
       },
@@ -1178,17 +1211,18 @@ var lyxx2 =
           "passenger_": "8",
           "parking_nu": "800",
           "monthly_re": "50",
-          "property_m": "6",
-          "vacant_are": 8750,
+          "property_m": "6-8",
+          "vacant_are": 3000,
           "old_settle": "160",
           "address": "湖北省武汉市汉阳区永丰街街道车友路5号",
           "street": "永丰街街道",
           "street1": 2,
           "volumn1": 3,
-          "vacant1": 3,
+          "vacant1": 2,
           "use": "单一商用",
-          "settled_en": "0.78",
-          "volume": "35000"
+          "settled_en": "0.93",
+          "volume": "46000",
+          "chanquan":"自持"
         },
         "id": 33
       },
@@ -1223,7 +1257,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "单一商用",
           "settled_en": "0.75",
-          "volume": "32000"
+          "volume": "32000",
+          "chanquan":"散售"
         },
         "id": 34
       },
@@ -1243,7 +1278,7 @@ var lyxx2 =
           "y": 30.55175177,
           "name": "麦迪森广场（九州通大厦）B座",
           "floor_num": "30",
-          "Standard_f": "约1000",
+          "Standard_f": "1000",
           "net_height": "2.5",
           "passenger_": "4",
           "parking_nu": "600",
@@ -1258,7 +1293,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "商住两用",
           "settled_en": "0.8",
-          "volume": "31000"
+          "volume": "31000",
+          "chanquan":"散售"
         },
         "id": 35
       },
@@ -1293,7 +1329,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "单一商用",
           "settled_en": "/",
-          "volume": "68663.17"
+          "volume": "68663.17",
+          "chanquan":"只售不租"
         },
         "id": 36
       },
@@ -1328,7 +1365,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "/",
           "settled_en": "/",
-          "volume": "28500"
+          "volume": "28500",
+          "chanquan":"集团使用"
         },
         "id": 37
       },
@@ -1363,7 +1401,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "工业",
           "settled_en": "/",
-          "volume": "56776"
+          "volume": "56776",
+          "chanquan":"自持"
         },
         "id": 38
       },
@@ -1398,7 +1437,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "单一商用",
           "settled_en": "0.7",
-          "volume": "12798"
+          "volume": "12798",
+          "chanquan":"自持"
         },
         "id": 39
       },
@@ -1433,7 +1473,8 @@ var lyxx2 =
           "vacant1": 6,
           "use": "工业",
           "settled_en": "/",
-          "volume": "67000"
+          "volume": "67000",
+          "chanquan":"半租半售"
         },
         "id": 40
       },
@@ -1468,7 +1509,8 @@ var lyxx2 =
           "vacant1": 5,
           "use": "/",
           "settled_en": "/",
-          "volume": "54000"
+          "volume": "54000",
+          "chanquan":"/"
         },
         "id": 41
       },
@@ -1503,7 +1545,8 @@ var lyxx2 =
           "vacant1": 4,
           "use": "/",
           "settled_en": "/",
-          "volume": "57400"
+          "volume": "57400",
+          "chanquan":"/"
         },
         "id": 42
       },
@@ -1538,7 +1581,8 @@ var lyxx2 =
           "vacant1": 3,
           "use": "/",
           "settled_en": "/",
-          "volume": "21800"
+          "volume": "21800",
+          "chanquan":"/"
         },
         "id": 43
       },
@@ -1573,7 +1617,8 @@ var lyxx2 =
           "vacant1": 1,
           "use": "/",
           "settled_en": "/",
-          "volume": "待定"
+          "volume": "待定",
+          "chanquan":"/"
         },
         "id": 44
       }
