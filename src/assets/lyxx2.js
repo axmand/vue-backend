@@ -32,7 +32,7 @@ var lyxx2 =
           "volumn1": 2,
           "vacant1": 3,
           "use": "单一商用",
-          "settled_en": "0.8",
+          "settled_en": "0.89",
           "volume": "28000",
           "chanquan":"自持"
         },
@@ -140,7 +140,7 @@ var lyxx2 =
           "volumn1": 1,
           "vacant1": 3,
           "use": "商住两用",
-          "settled_en": "0.5",
+          "settled_en": "0.55",
           "volume": "14689.74",
           "chanquan":"散售"
         },
@@ -176,7 +176,7 @@ var lyxx2 =
           "volumn1": 2,
           "vacant1": 4,
           "use": "商住两用",
-          "settled_en": "0.5",
+          "settled_en": "0.64",
           "volume": "20000",
           "chanquan":"散售"
         },
@@ -212,7 +212,7 @@ var lyxx2 =
           "volumn1": 2,
           "vacant1": 2,
           "use": "单一商用",
-          "settled_en": "0.88",
+          "settled_en": "0.89",
           "volume": "29000",
           "chanquan":"散售"
         },
@@ -248,7 +248,7 @@ var lyxx2 =
           "volumn1": 2,
           "vacant1": 4,
           "use": "商住两用",
-          "settled_en": "0.57",
+          "settled_en": "0.73",
           "volume": "29000",
           "chanquan":"散售"
         },
@@ -284,7 +284,7 @@ var lyxx2 =
           "volumn1": 2,
           "vacant1": 2,
           "use": "商住两用",
-          "settled_en": "0.86",
+          "settled_en": "0.88",
           "volume": "20000",
           "chanquan":"部分散售，部分产权属于政府"
         },
@@ -320,7 +320,7 @@ var lyxx2 =
           "volumn1": 4,
           "vacant1": 4,
           "use": "商服",
-          "settled_en": "0.6",
+          "settled_en": "0.67",
           "volume": "40000",
           "chanquan":"40年"
         },
@@ -356,7 +356,7 @@ var lyxx2 =
           "volumn1": 1,
           "vacant1": 2,
           "use": "单一商用",
-          "settled_en": "0.7",
+          "settled_en": "0.73",
           "volume": "8000",
           "chanquan":"自持（东风宏泰）"
         },
@@ -536,7 +536,7 @@ var lyxx2 =
           "volumn1": 6,
           "vacant1": 1,
           "use": "单一商用",
-          "settled_en": "0.45",
+          "settled_en": "0.75",
           "volume": "125000",
           "chanquan":"自持"
         },
@@ -644,7 +644,7 @@ var lyxx2 =
           "volumn1": 4,
           "vacant1": 3,
           "use": "商住两用",
-          "settled_en": "0.85",
+          "settled_en": "0.88",
           "volume": "48923",
           "chanquan":"散售"
         },
@@ -716,7 +716,7 @@ var lyxx2 =
           "volumn1": 6,
           "vacant1": 5,
           "use": "单一商用",
-          "settled_en": "0.45",
+          "settled_en": "0.47",
           "volume": "100000",
           "chanquan":"散售"
         },
@@ -752,7 +752,7 @@ var lyxx2 =
           "volumn1": 5,
           "vacant1": 4,
           "use": "商住两用",
-          "settled_en": "0.3",
+          "settled_en": "0.52",
           "volume": "50000",
           "chanquan":"半租半售/自持"
         },
@@ -788,7 +788,7 @@ var lyxx2 =
           "volumn1": 4,
           "vacant1": 4,
           "use": "单一商用",
-          "settled_en": "0.28",
+          "settled_en": "0.34",
           "volume": "45432",
           "chanquan":"散售"
         },
@@ -824,7 +824,7 @@ var lyxx2 =
           "volumn1": 1,
           "vacant1": 3,
           "use": "商住两用",
-          "settled_en": "0.5",
+          "settled_en": "0.53",
           "volume": "15000",
           "chanquan":"散售"
         },
@@ -968,7 +968,7 @@ var lyxx2 =
           "volumn1": 2,
           "vacant1": 4,
           "use": "单一商用",
-          "settled_en": "0.58",
+          "settled_en": "0.65",
           "volume": "25321",
           "chanquan":"散售"
         },
@@ -1004,7 +1004,7 @@ var lyxx2 =
           "volumn1": 3,
           "vacant1": 3,
           "use": "商住两用",
-          "settled_en": "0.7",
+          "settled_en": "0.68",
           "volume": "36000",
           "chanquan":"散售"
         },
