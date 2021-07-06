@@ -599,7 +599,7 @@ var lyxx2 =
           "passenger_": "6",
           "parking_nu": "693（共用地下停车场）",
           "monthly_re": "毛坯：49-69",
-          "property_m": "5",
+          "property_m": "4/5",
           "vacant_are": 38968.3488,
           "old_settle": "34",
           "address": "湖北省武汉市汉阳区洲头街街道建港路特1号",
@@ -610,7 +610,7 @@ var lyxx2 =
           "use": "商住两用",
           "settled_en": "0.04",
           "volume": "40592.03",
-          "chanquan":"散售（还建楼）"
+          "chanquan":"散售"
         },
         "id": 16
       },
@@ -741,19 +741,19 @@ var lyxx2 =
           "Standard_f": "1461.5",
           "net_height": "3.8",
           "passenger_": "6",
-          "parking_nu": "802",
-          "monthly_re": "47",
+          "parking_nu": "806",
+          "monthly_re": "45",
           "property_m": "6",
-          "vacant_are": 35000,
+          "vacant_are": 9000,
           "old_settle": "15",
           "address": "湖北省武汉市汉阳区四新街道办事处梅林西路12附4",
           "street": "四新街道办事处",
           "street1": 5,
           "volumn1": 5,
-          "vacant1": 4,
+          "vacant1": 1,
           "use": "商住两用",
-          "settled_en": "0.52",
-          "volume": "50000",
+          "settled_en": "0.79",
+          "volume": "43637",
           "chanquan":"半租半售/自持"
         },
         "id": 20
